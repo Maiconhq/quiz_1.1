@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luyện thi Lịch sử 11</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FFFFFF;--bg2:#F8F9FA;--text:#1F2937;--text2:#6B7280;
+  --primary:#3B82F6;--primary-h:#2563EB;--border:#E5E7EB;
+  --ok:#10B981;--ok-bg:#ECFDF5;--err:#EF4444;--err-bg:#FEF2F2;
+  --shadow:0 1px 3px rgba(0,0,0,.06);--shadow-h:0 4px 16px rgba(0,0,0,.1);
+  --r:16px;--r2:10px;
+}
+[data-theme=dark]{
+  --bg:#111827;--bg2:#1F2937;--text:#F9FAFB;--text2:#9CA3AF;
+  --primary:#60A5FA;--primary-h:#3B82F6;--border:#374151;
+  --ok-bg:#064E3B;--err-bg:#7F1D1D;
+  --shadow:0 1px 3px rgba(0,0,0,.3);--shadow-h:0 4px 16px rgba(0,0,0,.5);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;line-height:1.6}
+.app{max-width:780px;margin:0 auto;padding:20px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-top:8px}
+.logo{font-size:20px;font-weight:700;color:var(--primary)}
+.theme-btn{background:var(--bg2);border:1px solid var(--border);border-radius:50px;padding:8px 16px;cursor:pointer;color:var(--text);font-size:14px;transition:all .2s;display:flex;align-items:center;gap:6px}
+.theme-btn:hover{background:var(--border)}
+.screen{display:none;animation:fadeIn .25s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* HOME */
+.home-hero{text-align:center;margin-bottom:40px}
+.home-hero h1{font-size:30px;font-weight:700;margin-bottom:8px}
+.home-hero p{color:var(--text2);font-size:16px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:16px}
+.card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:24px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
+.card:hover{border-color:var(--primary);box-shadow:var(--shadow-h);transform:translateY(-2px)}
+.card .ci{font-size:32px;margin-bottom:12px}
+.card h3{font-size:18px;font-weight:600;margin-bottom:6px}
+.card p{color:var(--text2);font-size:14px;margin-bottom:14px}
+.card-tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{background:var(--bg2);color:var(--text2);font-size:12px;padding:3px 10px;border-radius:6px}
+.card-random{background:linear-gradient(135deg,#3B82F6,#8B5CF6);color:#fff;border:none}
+.card-random:hover{box-shadow:0 8px 24px rgba(59,130,246,.4);border-color:transparent}
+.card-random p,.card-random .tag{color:rgba(255,255,255,.8)}
+.card-random .tag{background:rgba(255,255,255,.2)}
+/* SETUP */
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--text2);background:none;border:none;cursor:pointer;font-size:14px;margin-bottom:20px;transition:color .2s;padding:0}
+.back-btn:hover{color:var(--text)}
+.page-title{font-size:24px;font-weight:700;margin-bottom:24px}
+.setup-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.setup-box h3{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text2);margin-bottom:14px}
+.qty-row{display:flex;gap:10px;flex-wrap:wrap}
+.qty-btn{padding:9px 18px;border:1.5px solid var(--border);border-radius:var(--r2);background:var(--bg);color:var(--text);cursor:pointer;font-size:15px;font-weight:500;transition:all .2s}
+.qty-btn.on,.qty-btn:hover{border-color:var(--primary);color:var(--primary);background:rgba(59,130,246,.05)}
+.chk-row{display:flex;flex-direction:column;gap:10px}
+.chk-label{display:flex;align-items:center;gap:12px;cursor:pointer;padding:10px 14px;border-radius:var(--r2);border:1.5px solid var(--border);background:var(--bg);transition:all .2s;font-size:15px}
+.chk-label:hover{border-color:var(--primary)}
+.chk-label input{width:18px;height:18px;accent-color:var(--primary);cursor:pointer}
+/* QUIZ */
+.prog-wrap{background:var(--border);border-radius:10px;height:6px;margin-bottom:12px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:10px;transition:width .4s ease}
+.quiz-meta{display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:20px}
+.q-card{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow);margin-bottom:16px}
+.q-text{font-size:18px;font-weight:500;margin-bottom:22px;line-height:1.65}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;user-select:none}
+.opt:hover:not(.done){border-color:var(--primary);background:rgba(59,130,246,.04)}
+.opt.sel{border-color:var(--primary);background:rgba(59,130,246,.07)}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--err);background:var(--err-bg)}
+.opt.done{cursor:default}
+.oletter{width:28px;height:28px;min-width:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;transition:all .2s}
+.opt.sel .oletter{background:var(--primary);color:#fff}
+.opt.right .oletter{background:var(--ok);color:#fff}
+.opt.wrong .oletter{background:var(--err);color:#fff}
+.otext{font-size:15px;line-height:1.55;padding-top:3px}
+.fb{display:none;padding:13px 16px;border-radius:10px;margin-top:14px;font-size:14px;font-weight:500;line-height:1.5;gap:8px;align-items:flex-start}
+.fb.ok{background:var(--ok-bg);color:var(--ok);border:1px solid var(--ok);display:flex}
+.fb.err{background:var(--err-bg);color:var(--err);border:1px solid var(--err);display:flex}
+.quiz-foot{display:flex;justify-content:space-between;align-items:center}
+.hint{font-size:12px;color:var(--text2)}
+.hint kbd{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-family:monospace;font-size:11px}
+/* BUTTONS */
+.btn{padding:11px 26px;border-radius:var(--r2);border:none;font-size:15px;font-weight:500;cursor:pointer;transition:all .2s;min-height:44px;display:inline-flex;align-items:center;gap:8px;font-family:inherit}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(59,130,246,.3)}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:var(--bg2);color:var(--text);border:1.5px solid var(--border)}
+.btn-secondary:hover{background:var(--border)}
+/* RESULTS */
+.res-top{text-align:center;padding:36px 0 24px}
+.donut{width:140px;height:140px;border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;position:relative;background:var(--border)}
+.donut::before{content:'';width:108px;height:108px;background:var(--bg);border-radius:50%;position:absolute}
+.donut-inner{position:relative;z-index:1;text-align:center}
+.donut-num{font-size:26px;font-weight:700;display:block;line-height:1.1}
+.donut-lbl{font-size:12px;color:var(--text2)}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.res-cell{background:var(--bg2);border-radius:12px;padding:16px;text-align:center}
+.res-val{font-size:24px;font-weight:700;display:block;margin-bottom:2px}
+.res-val.ok{color:var(--ok)}.res-val.err{color:var(--err)}.res-val.pri{color:var(--primary)}
+.res-lbl{font-size:13px;color:var(--text2)}
+.res-btns{display:flex;gap:12px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.review-toggle{width:100%;text-align:left;padding:14px 18px;background:var(--bg2);border:1.5px solid var(--border);border-radius:12px;cursor:pointer;font-size:15px;font-weight:500;color:var(--text);display:flex;justify-content:space-between;align-items:center;transition:all .2s;font-family:inherit}
+.review-toggle:hover{border-color:var(--primary)}
+.rev-list{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.rev-item{padding:14px 18px;border-radius:12px;border:1.5px solid var(--border)}
+.rev-item.ok{border-color:var(--ok);background:var(--ok-bg)}
+.rev-item.err{border-color:var(--err);background:var(--err-bg)}
+.rev-q{font-size:14px;font-weight:500;margin-bottom:6px}
+.rev-a{font-size:13px;color:var(--text2);line-height:1.5}
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:var(--bg);padding:11px 22px;border-radius:50px;font-size:14px;font-weight:500;transition:transform .3s;z-index:999;white-space:nowrap;pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+/* RESPONSIVE */
+@media(max-width:600px){
+  .app{padding:14px}
+  .cards-grid{grid-template-columns:1fr}
+  .q-text{font-size:16px}
+  .res-grid{grid-template-columns:1fr}
+  .res-btns{flex-direction:column}
+  .quiz-foot{flex-direction:column;gap:12px;align-items:stretch}
+  .quiz-foot .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="logo">📚 Lịch sử 11</div>
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙 Tối</button>
+  </header>
+
+  <!-- HOME -->
+  <div class="screen active" id="screen-home">
+    <div class="home-hero">
+      <h1>Luyện thi Lịch sử</h1>
+      <p>Chọn bài để luyện tập hoặc tạo đề ngẫu nhiên</p>
+    </div>
+    <div class="cards-grid">
+      <div class="card" onclick="startLesson('bai10')">
+        <div class="ci">🏛️</div>
+        <h3>Bài 10</h3>
+        <p>Cải cách của vua Lê Thánh Tông (thế kỉ XV)</p>
+        <div class="card-tags"><span class="tag">32 câu</span><span class="tag">~15 phút</span></div>
+      </div>
+      <div class="card" onclick="startLesson('bai11')">
+        <div class="ci">⚖️</div>
+        <h3>Bài 11</h3>
+        <p>Cải cách của vua Minh Mạng (thế kỉ XIX)</p>
+        <div class="card-tags"><span class="tag">31 câu</span><span class="tag">~15 phút</span></div>
+      </div>
+      <div class="card" onclick="startLesson('bai12')">
+        <div class="ci">🌊</div>
+        <h3>Bài 12</h3>
+        <p>Vị trí và tầm quan trọng của Biển Đông</p>
+        <div class="card-tags"><span class="tag">30 câu</span><span class="tag">~12 phút</span></div>
+      </div>
+      <div class="card card-random" onclick="showSetup()">
+        <div class="ci">🎲</div>
+        <h3>Tạo đề ngẫu nhiên</h3>
+        <p>Trộn câu hỏi từ nhiều bài, từ dễ đến khó</p>
+        <div class="card-tags"><span class="tag">Tùy số câu</span><span class="tag">Tùy bài</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETUP -->
+  <div class="screen" id="screen-setup">
+    <button class="back-btn" onclick="goHome()">← Quay lại</button>
+    <h2 class="page-title">🎲 Tạo đề ngẫu nhiên</h2>
+    <div class="setup-box">
+      <h3>Số câu hỏi</h3>
+      <div class="qty-row">
+        <button class="qty-btn on" onclick="pickQty(this,10)">10 câu</button>
+        <button class="qty-btn" onclick="pickQty(this,20)">20 câu</button>
+        <button class="qty-btn" onclick="pickQty(this,30)">30 câu</button>
+        <button class="qty-btn" onclick="pickQty(this,'all')">Tất cả</button>
+      </div>
+    </div>
+    <div class="setup-box">
+      <h3>Chọn bài học</h3>
+      <div class="chk-row">
+        <label class="chk-label"><input type="checkbox" checked value="bai10" class="lchk"> 🏛️ Bài 10 – Lê Thánh Tông (32 câu)</label>
+        <label class="chk-label"><input type="checkbox" checked value="bai11" class="lchk"> ⚖️ Bài 11 – Minh Mạng (31 câu)</label>
+        <label class="chk-label"><input type="checkbox" checked value="bai12" class="lchk"> 🌊 Bài 12 – Biển Đông (30 câu)</label>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%" onclick="startRandom()">🚀 Bắt đầu làm bài</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <button class="back-btn" onclick="confirmQuit()">← Thoát</button>
+    <div class="prog-wrap"><div class="prog-fill" id="progBar" style="width:0%"></div></div>
+    <div class="quiz-meta">
+      <span id="qCounter">Câu 1 / 32</span>
+      <span id="scoreTrack">✓ 0 đúng</span>
+    </div>
+    <div class="q-card">
+      <p class="q-text" id="qText"></p>
+      <div class="opts" id="optsList"></div>
+      <div class="fb" id="fbBox"></div>
+    </div>
+    <div class="quiz-foot">
+      <div class="hint">Phím <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> chọn · <kbd>Enter</kbd> tiếp</div>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQ()" disabled>Câu tiếp →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="screen" id="screen-results">
+    <div class="res-top">
+      <div class="donut" id="donut">
+        <div class="donut-inner">
+          <span class="donut-num" id="resNum">0/0</span>
+          <span class="donut-lbl">điểm</span>
+        </div>
+      </div>
+      <h2 id="resTitle" style="font-size:22px;margin-bottom:6px"></h2>
+      <p id="resSub" style="color:var(--text2)"></p>
+    </div>
+    <div class="res-grid">
+      <div class="res-cell"><span class="res-val ok" id="rCorrect">0</span><span class="res-lbl">Câu đúng</span></div>
+      <div class="res-cell"><span class="res-val err" id="rWrong">0</span><span class="res-lbl">Câu sai</span></div>
+      <div class="res-cell"><span class="res-val pri" id="rPct">0%</span><span class="res-lbl">Tỉ lệ đúng</span></div>
+    </div>
+    <div class="res-btns">
+      <button class="btn btn-primary" onclick="retryQuiz()">🔄 Làm lại</button>
+      <button class="btn btn-secondary" onclick="goHome()">🏠 Trang chủ</button>
+    </div>
+    <button class="review-toggle" onclick="toggleRev(this)">
+      <span>📋 Xem lại đáp án chi tiết</span><span id="revIcon">▼</span>
+    </button>
+    <div class="rev-list" id="revList" style="display:none"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const L = ['A','B','C','D'];
+
+const QDB = {
+bai10:[
+{q:"Cuộc cải cách của vua Lê Thánh Tông được tiến hành trong bối cảnh lịch sử nào sau đây?",o:["Nội bộ triều đình có nhiều mâu thuẫn, biến động.","Chế độ phong kiến lâm vào khủng hoảng trầm trọng","Nền kinh tế sa sút, nạn đói diễn ra thường xuyên","Đất nước đứng trước nguy cơ bị nhà Minh xâm lược"],a:0,d:'easy'},
+{q:"Công cuộc cải cách của Lê Thánh Tông được tiến hành trên mọi lĩnh vực, nhưng tập trung chủ yếu vào lĩnh vực",o:["giáo dục.","kinh tế.","văn hóa.","hành chính."],a:3,d:'easy'},
+{q:"Để quản lý đất nước, vua Lê Thánh Tông đã cho ban hành bộ luật nào sau đây?",o:["Quốc triều hình luật.","Hình thư","Hoàng Việt luật lệ.","Hình luật."],a:0,d:'easy'},
+{q:"Trong lĩnh vực văn hóa, Lê Thánh Tông đặc biệt đề cao hệ tư tưởng",o:["Nho giáo","Đạo giáo","Thiên chúa giáo","Phật giáo"],a:0,d:'easy'},
+{q:"Ban cấp ruộng đất cho quý tộc, quan lại cao cấp từ nhất phẩm đến tứ phẩm là nội dung chủ yếu của chính sách cải cách nào sau đây của vua Lê Thánh Tông?",o:["Hạn nô","Lộc điền","Quân điền","Hạn điền"],a:1,d:'easy'},
+{q:"Ruộng đất công ở các làng xã thời Lê Thánh Tông được phân chia theo chế độ nào sau đây?",o:["Lộc điền.","Điền trang.","Hạn điền","Quân điền."],a:3,d:'easy'},
+{q:"Dưới thời vua Lê Thánh Tông, hệ thống cơ quan phụ trách đạo thừa tuyên có tên gọi là",o:["Thông chính ty","Lục bộ","Lục khoa","Tam ty"],a:3,d:'easy'},
+{q:"Năm 1471, vua Lê Thánh Tông cho lập thêm đạo thừa tuyên thứ 13 có tên gọi là",o:["Quảng Nam.","Tây Đô.","Phú Xuân.","Hà Nội."],a:0,d:'easy'},
+{q:"Trong cuộc cải cách thế kỉ XV, dưới đạo thừa tuyên, vua Lê Thánh Tông thiết lập hệ thống",o:["tỉnh, phủ, huyện, làng.","phủ, huyện/châu, xã.","tỉnh/thành phố, huyện, xã","lộ, trấn, phủ, huyện/châu"],a:1,d:'easy'},
+{q:"Dưới thời vua Lê Thánh Tông, hệ thống quan lại được tuyển chọn chủ yếu thông qua",o:["tiến cử","đề cử","dòng dõi tôn thất","giáo dục – khoa cử"],a:3,d:'easy'},
+{q:"Nội dung nào sau đây phản ánh đúng mục đích cải cách của vua Lê Thánh Tông?",o:["Tăng cường quyền lực của hoàng đế và củng cố bộ máy nhà nước","Tăng cường tiềm lực đất nước chuẩn bị đối phó với giặc ngoại xâm","Giải quyết tình trạng khủng hoảng trầm trọng của đất nước bấy giờ","Biến nước ta trở thành cường quốc lớn mạnh hàng đầu trong khu vực."],a:0,d:'medium'},
+{q:"Để tập trung quyền lực vào nhà vua, Lê Thánh Tông đã",o:["Bãi bỏ nhiều cơ quan, chức quan cũ","Chú trọng đổi mới giáo dục khoa cử","Coi trọng bảo vệ quyền lợi phụ nữ, trẻ em","Ban hành chính sách hạn điền và hạn nô"],a:0,d:'medium'},
+{q:"\"Đây là một bộ luật đầy đủ… gồm hơn 700 điều, quy định khá đầy đủ tội danh và hình phạt liên quan đến hầu hết các hoạt động xã hội…\". Nhận xét trên đề cập đến bộ luật nào sau đây?",o:["Quốc triều hình luật.","Hình thư.","Hoàng Việt luật lệ.","Hình luật."],a:0,d:'medium'},
+{q:"Năm 1460, sau khi lên ngôi, vua Lê Thánh Tông đã tiến hành",o:["khuyến khích phát triển ngoại thương.","công cuộc thống nhất đất nước.","cuộc cải cách trên nhiều lĩnh vực.","mở cuộc tiến công sang Trung Quốc."],a:2,d:'medium'},
+{q:"Một trong những điểm mới và tiến bộ của bộ luật Quốc triều hình luật là",o:["đề cao quyền tự do, dân chủ của nhân dân.","bảo vệ quyền lợi và địa vị của người phụ nữ.","bảo vệ tuyệt đối quyền và lợi ích của vua.","bảo vệ quyền và lợi ích của quân cấm binh."],a:1,d:'medium'},
+{q:"Nội dung nào sau đây phản ánh đúng về chức năng của Lục bộ dưới thời vua Lê Thánh Tông?",o:["Cơ quan cao cấp chủ chốt trong triều đình.","Theo dõi, giám sát hoạt động của Lục khoa.","Phụ trách hoạt động quân sự của nhà nước.","Cơ quan giúp việc cho Lục Tự, Lục khoa"],a:0,d:'medium'},
+{q:"Nội dung nào sau đây không phải là cải cách hành chính ở cấp trung ương của vua Lê Thánh Tông?",o:["Xóa bỏ hầu hết các chức quan đại thần có quyền lực lớn.","Giữ lại một số ít quan đại thần cùng vua bàn việc khi cần.","Chia đất nước thành 12 đạo thừa tuyên và phủ Trung Đô.","Tổ chức hoàn thiện cơ cấu, chức năng của Lục Bộ, Lục khoa"],a:2,d:'medium'},
+{q:"Nội dung nào sau đây phản ánh đúng ý nghĩa cải cách của vua Lê Thánh Tông thế kỉ XV?",o:["Đưa đất nước thoát khỏi tình trạng khủng hoảng trầm trọng","Góp phần ổn định và phát triển kinh tế, văn hóa, xã hội Đại Việt","Nâng cao tiềm lực quốc gia, đẩy lùi nguy cơ ngoại xâm cận kề","Hoàn thành thống nhất đất nước về mặt lãnh thổ và hành chính"],a:1,d:'medium'},
+{q:"Nội dung nào sau đây không phải là cải cách của vua Lê Thánh Tông trên lĩnh vực hành chính?",o:["Chia cả nước từ 5 đạo thành 12 đạo thừa tuyên và phủ Trung Đô","Đề cao Nho giáo, đưa Nho giáo trở thành hệ tư tưởng độc tôn","Tăng cường chế độ kiểm tra, giám sát lẫn nhau giữa các cơ quan","Thành lập Lục bộ đảm nhiệm công việc chủ yếu của quốc gia"],a:1,d:'medium'},
+{q:"Nội dung nào sau đây là cải cách của vua Lê Thánh Tông trên lĩnh vực văn hóa – giáo dục?",o:["Hạn chế quyền lực của vương hầu, quý tộc","Quy định chặt chẽ chế độ khoa cử","Ban hành chế độ lộc điền và quân điền","Thành lập Lục khoa giám sát Lục bộ"],a:1,d:'medium'},
+{q:"Nội dung nào sau đây là cải cách của vua Lê Thánh Tông trên lĩnh vực quân đội, quốc phòng?",o:["Chú trọng hoàn thiện hệ thống pháp luật quản lý đất nước","Chú trọng xây dựng đội ngũ quan lại có phẩm chất tốt","Tổ chức các kì thi khảo võ nghệ để tuyển chọn tướng sĩ","Bãi bỏ hầu hết các chức quan đại thần có quyền lực lớn"],a:2,d:'hard'},
+{q:"Nội dung nào sau đây phản ánh đúng điểm giống nhau giữa cải cách của Hồ Quý Ly và vua Lê Thánh Tông?",o:["Cải cách thành công trọn vẹn và mang tính triệt để trên mọi lĩnh vực","Cải cách nhằm tập trung quyền lực về tay vua và triều đình trung ương","Cải cách chủ yếu mô phỏng theo mô hình nhà Minh (Trung Quốc)","Cải cách toàn diện, quy mô lớn nhưng tập trung vào lĩnh vực quân đội"],a:1,d:'hard'},
+{q:"Phân chia ruộng công ở các làng xã cho quan lại từ tam phẩm trở xuống đến các tầng lớp nhân dân là nội dung chủ yếu của chính sách cải cách nào sau đây của vua Lê Thánh Tông?",o:["Quân điền","Hạn nô","Lộc điền","Hạn điền"],a:0,d:'hard'},
+{q:"Công cuộc cải cách của vua Lê Thánh Tông thế kỉ XV không được tiến hành trên lĩnh vực nào sau đây?",o:["Hành chính","Giáo dục","Kinh tế","Ngoại giao"],a:3,d:'hard'},
+{q:"\"Coi trọng biên soạn quốc sử\" là nội dung cải cách của vua Lê Thánh Tông trên lĩnh vực nào sau đây?",o:["Quân đội","Kinh tế","Luật pháp","Văn hóa"],a:3,d:'hard'},
+{q:"Trong nội dung cải cách, Hồ Quý Ly và vua Lê Thánh Tông đều",o:["bãi bỏ nhiều cơ quan, chức quan cũ có nhiều quyền lực","tăng cường cơ chế giám sát, ràng buộc nhau giữa các cơ quan","hạn chế sỡ hữu ruộng đất quy mô lớn của quý tộc tôn thất","khuyến khích và đề cao sử dụng chữ Nôm trong thi cử"],a:0,d:'hard'},
+{q:"Năm 1484, vua Lê Thánh Tông quyết định cho dựng bia ghi tên Tiến sĩ nhằm",o:["phát huy những phong tục tập quán tốt đẹp của dân tộc","tăng cường sự ràng buộc lẫn nhau giữa các cơ quan","tập trung quyền lực vào tay vua và triều đình trung ương","đề cao Nho học và tôn vinh các bậc trí thức Nho học"],a:3,d:'hard'},
+{q:"Nội dung nào sau đây không phải là cải cách hành chính ở cấp địa phương của vua Lê Thánh Tông?",o:["Thành lập cơ quan đứng đầu các đạo Thừa tuyên là Tam ty","Xóa bỏ hầu hết các chức quan đại thần có quyền lực lớn.","Chia đất nước thành 12 đạo thừa tuyên và phủ Trung Đô.","Bãi bỏ lộ, trấn cũ, thành lập hệ thống phủ, huyện/châu, xã"],a:1,d:'hard'},
+{q:"Nội dung nào sau đây là một trong những ý nghĩa về cuộc cải cách của vua Lê Thánh Tông ở thế kỉ XV?",o:["Tạo tiền đề cho cuộc chiến tranh xâm lược phương Bắc.","Tạo thế và lực cho ta đánh bại quân xâm lược Minh.","Làm chuyển biến toàn bộ các hoạt động của quốc gia.","Mở ra khả năng độc lập, tự chủ đầu tiên cho dân tộc ta."],a:2,d:'hard'},
+{q:"Để tăng cường sức mạnh quân đội, trong cải cách của mình, vua Lê Thánh Tông đã",o:["Tăng cường tuyển quân quy mô lớn, ồ ạt ở các địa phương","Chú trọng cải tiến vũ khí, phòng thủ những nơi hiểm yếu","Quy định chặt chẽ kỉ luật quân đội và huấn luyện, tập trận","Thải hồi những binh sĩ già yếu, bổ sung người khỏe mạnh"],a:2,d:'hard'},
+{q:"Một trong những điểm mới của bộ Quốc triều hình luật là",o:["đề cao quyền lợi và địa vị của nam giới, quy định cụ thể về tố tụng","có sự gia tăng hình phạt đối với người phạm tội nếu đã đến tuổi trưởng thành","có sự phân biệt hình phạt đối với người phạm tội nếu tàn tật hoặc còn nhỏ","xóa bỏ hình phạt đối với người phạm tội nếu tàn tật hoặc còn nhỏ"],a:2,d:'hard'},
+{q:"Nội dung nào sau đây không phải là những giá trị cơ bản mà cuộc cải cách hành chính của vua Lê Thánh Tông thế kỉ XV mang lại?",o:["Xây dựng quy chế vận hành bộ máy nhà nước trên nguyên tắc quyền lực thuộc về nhân dân.","Thanh lọc, tỉnh giản một số chức quan, cơ quan và các cấp chính quyền trung gian.","Không để quyền lực tập trung quá nhiều vào một cơ quan, để ngăn chặn sự lộng quyền.","Các cơ quan Nhà nước giảm sát lẫn nhau để hạn chế sự lạm quyền và nâng cao trách nhiệm."],a:0,d:'hard'}
+],
+bai11:[
+{q:"Cuộc cải cách hành chính lớn nhất của vương triều Nguyễn được tiến hành dưới thời vua",o:["Thiệu Trị.","Minh Mạng.","Tự Đức.","Gia Long."],a:1,d:'easy'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) được thực hiện trong bối cảnh lịch sử nào sau đây?",o:["Phương thức sản xuất tư bản chủ nghĩa phát triển mạnh","Chế độ quân chủ chuyên chế đang trong thời kì thịnh trị.","Đất nước đứng trước nguy cơ xâm lược từ nhà Thanh","Bộ máy chính quyền nhà nước chưa hoàn thiện, đồng bộ"],a:3,d:'easy'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) nhằm thực hiện một trong những mục đích nào sau đây?",o:["Khôi phục nền giáo dục Nho học","Thúc đẩy kinh tế tư bản chủ nghĩa","Ngăn ngừa nguy cơ giặc ngoại xâm","Tập trung quyền lực vào tay vua"],a:3,d:'easy'},
+{q:"Để hoàn thiện bộ máy chính quyền Trung ương, vua Minh Mạng đã cho thành lập một số cơ quan mới có tên là",o:["Đô sát viện, Cơ mật viện","Thông chính ty, Quốc Tử Giám","Lục bộ, Lục khoa, Lục tự","Đô ty, Thừa ty, Hiến ty"],a:0,d:'easy'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) tập trung vào lĩnh vực chủ yếu nào sau đây?",o:["Hành chính","Quốc phòng","Kinh tế","Văn hóa"],a:0,d:'easy'},
+{q:"Trong cuộc cải cách nửa đầu thế kỉ XIX, vua Minh Mạng đã phân chia bộ máy chính quyền địa phương thành các cấp nào sau đây?",o:["Lộ, trấn, phủ, huyện/châu, xã","Đạo thừa tuyên, phủ, huyện/châu, xã.","Tỉnh/thành phố, huyện/châu, xã","Tỉnh, phủ, huyện/châu, tổng, xã."],a:3,d:'easy'},
+{q:"Nội dung nào sau đây không phải là hoạt động cải cách của vua Minh Mạng nửa đầu thế kỉ XIX?",o:["Phân chia lại đơn vị hành chính ở cấp địa phương","Ban hành chính sách hạn điền và hạn nô","Hoàn thiện cơ cấu, chức năng của Lục bộ","Tăng cường giám sát lẫn nhau giữa các cơ quan"],a:1,d:'easy'},
+{q:"Trong công cuộc cải cách của vua Minh Mạng, Nội các được thành lập có vai trò nào sau đây?",o:["Xướng danh những người đỗ trong kì thi Đình","Phụ trách nhân khẩu, thu thuế trong cả nước","Giúp vua khởi thảo các văn bản hành chính","Kiểm tra, giám sát hoạt động của Lục bộ"],a:2,d:'easy'},
+{q:"Năm 1832, vua Minh Mạng cho thành lập Đô sát viện để thực hiện nhiệm vụ nào sau đây?",o:["Phụ trách bang giao, đón tiếp sứ thần nước ngoài","Tiếp nhận và xử lý các loại công văn, giấy tờ","Phụ trách nhân khẩu, thu thuế trong cả nước","Can gián nhà vua và giám sát các cơ quan"],a:3,d:'easy'},
+{q:"Trong cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX), đứng đầu tỉnh là",o:["Lục khoa, Lục tự","Đô ty, Thừa ty, Hiến ty.","Tổng đốc, Tuần phủ.","Lục bộ, Lục khoa"],a:2,d:'easy'},
+{q:"Công cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) đã đem lại một trong những kết quả nào sau đây?",o:["Đưa đất nước phát triển lên chế độ tư bản chủ nghĩa.","Hoàn thành thống nhất đất nước về mặt lãnh thổ.","Góp phần mở cửa và hội nhập nền kinh tế khu vực.","Thúc đẩy bộ máy chính quyền các cấp hoạt động hiệu quả."],a:3,d:'medium'},
+{q:"Nội dung nào sau đây không phản ánh đúng kết quả cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX)?",o:["Xây dựng chế độ quân chủ trung ương phân quyền cao độ.","Tổ chức cơ cấu bộ máy nhà nước gọn nhẹ, chặt chẽ.","Thống nhất đơn vị hành chính địa phương trong cả nước.","Xây dựng được chế độ quân chủ trung ương tập quyền cao độ."],a:0,d:'medium'},
+{q:"Trong bộ máy chính quyền trung ương thời Minh Mạng, Cơ mật viện có vai trò tư vấn cho nhà vua về",o:["quân sự.","luật pháp.","giáo dục.","văn hóa."],a:0,d:'medium'},
+{q:"Ở địa phương, trong công cuộc cải cách hành chính nửa đầu thế kỉ XIX, vua Minh Mạng đã chia cả nước thành",o:["các lộ, trấn, phủ, huyện/châu","30 tỉnh và 1 phủ Thừa Thiên.","Bắc Thành, Gia Định thành","13 đạo thừa tuyên và các phủ"],a:1,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) được thực hiện trong bối cảnh",o:["bộ máy nhà nước phong kiến cơ bản đã hoàn chỉnh.","tình hình an ninh – xã hội ở nhiều địa phương bất ổn","tình trạng phân quyền, thiếu thống nhất đã khắc phục.","phương thức sản xuất tư bản chủ nghĩa thâm nhập mạnh"],a:1,d:'medium'},
+{q:"Cuộc cải cách hành chính của vua Minh Mạng (nửa đầu thế kỉ XIX) không nhằm mục đích nào sau đây?",o:["Tập trung quyền lực và hoàn thiện bộ máy nhà nước.","Xóa bỏ tình trạng \"bế quan tỏa cảng\" của đất nước.","Tăng cường tính thống nhất và tiềm lực của đất nước.","Khắc phục tình trạng phân quyền, thiếu thống nhất."],a:1,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) có ý nghĩa quan trọng nào sau đây?",o:["ngăn chặn mọi nguy cơ xâm lược từ bên ngoài.","xóa bỏ tình trạng \"bế quan tỏa cảng\" của đất nước.","đặt cơ sở cho sự phân chia tỉnh, huyện hiện nay.","hoàn thành thống nhất đất nước về mặt lãnh thổ."],a:2,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng và cuộc cải cách của vua Lê Thánh Tông có điểm giống nhau nào sau đây?",o:["Khuyến khích, tạo điều kiện cho ngoại thương phát triển.","Chú trọng phát triển kinh tế, xã hội theo hướng tư bản.","Ưu tiên cho sự nghiệp thống nhất đất nước về lãnh thổ.","Nâng cao vai trò quản lí của chính quyền ở trung ương."],a:3,d:'medium'},
+{q:"Một trong những di sản lớn nhất trong cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) còn giá trị đến ngày nay là",o:["ưu tiên bổ nhiệm quan lại là người ở địa phương.","cách thức tổ chức bộ máy nhà nước ở trung ương.","tập trung cao độ quyền lực vào trong tay nhà vua.","cách thức phân chia đơn vị hành chính cấp tỉnh."],a:3,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng và vua Lê Thánh Tông có điểm khác biệt nào sau đây?",o:["Tăng cường quyền lực tuyệt đối của nhà vua.","Thành lập lục Bộ để giúp việc cho nhà vua.","Thành lập các cơ quan Nội các và Cơ mật viện.","Củng cố chế độ quân chủ chuyên chế tập quyền."],a:2,d:'hard'},
+{q:"Cuộc cải cách hành chính của vua Minh Mạng được thực hiện trên cơ sở học tập chủ yếu mô hình của vương triều nào sau đây ở Trung Quốc?",o:["Nhà Thanh","Nhà Tống","Nhà Nguyên","Nhà Đường"],a:0,d:'hard'},
+{q:"Một trong những hạn chế trong cải cách của vua Minh Mạng nửa đầu thế kỉ XIX là",o:["bộ máy nhà nước cồng kềnh, hoạt động kém hiệu quả hơn thời kì trước","sự giám sát, ràng buộc lẫn nhau giữa các cơ quan, chức quan mờ nhạt","cải cách làm tăng thêm tình trạng cát cứ, phân quyền ở các địa phương","cải cách nặng về củng cố vương triều, ít chú ý đến cải thiện dân sinh"],a:3,d:'hard'},
+{q:"Dưới thời Minh Mạng, triều đình tăng cường quyền kiểm soát đối với vùng dân tộc thiểu số thông qua việc",o:["bỏ lưu quan (quan lại người Kinh)","bãi bỏ quyền thế tập của tù trưởng.","gả công chúa cho các tù trưởng","thiết lập chế độ thổ quan"],a:1,d:'hard'},
+{q:"Cuộc cải cách của vua Minh Mạng nửa đầu thế kỉ XIX đã đưa đến",o:["sự xác lập của mô hình quản lý nhà nước hoàn toàn độc đáo so với thế giới lúc bấy giờ","sự xác lập của nền quân chủ chuyên chế trung ương tập quyền cao độ mang tính quan liêu.","sự xác lập của nền quân chủ chuyên chế trung ương tập quyền cao độ mang tính quý tộc.","sự phát triển thịnh trị đạt đến đỉnh cao trong lịch sử của chế độ quân chủ Việt Nam"],a:1,d:'hard'},
+{q:"Trong cải cách của vua Minh Mạng, cơ quan tư vấn tối cao cho nhà vua về những vấn đề quân sự quan trọng được gọi là",o:["Đô sát viện.","Hàn lâm viện.","Cơ mật viện.","Nội các."],a:2,d:'hard'},
+{q:"Một trong những tác dụng tích cực của cải cách hành chính thời vua Minh Mạng là góp phần",o:["phát triển nền văn hóa mang đậm bản sắc dân tộc.","khích lệ người dân tích cực thi cử và ra làm quan.","hạn chế sự tham nhũng và lộng hành của quan lại.","tạo điều kiện phát triển kinh tế theo hướng tư bản"],a:2,d:'hard'},
+{q:"Vua Minh Mạng cải cách hệ thống chính trị - hành chính chặt chẽ, gọn nhẹ từ trung ương đến địa phương không nhằm mục tiêu nào dưới đây?",o:["Hạn chế tối đa quyền tự trị của làng xã, địa phương.","Nâng cao năng lực hệ thống quan chức ở trung ương.","Thống nhất đất nước, xác lập chủ quyền lãnh thổ.","Thiết lập nên nhà nước quân chủ phong kiến tập quyền."],a:2,d:'hard'},
+{q:"Cuộc cải cách của vua Minh Mạng và cuộc cải cách của vua Lê Thánh Tông có điểm khác biệt nào sau đây?",o:["Chia cả nước thành 30 tỉnh và phủ Thừa Thiên.","Củng cố chế độ quân chủ chuyên chế tập quyền.","Thành lập lục Bộ để giúp việc cho nhà vua.","Tăng cường quyền lực tuyệt đối của nhà vua."],a:0,d:'hard'},
+{q:"Nội dung nào sau đây phản ánh đúng điểm giống nhau trong cải cách của Hồ Quý Ly và vua Minh Mạng?",o:["Cải cách nặng về mô phỏng, dập khuôn bên ngoài mà ít có sự sáng tạo, cải biến","Cải cách nhằm tăng cường quyền lực của vua và hiệu quả của bộ máy nhà nước","Được tiến hành khi đất nước đang lâm vào tình trang khủng hoảng trầm trọng.","Cải cách nhằm hướng đến cải thiện dân sinh, phát triển kinh tế - xã hội đất nước"],a:1,d:'hard'},
+{q:"Một trong những cơ quan chủ chốt của triều đình phong kiến trung ương được thành lập từ thời vua Minh Mạng là",o:["Hồng lô tự.","Thông chính ty.","Đô sát viện.","Quốc tử giám."],a:2,d:'hard'},
+{q:"Một trong những đặc điểm cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) là",o:["không tạo điều kiện cho sự phát triển kinh tế đất nước","mang tính cưỡng bức, nặng về mô phỏng bên ngoài","chủ yếu diễn ra trên lĩnh vực chính trị, hành chính","ảnh hưởng trực tiếp đến khối đại đoàn kết dân tộc"],a:2,d:'hard'}
+],
+bai12:[
+{q:"Biển Đông là vùng biển thuộc",o:["Đại Tây Dương.","Ấn Độ Dương.","Địa Trung Hải.","Thái Bình Dương."],a:3,d:'easy'},
+{q:"Về vị trí địa lý, biển Đông được coi là cầu nối giữa Thái Bình Dương và",o:["Địa Trung Hải.","Ấn Độ Dương.","Đại Tây Dương.","Bắc Băng Dương."],a:1,d:'easy'},
+{q:"Biển Đông là vùng biển chung của 9 quốc gia ở châu Á, trong đó có",o:["Nhật Bản","Ấn Độ","Trung Quốc","Lào"],a:2,d:'easy'},
+{q:"Phía tây nam của biển Đông nối với biển An-đa-man của Ấn Độ Dương thông qua eo biển",o:["Đài Loan","La-li-man-tan","Lu-dông","Ma-lắc-ca"],a:3,d:'easy'},
+{q:"Tuyến đường vận tải quốc tế qua Biển Đông được coi là nhộn nhịp thứ 2 trên thế giới chỉ sau biển",o:["Gia-va.","Địa Trung Hải","Caribê.","Hoa Đông."],a:1,d:'easy'},
+{q:"Eo biển Ma-lắc-ca là điểm điều tiết giao thông quan trọng bậc nhất ở châu lục nào sau đây?",o:["Châu Mĩ.","Châu Âu.","Châu Phi.","Châu Á."],a:3,d:'easy'},
+{q:"Biển Đông là một trong những biển lớn và là đường vận chuyển huyết mạch của khu vực",o:["châu Á - Thái Bình Dương.","châu Âu và mũi Hảo Vọng.","châu Phi và châu Nam Cực.","Bắc Mĩ và eo biển Đan Mạch."],a:0,d:'easy'},
+{q:"Biển Đông có ảnh hưởng trực tiếp tới cuộc sống của người dân ở một số nước thuộc khu vực nào sau đây?",o:["Châu Phi.","Châu Mĩ.","Châu Á","Châu Âu."],a:2,d:'easy'},
+{q:"Biển Đông là vùng biển chung của 9 quốc gia ở châu Á, trong đó có",o:["Ma-lai-xi-a","Mi-an-ma","Liên bang Nga","Mĩ"],a:0,d:'easy'},
+{q:"Các cảng biển lớn trên Biển Đông có vai trò nào sau đây?",o:["Điểm trung chuyển của tàu thuyền.","Nơi giải quyết các vấn đề xã hội.","Điểm tập trung phát triển du lịch.","Nơi khai thác và chế biến dầu khí."],a:0,d:'easy'},
+{q:"Eo biển Ma-lắc-ca là điểm điều tiết giao thông đường biển quan trọng, kết nối nhiều nước châu Á, trong đó có 3 nước đông dân nhất là In-đô-nê-xi-a, Trung Quốc và",o:["Ấn Độ","Ai Cập","Liên bang Nga","Mông Cổ"],a:0,d:'medium'},
+{q:"Vùng biển nào sau đây là tuyến đường di chuyển ngắn nhất nối Thái Bình Dương và Ấn Độ Dương?",o:["Biển Đỏ.","Biển Địa Trung Hải.","Biển Đen.","Biển Đông."],a:3,d:'medium'},
+{q:"Trong lịch sử, Biển Đông được coi là tuyến đường thiết yếu trong giao thông, giao thương, di cư,… giữa",o:["Trung Quốc và Nhật Bản","Ấn Độ và Nam Á","Ấn Độ và Trung Quốc","Trung Quốc và Đông Á"],a:2,d:'medium'},
+{q:"Các quốc gia ở khu vực nào sau đây có nền kinh tế gắn trực tiếp với con đường thương mại, hệ thống cảng biển và tài nguyên trên Biển Đông?",o:["Đông Nam Á và Nam Á","Đông Bắc Á và Tây Âu","Đông Bắc Á và Đông Nam Á","Nam Á và Tây Á"],a:2,d:'medium'},
+{q:"Ở Biển Đông, nguồn tài nguyên thiên nhiên nào sau đây có trữ lượng vào loại lớn nhất thế giới?",o:["Muối biển.","Quặng sắt.","Băng cháy.","Dầu khí."],a:3,d:'medium'},
+{q:"Nội dung nào sau đây phản ánh đúng sự phong phú về nguồn tài nguyên thiên nhiên của Biển Đông?",o:["Biển Đông là điểm điều tiết giao thông đường biển quan trọng nhất châu Á","Biển Đông có hàng trăm loài sinh vật, bao gồm cả động vật và thực vật","Biển Đông là địa bàn cạnh tranh ảnh hưởng truyền thống của các nước lớn","Biển Đông là nơi tập trung các mô hình chính trị, kinh tế xã hội đa dạng"],a:1,d:'medium'},
+{q:"Nội dung nào sau đây không phản ánh đúng vai trò quan trọng của Biển Đông về mặt kinh tế?",o:["Biển Đông là nơi diễn ra quá trình giao thoa của nhiều nền văn hóa lớn","Biển Đông là tuyến đường vận tải hàng hải nhộn nhịp thứ hai thế giới","Các nước ven biển Đông có hoạt động khai thác hải sản và dầu khí sôi động","Các nước Đông Nam Á ven biển hưởng lợi trực tiếp về kinh tế từ biển Đông"],a:0,d:'medium'},
+{q:"Ngành kinh tế nào sau đây của Biển Đông được đẩy mạnh nhờ hệ sinh vật đa dạng dưới đáy biển và cảnh quan thiên nhiên tươi đẹp?",o:["Nuôi trồng thủy, hải sản.","Đánh bắt cá.","Khai thác khoáng sản.","Du lịch biển."],a:3,d:'medium'},
+{q:"Nội dung nào sau đây thể hiện tầm quan trọng chiến lược của Biển Đông?",o:["Có nguồn tài nguyên thiên nhiên biển phong phú.","Là tuyến hàng hải nối Thái Bình Dương với Bắc Băng Dương","Là tuyến hàng hải quốc tế nhộn nhịp nhất trên thế giới.","Là tuyến giao thông hàng hải duy nhất trên biển."],a:0,d:'medium'},
+{q:"Nguồn tài nguyên khoáng sản đa dạng trên biển Đông là điều kiện thuận lợi để các nước",o:["phát triển hoạt động kinh tế có tầm chiến lược.","xây dựng cơ sở hậu cần, kỹ thuật, phục vụ quân sự.","kiểm soát, đảm bảo an ninh giao thông trên biển.","xây dựng các trạm thông tin, trạm dừng chân."],a:0,d:'hard'},
+{q:"Quần đảo Hoàng Sa và quần đảo Trường Sa thuộc chủ quyền của quốc gia nào sau đây?",o:["Trung Quốc.","Việt Nam.","Hàn Quốc.","Nhật Bản."],a:1,d:'hard'},
+{q:"Hiện nay, quần đảo Hoàng Sa trực thuộc quyền quản lý hành chính của",o:["thành phố Đà Nẵng.","tỉnh Cà Mau.","tỉnh Bà Rịa – Vũng Tàu.","tỉnh Khánh Hòa"],a:0,d:'hard'},
+{q:"Hiện nay, quần đảo Trường Sa trực thuộc quyền quản lí hành chính của",o:["tỉnh Nghệ An.","tỉnh Kiên Giang.","thành phố Đà Nẵng.","tỉnh Khánh Hòa."],a:3,d:'hard'},
+{q:"Nội dung nào sau đây phản ánh đúng tầm quan trọng của quần đảo Hoàng Sa và Trường Sa đối với Việt Nam về mặt quốc phòng – an ninh?",o:["Xây dựng các trạm thông tin, dừng chân, tiếp nhiên liệu cho các tàu.","Tạo thế mạnh cho dịch vụ hàng hải và đánh bắt hải sản trong khu vực","Giúp xây dựng các khu bảo tồn, trung tâm nghiên cứu sinh vật biển.","Hình thành tuyến phòng thủ nhiều tầng, từ xa đến gần bảo vệ đất liền."],a:3,d:'hard'},
+{q:"Nội dung nào sau đây không phản ánh đúng tầm quan trọng của quần đảo Hoàng Sa và Trường Sa đối với Việt Nam về mặt kinh tế?",o:["Tạo tuyến phòng thủ nhiều tầng từ xa đến gần để bảo vệ đất liền","Tạo thế mạnh về dịch vụ hàng hải cho nước ta trên Biển Đông","Tạo thuận lợi để phát triển ngành nuôi trồng, chế biến thủy sản","Tạo thế mạnh để phát triển kinh tế du lịch biển đảo cho nước ta"],a:0,d:'hard'},
+{q:"Tầm quan trọng chiến lược của quần đảo Hoàng Sa và Trường Sa được thể hiện ở nội dung nào sau đây?",o:["Đây là hai quần đảo duy nhất thuộc khu vực Biển Đông","Đây là hai quần đảo lớn nhất thuộc khu vực Biển Đông","Là nơi tiếp nhiên liệu duy nhất cho các tàu trên biển","Phục vụ tuyến hàng hải huyết mạch trên Biển Đông"],a:3,d:'hard'},
+{q:"Đối với Việt Nam, tầm quan trọng chiến lược của quần đảo Trường Sa và quần đảo Hoàng Sa được thể hiện ở điểm nào sau đây?",o:["Là tuyến đường duy nhất để Việt Nam xuất khẩu hàng nông sản.","Là nền tảng duy nhất để Việt Nam phát triển công nghiệp nặng.","Có ý nghĩa về chiến lược quốc phòng, an ninh, kinh tế biển.","Đảm bảo nguồn an ninh lương thực cho nhân dân Việt Nam."],a:2,d:'hard'},
+{q:"Nội dung nào sau đây phản ánh đúng về tầm quan trọng chiến lược của Biển Đông đối với sự phát triển kinh tế Việt Nam?",o:["Vùng biển rộng lớn với nhiều đảo là không gian trọng yếu để phát triển văn hóa.","Hệ thống đảo, quần đảo trên Biển Đông chỉ thuận lợi để đầu tư và phát triển du lịch.","Việt Nam được đánh giá là quốc gia có lợi thế và tiềm năng to lớn về tài nguyên biển.","Biển đảo là nguồn cung cấp lương thực chủ yếu cho cuộc sống của nhân dân Việt Nam."],a:2,d:'hard'},
+{q:"Đặc điểm chung về vị trí địa lý của quần đảo Hoàng Sa và Trường Sa là",o:["gần với khu vực đất liền Việt Nam nhất","đều thuộc khu vực miền Bắc Việt Nam","nằm ở vị trí trung tâm của Biển Đông","đều thuộc khu vực miền Nam Việt Nam"],a:2,d:'hard'},
+{q:"Cả hai quần đảo Hoàng Sa và Trường Sa đều tạo thuận lợi để Việt Nam phát triển ngành kinh tế nào sau đây?",o:["công nghiệp chế tạo","lâm nghiệp","khai thác hải sản","nông nghiệp lúa nước"],a:2,d:'hard'}
+]
+};
+
+// STATE
+let qs=[],idx=0,score=0,answers=[],done=false,qty=10,mode='lesson',lesson=null;
+
+// NAV
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function goHome(){showScreen('home')}
+function showSetup(){showScreen('setup')}
+
+// THEME
+function toggleTheme(){
+  const h=document.documentElement,dark=h.dataset.theme==='dark';
+  h.dataset.theme=dark?'light':'dark';
+  document.getElementById('themeBtn').textContent=dark?'🌙 Tối':'☀️ Sáng';
+  localStorage.setItem('theme',h.dataset.theme);
+}
+
+// SETUP
+function pickQty(btn,q){
+  document.querySelectorAll('.qty-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on'); qty=q;
+}
+
+// START
+function startLesson(l){
+  lesson=l; mode='lesson';
+  qs=[...QDB[l]];
+  begin();
+}
+
+function startRandom(){
+  const checks=[...document.querySelectorAll('.lchk:checked')];
+  if(!checks.length){toast('Vui lòng chọn ít nhất một bài học!');return;}
+  mode='random';
+  let pool=[];
+  checks.forEach(c=>pool.push(...QDB[c.value]));
+  const easy=shuffle(pool.filter(q=>q.d==='easy'));
+  const med=shuffle(pool.filter(q=>q.d==='medium'));
+  const hard=shuffle(pool.filter(q=>q.d==='hard'));
+  let ordered=[...easy,...med,...hard];
+  if(qty!=='all') ordered=ordered.slice(0,qty);
+  qs=ordered;
+  begin();
+}
+
+function shuffle(a){
+  const b=[...a];
+  for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}
+  return b;
+}
+
+function begin(){
+  idx=0;score=0;answers=[];done=false;
+  showScreen('quiz');
+  render();
+}
+
+// RENDER
+function render(){
+  const q=qs[idx],total=qs.length;
+  document.getElementById('progBar').style.width=((idx/total)*100)+'%';
+  document.getElementById('qCounter').textContent=`Câu ${idx+1} / ${total}`;
+  document.getElementById('scoreTrack').textContent=`✓ ${score} đúng`;
+  document.getElementById('qText').textContent=q.q;
+  const ol=document.getElementById('optsList');
+  ol.innerHTML='';
+  q.o.forEach((opt,i)=>{
+    const d=document.createElement('div');
+    d.className='opt';
+    d.onclick=()=>pick(i);
+    d.innerHTML=`<span class="oletter">${L[i]}</span><span class="otext">${opt}</span>`;
+    ol.appendChild(d);
+  });
+  const fb=document.getElementById('fbBox');
+  fb.className='fb'; fb.style.display='none'; fb.textContent='';
+  const nb=document.getElementById('nextBtn');
+  nb.disabled=true;
+  nb.textContent=idx===total-1?'Xem kết quả →':'Câu tiếp →';
+  done=false;
+}
+
+function pick(i){
+  if(done)return;
+  done=true;
+  const q=qs[idx],correct=q.a,ok=i===correct;
+  if(ok)score++;
+  answers[idx]={sel:i,correct,ok};
+  document.querySelectorAll('.opt').forEach((o,j)=>{
+    o.classList.add('done');
+    if(j===correct)o.classList.add('right');
+    if(j===i&&!ok)o.classList.add('wrong');
+  });
+  const fb=document.getElementById('fbBox');
+  fb.className='fb '+(ok?'ok':'err');
+  fb.style.display='flex';
+  fb.innerHTML=ok
+    ?'<span>✅ Chính xác!</span>'
+    :`<span>❌ Sai rồi! Đáp án đúng là: <strong>${L[correct]}. ${q.o[correct]}</strong></span>`;
+  document.getElementById('nextBtn').disabled=false;
+  document.getElementById('scoreTrack').textContent=`✓ ${score} đúng`;
+}
+
+function nextQ(){
+  if(!done)return;
+  idx++;
+  if(idx>=qs.length)showResults();
+  else render();
+}
+
+// RESULTS
+function showResults(){
+  const total=qs.length,pct=Math.round((score/total)*100);
+  const deg=(score/total)*360;
+  document.getElementById('donut').style.background=
+    `conic-gradient(var(--primary) ${deg}deg, var(--border) ${deg}deg)`;
+  document.getElementById('resNum').textContent=`${score}/${total}`;
+  document.getElementById('rCorrect').textContent=score;
+  document.getElementById('rWrong').textContent=total-score;
+  document.getElementById('rPct').textContent=pct+'%';
+  const title=pct>=90?'🎉 Xuất sắc!':pct>=75?'👏 Rất tốt!':pct>=60?'👍 Khá tốt!':'💪 chúc mừng b làm bài như cc!';
+  document.getElementById('resTitle').textContent=title;
+  document.getElementById('resSub').textContent=`Bạn đúng ${score}/${total} câu (${pct}%)`;
+  const rl=document.getElementById('revList');
+  rl.innerHTML='';
+  qs.forEach((q,i)=>{
+    const ua=answers[i]||{sel:-1,correct:q.a,ok:false};
+    const d=document.createElement('div');
+    d.className='rev-item '+(ua.ok?'ok':'err');
+    d.innerHTML=`<div class="rev-q">${i+1}. ${q.q}</div>
+      <div class="rev-a">${ua.ok
+        ?`✅ Đúng: ${L[ua.correct]}. ${q.o[ua.correct]}`
+        :`❌ Bạn chọn: ${ua.sel>=0?L[ua.sel]+'. '+q.o[ua.sel]:'Chưa trả lời'}<br>✅ Đáp án: ${L[ua.correct]}. ${q.o[ua.correct]}`
+      }</div>`;
+    rl.appendChild(d);
+  });
+  document.getElementById('revList').style.display='none';
+  document.getElementById('revIcon').textContent='▼';
+  showScreen('results');
+}
+
+function toggleRev(btn){
+  const rl=document.getElementById('revList');
+  const hide=rl.style.display==='none';
+  rl.style.display=hide?'flex':'none';
+  document.getElementById('revIcon').textContent=hide?'▲':'▼';
+}
+
+function retryQuiz(){
+  if(mode==='lesson')startLesson(lesson);
+  else{qs=shuffle(qs);begin();}
+}
+
+function confirmQuit(){
+  if(idx>0||done){if(confirm('Thoát? Tiến độ sẽ không được lưu.'))goHome();}
+  else goHome();
+}
+
+// TOAST
+function toast(msg,ms=3000){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),ms);
+}
+
+// KEYBOARD
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('screen-quiz').classList.contains('active'))return;
+  if(['1','2','3','4'].includes(e.key)&&!done)pick(+e.key-1);
+  if((e.key==='Enter'||e.key==='ArrowRight')&&done)nextQ();
+});
+
+// INIT
+(()=>{
+  const t=localStorage.getItem('theme');
+  if(t){document.documentElement.dataset.theme=t;document.getElementById('themeBtn').textContent=t==='dark'?'☀️ Sáng':'🌙 Tối';}
+})();
+</script>
+</body>
+</html>
