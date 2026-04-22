@@ -243,6 +243,39 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
   z-index:1000;white-space:nowrap;box-shadow:var(--sh3);pointer-events:none}
 .toast.show{transform:translateX(-50%) translateY(0)}
 
+/* LISTENING */
+.section-hdr{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--txt3);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.section-hdr::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.card-top.ls{background:linear-gradient(90deg,#0EA5E9,#0284C7)}
+.card-top.ls2{background:linear-gradient(90deg,#06B6D4,#0891B2)}
+.card-top.ls3{background:linear-gradient(90deg,#14B8A6,#0D9488)}
+.card-top.ls4{background:linear-gradient(90deg,#6366F1,#4F46E5)}
+.audio-wrap{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:18px;margin-bottom:20px;box-shadow:var(--sh0)}
+.audio-label{font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ls-passage{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:24px 28px;margin-bottom:20px;box-shadow:var(--sh1);font-size:15px;line-height:2.2}
+.ls-para{margin-bottom:14px}
+.ls-para:last-child{margin-bottom:0}
+.blank-wrap{display:inline-flex;align-items:center;gap:2px;vertical-align:middle}
+.blank-num{font-size:12px;font-weight:700;color:var(--pri)}
+.ls-blank{border:none;border-bottom:2px solid var(--pri);background:transparent;
+  color:var(--txt);font-size:15px;font-family:'Inter',sans-serif;
+  padding:2px 6px;width:110px;text-align:center;outline:none;margin:0 2px;
+  transition:border-color .2s,color .2s}
+.ls-blank:focus{border-bottom-color:var(--acc);background:var(--pri-g);border-radius:4px 4px 0 0}
+.ls-blank.ls-correct{border-bottom-color:var(--ok);color:var(--ok);font-weight:600}
+.ls-blank.ls-incorrect{border-bottom-color:var(--err);color:var(--err)}
+.ls-score-box{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:20px 24px;margin-bottom:16px;box-shadow:var(--sh1)}
+.ls-score-top{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.ls-score-num{font-size:36px;font-weight:800;color:var(--pri);line-height:1}
+.ls-score-sub{font-size:13px;color:var(--txt2)}
+.ls-ans-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:14px}
+.ls-ans-row:last-child{border-bottom:none}
+.ls-note{background:var(--sur2);border:1px solid var(--bdr2);border-radius:8px;
+  padding:10px 14px;margin:8px 0 4px;font-size:13px;color:var(--txt2);font-style:italic;display:block}
 /* RESPONSIVE */
 @media(max-width:600px){
   .app{padding:14px}
@@ -254,6 +287,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
   .btn-full{width:100%;justify-content:center}
   .hint{display:none}
   .hero h1{font-size:24px}
+  .ls-blank{width:90px}
 }
 </style>
 </head>
@@ -276,7 +310,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
       <div class="hero-pills">
         <div class="pill">📖 <strong>3</strong> bài học</div>
         <div class="pill">❓ <strong>93</strong> câu hỏi</div>
-       
+        <div class="pill">🎧 <strong>14</strong> bài nghe</div>
+        <div class="pill">✍️ <strong>40</strong> word form</div>
       </div>
     </div>
     <div class="grid">
@@ -338,6 +373,290 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
         </div>
       </div>
     </div>
+
+    <div class="section-hdr">🎧 Listening – Tiếng Anh 1</div>
+    <div class="grid">
+      <div class="card" onclick="startListening('ban1')">
+        <div class="card-top ls"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 1</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban2')">
+        <div class="card-top ls2"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 2</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban3')">
+        <div class="card-top ls3"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 3</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban4')">
+        <div class="card-top ls4"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 4</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban5')">
+        <div class="card-top ls"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 5</h3>
+          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban6')">
+        <div class="card-top ls2"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 6</h3>
+          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban7')">
+        <div class="card-top ls3"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 7</h3>
+          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban8')">
+        <div class="card-top ls4"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 8</h3>
+          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban9')">
+        <div class="card-top ls"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 9</h3>
+          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('ban10')">
+        <div class="card-top ls2"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 1 – Bản 10</h3>
+          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-hdr">🎧 Luyện Listening – Tiếng Anh – Bài 2 (Paul)</div>
+    <div class="grid">
+      <div class="card" onclick="startListening('p_ban1')">
+        <div class="card-top ls"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 2 – Bản 1</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('p_ban2')">
+        <div class="card-top ls2"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 2 – Bản 2</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('p_ban3')">
+        <div class="card-top ls3"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 2 – Bản 3</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startListening('p_ban4')">
+        <div class="card-top ls4"></div>
+        <div class="card-body">
+          <div class="card-ico">🎧</div>
+          <h3>Listening Bài 2 – Bản 4</h3>
+          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-hdr">✍️ Luyện Word Form</div>
+    <div class="grid">
+      <div class="card" onclick="startWordForm('wf1')">
+        <div class="card-top" style="background:linear-gradient(90deg,#F59E0B,#D97706)"></div>
+        <div class="card-body">
+          <div class="card-ico">✍️</div>
+          <h3>Word Form – Bộ 1</h3>
+          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startWordForm('wf2')">
+        <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+        <div class="card-body">
+          <div class="card-ico">✍️</div>
+          <h3>Word Form – Bộ 2</h3>
+          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startWordForm('wf3')">
+        <div class="card-top" style="background:linear-gradient(90deg,#6366F1,#4F46E5)"></div>
+        <div class="card-body">
+          <div class="card-ico">✍️</div>
+          <h3>Word Form – Bộ 3</h3>
+          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startWordForm('wf4')">
+        <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+        <div class="card-body">
+          <div class="card-ico">✍️</div>
+          <h3>Word Form – Bộ 4</h3>
+          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" onclick="startWordForm('wf5')">
+        <div class="card-top" style="background:linear-gradient(90deg,#14B8A6,#0D9488)"></div>
+        <div class="card-body">
+          <div class="card-ico">✍️</div>
+          <h3>Word Form – Bộ 5</h3>
+          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+          <div class="card-ft">
+            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+            <div class="arr">→</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORD FORM -->
+  <div class="scr" id="scr-wordform">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title" id="wf-title">Word Form – Bộ 1</h2>
+    <div class="ls-passage" id="wf-passage"></div>
+    <div class="ls-score-box" id="wf-score" style="display:none">
+      <div class="ls-score-top">
+        <div>
+          <div class="ls-score-num" id="wf-score-num">0/8</div>
+          <div class="ls-score-sub">câu đúng</div>
+        </div>
+        <div style="flex:1;font-size:13px;color:var(--txt2)">Kết quả kiểm tra đáp án</div>
+      </div>
+      <div id="wf-ans-list"></div>
+    </div>
+    <button class="btn btn-p btn-full" id="wf-check-btn" onclick="checkWordForm()">✓ Kiểm tra đáp án</button>
+    <button class="btn btn-s btn-full" id="wf-retry-btn" onclick="retryWordForm()" style="display:none;margin-top:10px">🔄 Làm lại</button>
+  </div>
+
+  <!-- LISTENING -->
+  <div class="scr" id="scr-listening">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title" id="ls-title">Listening Bài 1 – Bản 1</h2>
+    <div class="audio-wrap">
+      <div class="audio-label">🎧 Nghe audio rồi điền từ vào chỗ trống:</div>
+      <audio id="ls-audio" controls style="width:100%;border-radius:8px">
+        <source src="tienganh 1.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="ls-passage" id="ls-passage"></div>
+    <div class="ls-score-box" id="ls-score" style="display:none">
+      <div class="ls-score-top">
+        <div>
+          <div class="ls-score-num" id="ls-score-num">0/5</div>
+          <div class="ls-score-sub">câu đúng</div>
+        </div>
+        <div style="flex:1;font-size:13px;color:var(--txt2)">Kết quả kiểm tra đáp án</div>
+      </div>
+      <div id="ls-ans-list"></div>
+    </div>
+    <button class="btn btn-p btn-full" id="ls-check-btn" onclick="checkListening()">✓ Kiểm tra đáp án</button>
+    <button class="btn btn-s btn-full" id="ls-retry-btn" onclick="retryListening()" style="display:none;margin-top:10px">🔄 Làm lại</button>
   </div>
 
   <!-- SETUP -->
@@ -638,7 +957,7 @@ function showResults(){
   if(pct>=90){emoji='🏆';title='Xuất sắc!';sub='Bạn đã nắm vững bài học này rồi!';}
   else if(pct>=75){emoji='🎉';title='Rất tốt!';sub='Kết quả tuyệt vời, tiếp tục cố gắng!';}
   else if(pct>=60){emoji='👍';title='NHU CC!';sub='Bạn đã hiểu phần lớn nội dung.';}
-  else if(pct>=40){emoji='💪';title='Cần cố gắng - nhu cc!';sub='Hãy ôn lại bài và thử lại nhé!';}
+  else if(pct>=40){emoji='💪';title='NGU - LAM BAI nhu cc!';sub='Hãy ôn lại bài và thử lại nhé!';}
   else{emoji='📖';title='B lam bai nhu cc!';sub='Đọc kỹ bài học rồi làm lại bài thi.';}
   document.getElementById('remoji').textContent=emoji;
   document.getElementById('rtitle').textContent=title;
@@ -699,6 +1018,467 @@ document.addEventListener('keydown',e=>{
   if(['1','2','3','4'].includes(e.key)&&!done)pick(+e.key-1);
   if((e.key==='Enter'||e.key==='ArrowRight')&&done)nextQ();
 });
+
+// LISTENING
+const LISTEN_DATA={
+  ban1:{
+    title:'Listening Bài 1 – Bản 1',
+    answers:['effective','mutual','weaknesses','failure','maturity'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an '},{t:'b',n:1},
+      {t:'p',v:' school. 80 per cent of the students felt that '},{t:'b',n:2},
+      {t:'p',v:' respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their '},{t:'b',n:3},
+      {t:'p',v:'. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from '},{t:'b',n:4},
+      {t:'p',v:', and time management, suited to the '},{t:'b',n:5},
+      {t:'p',v:' of the students concerned.'}
+    ]
+  },
+  ban2:{
+    title:'Listening Bài 1 – Bản 2',
+    answers:['survey','implied','attitudes','performance','concerned'],
+    segs:[
+      {t:'p',v:'In an informal '},{t:'b',n:1},
+      {t:'p',v:' carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This '},{t:'b',n:2},
+      {t:'p',v:' that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive '},{t:'b',n:3},
+      {t:'p',v:' towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their '},{t:'b',n:4},
+      {t:'p',v:' of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students '},{t:'b',n:5},
+      {t:'p',v:'.'}
+    ]
+  },
+  ban3:{
+    title:'Listening Bài 1 – Bản 3',
+    answers:['Perth','individuals','goals','motivated','time'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in '},{t:'b',n:1},
+      {t:'p',v:', western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as '},{t:'b',n:2},
+      {t:'p',v:' with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic '},{t:'b',n:3},
+      {t:'p',v:' for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be '},{t:'b',n:4},
+      {t:'p',v:' and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and '},{t:'b',n:5},
+      {t:'p',v:' management, suited to the maturity of the students concerned.'}
+    ]
+  },
+  ban4:{
+    title:'Listening Bài 1 – Bản 4',
+    answers:['views','realistic','life','academic','direct'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their '},{t:'b',n:1},
+      {t:'p',v:' on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set '},{t:'b',n:2},
+      {t:'p',v:' goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important '},{t:'b',n:3},
+      {t:'p',v:' skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the social side of school was as important as '},{t:'b',n:4},
+      {t:'p',v:' activities. The older students felt that they should be allowed to give some input school decision making a '},{t:'b',n:5},
+      {t:'p',v:' effect on students.'}
+    ]
+  },
+  ban5:{
+    title:'Listening Bài 1 – Bản 5',
+    answers:['informal survey','mutual respect','encouraged','reflect in','maturity'],
+    segs:[
+      {t:'p',v:'In an '},{t:'b',n:1,w:160},
+      {t:'p',v:' carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that '},{t:'b',n:2,w:155},
+      {t:'p',v:' in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be '},{t:'b',n:3},
+      {t:'p',v:' to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then '},{t:'b',n:4,w:120},
+      {t:'p',v:' their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the '},{t:'b',n:5},
+      {t:'p',v:' of the students concerned.'}
+    ]
+  },
+  ban6:{
+    title:'Listening Bài 1 – Bản 6',
+    answers:['views','essential','individuals','attitudes','time management'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their '},{t:'b',n:1},
+      {t:'p',v:' on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was '},{t:'b',n:2},
+      {t:'p',v:' learning to take place. This implied that students should be treated as '},{t:'b',n:3},
+      {t:'p',v:' with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have '},{t:'b',n:4},
+      {t:'p',v:' towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and '},{t:'b',n:5,w:165},
+      {t:'p',v:', suited to the maturity of the students concerned.'}
+    ]
+  },
+  ban7:{
+    title:'Listening Bài 1 – Bản 7',
+    answers:['effective school','implied','realistic goals','motivated','centered on'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an '},{t:'b',n:1,w:165},
+      {t:'p',v:'. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This '},{t:'b',n:2},
+      {t:'p',v:' that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set '},{t:'b',n:3,w:155},
+      {t:'p',v:' for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be '},{t:'b',n:4},
+      {t:'p',v:' and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be '},{t:'b',n:5,w:130},
+      {t:'p',v:' important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'}
+    ]
+  },
+  ban8:{
+    title:'Listening Bài 1 – Bản 8',
+    answers:['strengths and weaknesses','positive attitudes','performance','communication','social side'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their '},{t:'b',n:1,w:230},
+      {t:'p',v:'. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have '},{t:'b',n:2,w:170},
+      {t:'p',v:' towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their '},{t:'b',n:3},
+      {t:'p',v:' of the students. Nearly all the students believed that learning should be centered on important life skills such as '},{t:'b',n:4},
+      {t:'p',v:', building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the '},{t:'b',n:5,w:120},
+      {t:'p',v:' of school was as important as academic activities.'}
+    ]
+  },
+  ban9:{
+    title:'Listening Bài 1 – Bản 9',
+    answers:['life skills','self-respect','learn from failure','academic activities','input'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important '},{t:'b',n:1,w:120},
+      {t:'p',v:' such as communication, building '},{t:'b',n:2,w:130},
+      {t:'p',v:', self-confidence, the ability to '},{t:'b',n:3,w:165},
+      {t:'p',v:', and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the social side of school was as important as '},{t:'b',n:4,w:185},
+      {t:'p',v:'. The older students felt that they should be allowed to give some '},{t:'b',n:5},
+      {t:'p',v:' school decision making a direct effect on students.'}
+    ]
+  },
+  ban10:{
+    title:'Listening Bài 1 – Bản 10',
+    answers:['decision making','direct effect','communication','motivated','individuals'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the social side of school was as important as academic activities. The older students felt that they should be allowed to give some input school '},{t:'b',n:1,w:165},
+      {t:'p',v:' a '},{t:'b',n:2,w:145},
+      {t:'p',v:' on students.'},
+      {t:'note',v:'(3), (4), (5) – Chọn từ phù hợp trong bài để điền:'},
+      {t:'b',n:3,w:155},{t:'p',v:'\u00A0\u00A0\u00A0'},{t:'b',n:4,w:120},{t:'p',v:'\u00A0\u00A0\u00A0'},{t:'b',n:5,w:120}
+    ]
+  }
+  ,p_ban1:{
+    title:'Listening Bài 2 – Bản 1',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['Boston Marathon','USA','New York','2 hours 50 minutes and 10 seconds','6164'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of '},{t:'b',n:1,w:185},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every year, in the '},{t:'b',n:2,w:80},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In 1897. And the same year, John McDermott won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from '},{t:'b',n:3,w:120},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked '},{t:'b',n:4,w:300},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to participate in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until 1967, women were formally accepted to take part in the Boston races ... A few years later, Kuscsik became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In 1972. There were 8 women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world join it. In 1984, '},{t:'b',n:5,w:80},{t:'p',v:' runners from 34 countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about 42km. Runners have to go through 13 towns during the race. It ends in the centre of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."}
+    ]
+  },
+  p_ban2:{
+    title:'Listening Bài 2 – Bản 2',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['year','1897','participate','1972','join'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of Boston Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every '},{t:'b',n:1,w:80},{t:'p',v:', in the USA.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In '},{t:'b',n:2,w:80},{t:'p',v:'. And the same year, John McDermott won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from New York.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked 2 hours 50 minutes and 10 seconds.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to '},{t:'b',n:3,w:120},{t:'p',v:' in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until 1967, women were formally accepted to take part in the Boston races ... A few years later, Kuscsik became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In '},{t:'b',n:4,w:80},{t:'p',v:'. There were 8 women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world '},{t:'b',n:5,w:80},{t:'p',v:' it. In 1984, 6164 runners from 34 countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about 42km. Runners have to go through 13 towns during the race. It ends in the centre of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."}
+    ]
+  },
+  p_ban3:{
+    title:'Listening Bài 2 – Bản 3',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['John McDermott','1967','Kuscsik','8','34'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of Boston Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every year, in the USA.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In 1897. And the same year, '},{t:'b',n:1,w:165},{t:'p',v:' won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from New York.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked 2 hours 50 minutes and 10 seconds.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to participate in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until '},{t:'b',n:2,w:80},{t:'p',v:', women were formally accepted to take part in the Boston races ... A few years later, '},{t:'b',n:3,w:110},{t:'p',v:' became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In 1972. There were '},{t:'b',n:4,w:60},{t:'p',v:' women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world join it. In 1984, 6164 runners from '},{t:'b',n:5,w:60},{t:'p',v:' countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about 42km. Runners have to go through 13 towns during the race. It ends in the centre of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."}
+    ]
+  },
+  p_ban4:{
+    title:'Listening Bài 2 – Bản 4',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['42km','13','centre','Boston Marathon','participate'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of Boston Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every year, in the USA.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In 1897. And the same year, John McDermott won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from New York.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked 2 hours 50 minutes and 10 seconds.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to participate in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until 1967, women were formally accepted to take part in the Boston races ... A few years later, Kuscsik became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In 1972. There were 8 women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world join it. In 1984, 6164 runners from 34 countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about '},{t:'b',n:1,w:80},{t:'p',v:'. Runners have to go through '},{t:'b',n:2,w:60},{t:'p',v:' towns during the race. It ends in the '},{t:'b',n:3,w:90},{t:'p',v:' of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."},
+      {t:'note',v:'Điền thêm từ/cụm từ nghe được trong bài:'},
+      {t:'b',n:4,w:185},{t:'p',v:'\u00A0\u00A0\u00A0\u00A0'},{t:'b',n:5,w:120}
+    ]
+  }
+};
+
+let curListen=null;
+
+function startListening(ban){
+  curListen=ban;
+  const d=LISTEN_DATA[ban];
+  document.getElementById('ls-title').textContent=d.title;
+  const audio=document.getElementById('ls-audio');
+  audio.pause();
+  const newSrc=d.audio||'tienganh 1.mp3';
+  if(audio.dataset.curSrc!==newSrc){audio.src=newSrc;audio.dataset.curSrc=newSrc;audio.load();}
+  audio.currentTime=0;
+  let html='<div class="ls-para">';
+  d.segs.forEach(s=>{
+    if(s.t==='br'){html+='</div><div class="ls-para">';}
+    else if(s.t==='p'){html+=s.v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    else if(s.t==='b'){const w=s.w||110;html+=`<span class="blank-wrap"><span class="blank-num">(${s.n})</span><input class="ls-blank" id="lb${s.n}" type="text" placeholder="..." autocomplete="off" spellcheck="false" style="width:${w}px"></span>`;}
+    else if(s.t==='note'){html+=`</div><div class="ls-note">${s.v}</div><div class="ls-para">`;}
+  });
+  html+='</div>';
+  document.getElementById('ls-passage').innerHTML=html;
+  document.getElementById('ls-score').style.display='none';
+  document.getElementById('ls-check-btn').style.display='flex';
+  document.getElementById('ls-retry-btn').style.display='none';
+  showScr('listening');
+  setTimeout(()=>{const f=document.getElementById('lb1');if(f)f.focus()},350);
+}
+
+function normalizeAns(s){
+  return s.toLowerCase().replace(/[()]/g,'').replace(/\s*\/\s*/g,' and ').trim().replace(/\s+/g,' ');
+}
+
+function checkListening(){
+  const d=LISTEN_DATA[curListen];
+  let ok=0,list='';
+  d.answers.forEach((ans,i)=>{
+    const n=i+1,inp=document.getElementById('lb'+n);
+    const val=(inp.value||'').trim();
+    const right=normalizeAns(val)===normalizeAns(ans);
+    if(right)ok++;
+    inp.disabled=true;
+    inp.classList.add(right?'ls-correct':'ls-incorrect');
+    const icon=right
+      ?`<span style="color:var(--ok);font-weight:700">✓</span>`
+      :`<span style="color:var(--err);font-weight:700">✗</span>`;
+    const userPart=(!right&&val)?` <span style="color:var(--txt3);font-size:12px">← bạn điền: "${val}"</span>`:'';
+    list+=`<div class="ls-ans-row">${icon} <strong>(${n})</strong> <span style="color:var(--ok)">${ans}</span>${userPart}</div>`;
+  });
+  document.getElementById('ls-score-num').textContent=`${ok}/${d.answers.length}`;
+  document.getElementById('ls-ans-list').innerHTML=list;
+  document.getElementById('ls-score').style.display='block';
+  document.getElementById('ls-check-btn').style.display='none';
+  document.getElementById('ls-retry-btn').style.display='flex';
+}
+
+function retryListening(){startListening(curListen);}
+
+// WORD FORM
+const WF_DATA={
+  wf1:{
+    title:'Word Form – Bộ 1',
+    items:[
+      {q:'Some children have more ___ personalities than others.',hint:'socialize',ans:'sociable'},
+      {q:'They are the most ___ advanced nations in the world.',hint:'technology',ans:'technologically'},
+      {q:'The book bears several striking ___ to last year\'s bestseller.',hint:'similar',ans:'similarities'},
+      {q:'There was an ___ smell coming from the drains.',hint:'please',ans:'unpleasant'},
+      {q:'Environmental ___ has increased dramatically over the past decade.',hint:'aware',ans:'awareness'},
+      {q:'The company ___ bought and sold high-interest home loans.',hint:'responsible',ans:'irresponsibly'},
+      {q:'Ellen\'s ___ with pop music is astonishing.',hint:'familiar',ans:'familiarity'},
+      {q:'I hope Adam\'s actually doing some work at college - he seems to spend all his time ___!',hint:'socially',ans:'socializing'}
+    ]
+  },
+  wf2:{
+    title:'Word Form – Bộ 2',
+    items:[
+      {q:'I need to eat a large meal to ___ my hunger after a long day at work.',hint:'satisfaction',ans:'satisfy'},
+      {q:'The students were ___ that the test had been rescheduled to the following week, so they arrived at school unprepared.',hint:'aware',ans:'unaware'},
+      {q:'He was an ___ young man who dreamed of becoming a doctor.',hint:'ambition',ans:'ambitious'},
+      {q:'She greeted everyone with a smile and a sense of ___ .',hint:'cheerful',ans:'cheerfulness'},
+      {q:'The ___ made a deliberate choice to use bold and vibrant colors in her painting.',hint:'art',ans:'artist'},
+      {q:'The idea for the new product ___ from a deliberate market research analysis conducted by the company.',hint:'origin',ans:'originated'},
+      {q:'The style of the painting was so ___ that it stood out from all the other artworks in the exhibit.',hint:'distinct',ans:'distinctive'},
+      {q:'He is not only a talented singer but also a ___ gifted composer who can play multiple instruments.',hint:'music',ans:'musically'}
+    ]
+  },
+  wf3:{
+    title:'Word Form – Bộ 3',
+    items:[
+      {q:'The teacher made a ___ effort to give each student individual attention.',hint:'deliberation',ans:'deliberate'},
+      {q:'Despite his friend\'s optimism, he remained a ___ and believed that everything would end in failure.',hint:'pessimistic',ans:'pessimist'},
+      {q:'The magician was able to ___ a spectacular trick that left the audience in awe.',hint:'performance',ans:'perform'},
+      {q:'Though she was often criticized for her ___ approach to work, she surprised everyone with her talent.',hint:'organize',ans:'disorganized'},
+      {q:'The ___ festival was a melting pot of diverse traditions and art forms.',hint:'culture',ans:'cultural'},
+      {q:'___ speaking, the sunrise is a canvas painted by the divine.',hint:'Poet',ans:'Poetically'},
+      {q:'She was a ___ writer who always came up with original ideas.',hint:'create',ans:'creative'},
+      {q:'She valued ___ in her work and life, as it allowed her to adapt to different situations.',hint:'flexible',ans:'flexibility'}
+    ]
+  },
+  wf4:{
+    title:'Word Form – Bộ 4',
+    items:[
+      {q:'She was an ___ of classical music and opera, and attended many concerts.',hint:'enthusiastic',ans:'enthusiast'},
+      {q:'She was ___ about her chances of winning the competition.',hint:'optimism',ans:'optimistic'},
+      {q:'He suffered from ___ and often doubted himself and others.',hint:'pessimistic',ans:'pessimism'},
+      {q:'He was ___ and always arrived on time for his appointments.',hint:'punctuality',ans:'punctual'},
+      {q:'She was a ___ person who enjoyed having conversations and making connections.',hint:'society',ans:'sociable'},
+      {q:'She was ___ to his situation and offered her support and advice.',hint:'sympathy',ans:'sympathetic'},
+      {q:'Why had James behaved so ___? I don\'t understand him.',hint:'ordinary',ans:'oddly'},
+      {q:'An investigation revealed that the mine was ___ both the air and the groundwater.',hint:'pollutant',ans:'polluting'}
+    ]
+  },
+  wf5:{
+    title:'Word Form – Bộ 5',
+    items:[
+      {q:'Other industrialized and densely ___ countries have similar problems.',hint:'populous',ans:'populated'},
+      {q:'Too little exercise is a ___ factor in heart disease.',hint:'contribute',ans:'contributing'},
+      {q:'She\'s too young and ___ to go abroad on her own.',hint:'experience',ans:'inexperienced'},
+      {q:'They ___ each other for their ability to collaborate effectively as a team when they worked in a team.',hint:'compliment',ans:'complimented'},
+      {q:'She ran ___ down the hall to greet her cousins.',hint:'excitement',ans:'excitedly'},
+      {q:'The company has successfully ___ new products and services.',hint:'innovation',ans:'innovated'},
+      {q:'Hong Kong is one of the most ___ areas in the world.',hint:'population',ans:'populous'},
+      {q:'Power plants burn fossil fuels to operate; due to this they produce a variety of different ___ .',hint:'pollute',ans:'pollutants'}
+    ]
+  }
+};
+
+let curWF=null;
+function startWordForm(set){
+  curWF=set;
+  const d=WF_DATA[set];
+  document.getElementById('wf-title').textContent=d.title;
+  let html='';
+  d.items.forEach((item,i)=>{
+    const n=i+1;
+    const parts=item.q.split('___');
+    const w=Math.max(130,item.ans.length*11);
+    html+=`<div class="ls-para" style="margin-bottom:18px">
+      <span style="font-size:12px;font-weight:700;color:var(--pri);margin-right:6px">${n}.</span>${parts[0].replace(/&/g,'&amp;')}<span class="blank-wrap"><input class="ls-blank" id="wfb${n}" type="text" placeholder="..." autocomplete="off" spellcheck="false" style="width:${w}px"></span>${(parts[1]||'').replace(/&/g,'&amp;')} <span style="font-size:13px;color:var(--txt3);font-style:italic">(${item.hint})</span>
+    </div>`;
+  });
+  document.getElementById('wf-passage').innerHTML=html;
+  document.getElementById('wf-score').style.display='none';
+  document.getElementById('wf-check-btn').style.display='flex';
+  document.getElementById('wf-retry-btn').style.display='none';
+  showScr('wordform');
+  setTimeout(()=>{const f=document.getElementById('wfb1');if(f)f.focus()},350);
+}
+function checkWordForm(){
+  const d=WF_DATA[curWF];
+  let ok=0,list='';
+  d.items.forEach((item,i)=>{
+    const n=i+1,inp=document.getElementById('wfb'+n);
+    const val=(inp.value||'').trim();
+    const right=val.toLowerCase()===item.ans.toLowerCase();
+    if(right)ok++;
+    inp.disabled=true;
+    inp.classList.add(right?'ls-correct':'ls-incorrect');
+    const icon=right?`<span style="color:var(--ok);font-weight:700">✓</span>`:`<span style="color:var(--err);font-weight:700">✗</span>`;
+    const userPart=(!right&&val)?` <span style="color:var(--txt3);font-size:12px">← bạn điền: "${val}"</span>`:'';
+    list+=`<div class="ls-ans-row">${icon} <strong>(${n})</strong> <span style="color:var(--ok)">${item.ans}</span>${userPart}</div>`;
+  });
+  document.getElementById('wf-score-num').textContent=`${ok}/${d.items.length}`;
+  document.getElementById('wf-ans-list').innerHTML=list;
+  document.getElementById('wf-score').style.display='block';
+  document.getElementById('wf-check-btn').style.display='none';
+  document.getElementById('wf-retry-btn').style.display='flex';
+}
+function retryWordForm(){startWordForm(curWF);}
 
 // INIT
 (()=>{
