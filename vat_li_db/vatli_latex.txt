@@ -1,0 +1,381 @@
+Câu 1: Suất điện động của nguồn điện là đại lượng được đo bằng
+A. công của lực lạ tác dụng lên điện tích q dương.
+B. thương số giữa công và lực lạ tác dụng lên điện tích q dương.
+C. thương số giữa lực lạ tác dụng lên điện tích q dương và độ lớn điện tích ấy.
+D. thương số giữa công của lực lạ dịch chuyển điện tích dương q từ cực âm đến cực dương trong nguồn và độ lớn của điện tích đó.
+
+Câu 2: Thiết bị, dụng cụ biến đổi hoàn toàn điện năng tiêu thụ thành nhiệt năng là
+A. quạt điện. B. ấm đun nước siêu tốc. C. máy giặt. D. bóng đèn LED.
+
+Câu 3: Từ đồ thị biểu diễn sự phụ thuộc của cường độ dòng điện vào hiệu điện thế đối với hai điện trở \(R_1, R_2\) trong hình. Tỉ số \(\frac{R_1}{R_2}\) bằng
+A. 4 B. 0,25 C. 2 D. 0,5
+
+Câu 4: Suất điện động của nguồn điện một chiều là \(\xi = 4 \, V\). Công của lực lạ làm dịch chuyển một lượng điện tích \(q = 5 \, mC\) giữa hai cực bên trong nguồn điện là
+A. 1,5 mJ. B. 0,8 mJ. C. 20 mJ. D. 5 mJ.
+
+Câu 5: Cho mạch điện như hình: \(E = 12 V; r = 1,1 \Omega; R_1 = 3,5 \Omega; R_2 = 1,4 \Omega\). Nhiệt lượng tỏa ra trên điện trở \(R_1\) trong thời gian 30 phút là
+A. 420 J. B. 25200 J. C. 25200 W. D. 12600 J.
+
+Câu 6: Đặc điểm của điện trở nhiệt NTC có hệ số nhiệt điện trở
+A. dương khi nhiệt độ tăng thì điện trở tăng. B. dương khi nhiệt độ tăng thì điện trở giảm.
+C. âm khi nhiệt độ tăng thì điện trở tăng. D. âm khi nhiệt độ tăng thì điện trở giảm.
+
+Câu 7: Một nguồn điện có suất điện động \(9V\) và điện trở trong \(1\Omega\) được mắc với điện trở thuần \(R = 5\Omega\) thành mạch điện kín. Cường độ dòng điện chạy trong mạch là
+A. 2 A. B. 2,5 A. C. 1,5 A. D. 2 A.
+
+Câu 8: Cho dòng điện 2A chạy qua một dây dẫn kim loại. Điện lượng chuyển qua tiết diện thẳng của dây dẫn trong 5s là
+A. 2,5 C. B. 10 C. C. 7 C. D. 3 C.
+
+Câu 9: Đại lượng nào cho biết mức độ mạnh yếu của dòng điện?
+A. hiệu điện thế. B. Công suất. C. Cường độ dòng điện. D. Nhiệt lượng.
+
+Câu 10: Đơn vị của suất điện động là
+A. Ampe (A). B. Vôn (V). C. Fara (F). D. Vôn/mét (V/m).
+
+Câu 11: Dụng cụ nào sau đây không dùng trong thí nghiệm xác định suất điện động và điện trở trong của nguồn?
+A. Pin điện hóa. B. Đồng hồ đa năng hiện số. C. Dây dẫn nối mạch. D. Thước đo chiều dài.
+
+Câu 12: Cường độ dòng điện chạy qua tiết diện thẳng của dây dẫn là 1,5A trong khoảng thời gian 3s. Khi đó điện lượng dịch chuyển qua tiết diện dây là
+A. 0,5C B. 2C C. 4,5C D. 4C
+
+Câu 13: Đặt hiệu điện thế 6V vào hai đầu điện trở \(3\Omega\). Cường độ dòng điện chạy qua điện trở là
+A. 0,5A B. 6A C. 2A D. 3A
+
+Câu 14: Một bộ acquy có suất điện động 12V. Khi được mắc vào mạch điện, trong thời gian 5 phút, acquy sinh ra một công là 720J. Cường độ dòng điện chạy qua acquy khi đó là
+A. 2A B. 2,8A C. 3A D. 0,2A
+
+Câu 15: Cho các thao tác tiến hành thí nghiệm xác định suất điện động và điện trở trong của một pin điện hóa như sau:
+a. Gạt núm bật – tắt của miliampe kế và của vôn kế sang vị trí “ON”.
+b. Ghi giá trị ổn định của cường độ dòng điện trên miliampe kế và của hiệu điện thế trên vôn kế vào bảng.
+c. Đóng khóa K.
+d. Ngắt khóa K.
+Thứ tự thao tác đúng là
+A. b, a, c, d B. a, c, b, d C. b, d, a, c D. a, c, d, b
+
+Câu 16: Cho dòng điện 4,2A chạy qua một đoạn dây dẫn bằng kim loại dài 80cm có đường kính tiết diện 2,5mm. Mật độ êlectron dẫn của kim loại này là \(8,5.10^{28} \, electron/m^3\). Thời gian trung bình mỗi êlectron dẫn di chuyển hết chiều dài đoạn dây gần nhất với giá trị nào sau đây?
+A. 4226s B. 12716s C. 26288s D. 3175s
+
+Câu 17: Cho mạch điện như hình vẽ. Biết \(R_1 = 5\Omega; R_2 = 10\Omega; R_3 = 3\Omega; E = 6V; r = 2\Omega\). Hiệu điện thế hai đầu điện trở \(R_1\) là
+A. 5V B. 9V C. 1,5V D. 3V
+
+Câu 18: Dụng cụ để đo cường độ dòng điện là
+A. Ampe kế. B. Vôn kế. C. Ôm kế. D. Nhiệt kế.
+
+Câu 19: Đặt hiệu điện thế \(U\) vào hai đầu đoạn mạch thì cường độ dòng điện chạy qua đoạn mạch là \(I\). Công thức tính năng lượng điện tiêu thụ của đoạn mạch trong thời gian \(t\) là
+A. \(A = UIt.\) B. \(A = U^2It.\) C. \(A = UIt^2.\) D. \(A = UI^2t.\)
+
+Câu 20: Chọn phương án sai. Theo định luật Jun – Lenxo, nhiệt lượng tỏa ra trên vật dẫn
+A. tỉ lệ thuận với điện trở của vật dẫn.
+B. tỉ lệ thuận với thời gian dòng điện chạy qua vật dẫn.
+C. tỉ lệ thuận với bình phương cường độ dòng điện chạy qua vật dẫn.
+D. tỉ lệ nghịch với bình phương điện trở của vật dẫn.
+
+Câu 21: Đơn vị đo điện năng tiêu thụ trong thực tế là
+A. J. B. kWh. C. kW. D. kJ.
+
+Câu 22: Một bóng đèn hoạt động bình thường ở hiệu điện thế 110V, cường độ dòng điện qua đèn là 2A. Điện năng tiêu thụ của đèn trong mỗi giờ là:
+A. 0,44 kWh B. 0,22 J C. 792000 kWh D. 0,22 kWh
+
+Câu 23: Cho mạch điện kín gồm acquy có suất điện động \(\xi = 2,2V\), cung cấp điện năng cho điện trở mạch ngoài \(R = 0,5 \Omega\). Hiệu suất của acquy \(H = 65\%\). Cường độ dòng điện qua mạch là:
+A. 2,21 A B. 0,5 A C. 1,15 A D. 2,86 A
+
+Câu 24: Lượng điện tích \(\Delta q\) chuyển qua tiết diện thẳng của dây dẫn trong khoảng thời gian \(\Delta t\) thì cường độ dòng điện chạy qua dây dẫn được xác định theo công thức
+A. \(I = \frac{\Delta q}{\Delta t}\) B. \(I = \frac{\Delta t}{\Delta q}\) C. \(I = \Delta q \cdot \Delta t\) D. \(I = \frac{(\Delta q)^2}{\Delta t}\)
+
+Câu 25: Xét dòng điện có cường độ 2A chạy trong một dây dẫn. Điện lượng chuyển qua tiết diện thẳng của dây dẫn trong 5s có độ lớn
+A. 0,4C. B. 2,5C. C. 10C. D. 7C.
+
+Câu 26: Một nguồn điện có suất điện động 200 mV. Để chuyển một điện lượng 10 C qua nguồn thì lực lạ phải sinh một công là
+A. 20 J. B. 0,05 J. C. 2000 J. D. 2 J.
+
+Câu 27: Đặt vào hai đầu đoạn mạch một hiệu điện thế không đổi \(U\), thì cường độ dòng điện qua mạch là \(I\). Năng lượng điện tiêu thụ của đoạn mạch trong khoảng thời gian \(t\) là
+A. \(UIt\) B. \(UI\) C. \(\frac{U^2}{R}t\) D. \(UI^2t\)
+
+Câu 28: Dụng cụ đo điện năng tiêu thụ của dòng điện là
+A. Vôn kế. B. Ampe kế. C. Oát kế. D. Công tơ điện.
+
+Câu 29: Hai điện trở \(R_1, R_2\) (\(R_1 > R_2\)) được mắc vào hai điểm A và B có hiệu điện thế \(U = 12 V\). Khi \(R_1\) ghép nối tiếp với \(R_2\) thì công suất tiêu thụ của mạch là 4W; Khi \(R_1\) ghép song song với \(R_2\) thì công suất tiêu thụ của mạch là 18 W. Giá trị của \(R_1, R_2\) bằng
+A. \(R_1 = 24 \, \Omega; R_2 = 12 \, \Omega\) B. \(R_1 = 2,4 \, \Omega; R_2 = 1,2 \, \Omega\)
+C. \(R_1 = 240 \, \Omega; R_2 = 120 \, \Omega\) D. \(R_1 = 8 \, \Omega; R_2 = 6 \, \Omega\)
+
+Câu 30: Chỉ ra câu sai.
+A. Cường độ dòng điện được đo bằng ampe kế.
+B. Để đo cường độ dòng điện, phải mắc nối tiếp ampe kế với mạch điện.
+C. Dòng điện chạy qua ampe kế đi vào chốt dương, đi ra chốt âm của ampe kế.
+D. Dòng điện chạy qua ampe kế đi vào chốt âm, đi ra chốt dương của ampe kế.
+
+Câu 31: Khi hiệu điện thế giữa hai bản tụ điện tăng lên 2 lần thì
+A. điện dung của tụ điện giảm đi 2 lần. B. điện dung của tụ điện tăng lên 2 lần.
+C. điện tích của tụ điện tăng lên 2 lần. D. điện tích của tụ điện giảm đi 2 lần.
+
+Câu 32: Một acquy đầy điện có dung lượng 20 A.h. Biết cường độ dòng điện mà nó cung cấp là 0,5A. Thời gian sử dụng của acquy là
+A. \(t = 5h\). B. \(t = 40h\). C. \(t = 20h\). D. \(t = 50h\).
+
+Câu 33: Câu nào sau đây là sai?
+A. Muốn có một dòng điện đi qua một điện trở, phải đặt một hiệu điện thế giữa hai đầu của nó.
+B. Với một điện trở nhất định, hiệu điện thế ở hai đầu điện trở càng lớn thì dòng điện qua điện trở càng lớn.
+C. Khi đặt cùng một hiệu điện thế vào hai đầu những điện trở khác nhau, điện trở càng lớn thì dòng điện qua điện trở càng nhỏ.
+D. Cường độ dòng điện qua điện trở tỉ lệ thuận với giá trị của điện trở.
+
+Câu 34: Đặc điểm của điện trở nhiệt PTC là
+A. khi nhiệt độ tăng thì điện trở giảm. B. khi nhiệt độ tăng thì điện trở tăng.
+C. khi nhiệt độ tăng thì điện trở không đổi. D. khi nhiệt độ tăng thì điện trở bằng 0.
+
+Câu 35: Hai nguồn điện có ghi 20V và 40V, nhận xét nào sau đây là đúng?
+A. Hai nguồn này luôn tạo ra một hiệu điện thế 20V và 40V cho mạch ngoài.
+B. Khả năng sinh công của hai nguồn là 20J và 40J.
+C. Nguồn thứ nhất luôn sinh công bằng một nửa nguồn thứ hai.
+D. Khả năng sinh công của nguồn thứ nhất bằng một nửa nguồn thứ hai.
+
+Câu 36: Điều kiện để có dòng điện là
+A. có hiệu điện thế. B. có điện tích tự do.
+C. có hiệu điện thế và điện tích tự do. D. có nguồn điện.
+
+Câu 37: Công của nguồn điện là
+A. lượng điện tích mà nguồn điện sinh ra trong 1 s.
+B. công của lực lạ làm dịch chuyển điện tích bên trong nguồn.
+C. công của dòng điện trong mạch kín sinh ra trong 1 s.
+D. công của dòng điện khi dịch chuyển một đơn vị điện tích trong mạch kín.
+
+Câu 38: Một dòng điện không đổi chạy trong một dây dẫn. Biết trong thời gian 10s có một điện lượng 5mC chạy qua. Số electron chuyển qua tiết diện thẳng của dây dẫn trong thời gian 1s là
+A. \(3,125.10^{15}\) B. \(1,6.10^{-19}\) C. \(5.10^{20}\) D. \(5,5.10^{4}\)
+
+Câu 39: Biểu thức đúng của định luật Ohm là:
+A. \(I = \frac{R}{U}\) B. \(I = \frac{U}{R}\) C. \(U = \frac{I}{R}\) D. \(U = \frac{R}{I}\)
+
+Câu 40: Nguyên nhân gây ra điện trở của kim loại là sự va chạm của:
+A. các electron tự do với chỗ mất trật tự của ion dương nút mạng.
+B. các electron tự do với nhau trong quá trình chuyển động nhiệt hỗn loạn.
+C. các ion dương nút mạng với nhau trong quá trình chuyển động nhiệt hỗn loạn.
+D. các ion dương chuyển động định hướng dưới tác dụng của điện trường với các electron.
+
+Câu 41: Nguồn điện tạo ra hiệu điện thế giữa hai cực bằng cách:
+A. tách electron ra khỏi nguyên tử và chuyển electron và ion về các cực của nguồn.
+B. sinh ra electron ở cực âm.
+C. sinh ra ion dương ở cực dương.
+D. làm biến mất electron ở cực dương.
+
+Câu 42: Trong các nhận định về suất điện động, nhận định không đúng là:
+A. Suất điện động là đại lượng đặc trưng cho khả năng sinh công của nguồn điện.
+B. Suất điện động được đo bằng thương số công của lực lạ dịch chuyển điện tích ngược chiều điện trường và độ lớn điện tích dịch chuyển.
+C. Đơn vị của suất điện động là Jun.
+D. Suất điện động của nguồn có trị số bằng hiệu điện thế giữa hai cực khi mạch ngoài hở.
+
+Câu 43: Công suất điện được đo bằng đơn vị nào sau đây?
+A. Niuton (N). B. Jun (J). C. Oát (W). D. Culông (C).
+
+Câu 44: Một bàn là điện khi được sử dụng với hiệu điện thế 220V thì dòng điện chạy qua bàn là có cường độ là 5A. Điện năng bàn là tiêu thụ trong 30 phút là:
+A. 2,35 kWh. B. 2,35 MJ. C. 1,98 kJ. D. 0,55 kWh.
+
+Câu 45: Đơn vị của cường độ dòng điện, suất điện động, điện lượng lần lượt là
+A. vôn(V), ampe(A), ampe(A). B. ampe(A), vôn(V), culông(C).
+C. niuton(N), fara(F), vôn(V). D. fara(F), vôn/mét(V/m), jun(J).
+
+Câu 46: Một bóng đèn ghi 220V – 100 W thì điện trở của đèn là
+A. 488 Ω. B. 448 Ω. C. 484 Ω. D. 48 Ω.
+
+Câu 47: Chọn phát biểu đúng về định luật Ohm.
+A. Cường độ dòng điện chạy qua dây dẫn tỉ lệ với hiệu điện thế giữa hai đầu dây dẫn và điện trở của dây.
+B. Cường độ dòng điện chạy qua dây dẫn tỉ lệ thuận với hiệu điện thế giữa hai đầu dây dẫn và không tỉ lệ với điện trở của dây.
+C. Cường độ dòng điện chạy qua dây dẫn tỉ lệ thuận với hiệu điện thế giữa hai đầu dây dẫn và tỉ lệ nghịch với điện trở của dây.
+D. Cường độ dòng điện chạy qua dây dẫn tỉ lệ nghịch với hiệu điện thế giữa hai đầu dây dẫn và tỉ lệ thuận với điện trở của dây.
+
+Câu 48: Đại lượng đặc trưng cho khả năng thực hiện công của lực lạ bên trong nguồn điện là:
+A. Suất điện động. B. Cường độ dòng điện. C. Hiệu điện thế. D. Điện trở trong.
+
+Câu 49: Người ta mắc hai cực của nguồn điện với một biến trở có thể thay đổi từ 0 đến vô cực. Khi giá trị của biến trở rất lớn thì hiệu điện thế giữa hai cực của nguồn điện là 4,5 V. Giảm giá trị của biến trở đến khi cường độ dòng điện trong mạch là 2 A thì hiệu điện thế giữa hai cực của nguồn điện là 4 V. Suất điện động và điện trở trong của nguồn điện là:
+A. \(E = 4,5 V; r = 4,5 \Omega\). B. \(E = 4,5 V; r = 2,5 \Omega\). C. \(E = 4,5 V; r = 0,25 \Omega\). D. \(E = 9 V; r = 4,5 \Omega\).
+
+Câu 50: Người ta đun sôi một ấm nước bằng một bếp điện. Ấm tỏa nhiệt ra không khí trong đó nhiệt lượng hao phí tỉ lệ với thời gian đun. Khi hiệu điện thế \(U_1 = 200V\) thì sau 5 phút nước sôi, khi hiệu điện thế \(U_2 = 100V\) thì sau 25 phút nước sôi. Hỏi nếu khi hiệu điện thế \(U_3 = 150V\) thì sau bao lâu nước sôi?
+A. 3,75 phút B. 37,5 phút C. 9,375 phút D. 10 phút
+
+Câu 51: Nguồn điện có suất điện động là 3V và có điện trở trong là \(1 \Omega\). Mắc song song hai bóng đèn giống nhau có cùng điện trở \(6 \Omega\) vào hai cực của nguồn điện này. Công suất tiêu thụ điện của mỗi bóng đèn là
+A. 1,08W. B. 0,54W. C. 1,28W. D. 0,64W.
+
+Câu 52: Số đếm của công tơ điện gia đình cho biết
+A. thời gian sử dụng điện của gia đình. B. công suất điện mà gia đình sử dụng.
+C. điện năng mà gia đình sử dụng. D. số dụng cụ và thiết bị điện đang sử dụng.
+
+Câu 53: Trong mạch điện kín gồm có nguồn điện có suất điện động \(E\), điện trở trong \(r\) và mạch ngoài có điện trở \(R_N\), \(I\) là cường độ dòng điện chạy trong mạch trong khoảng thời gian \(t\). Nhiệt lượng tỏa ra ở mạch ngoài và mạch trong là:
+A. \(Q = R_N I^2 t\) B. \(Q = (R_N + r)I^2\) C. \(Q = (R_N + r)I^2 t\) D. \(Q = r I^2 t\)
+
+Câu 54: Điện năng biến đổi hoàn toàn thành nhiệt năng ở dụng cụ hay thiết bị nào dưới đây khi chúng hoạt động?
+A. Bóng đèn dây tóc. B. Quạt điện. C. Ấm điện. D. Ắc quy đang được nạp điện.
+
+Câu 55: Trong các pin điện hóa có sự chuyển hóa từ năng lượng nào sang điện năng?
+A. Hóa năng B. Nhiệt năng C. Thế năng đàn hồi D. Cơ năng
+
+Câu 56: Đối với mạch điện kín gồm nguồn điện với mạch ngoài là điện trở thì cường độ dòng điện chạy trong mạch
+A. tỉ lệ thuận với điện trở mạch ngoài. B. tỉ lệ nghịch với điện trở mạch ngoài.
+C. giảm khi điện trở mạch ngoài tăng. D. tăng khi điện trở mạch ngoài tăng.
+
+Câu 57: Hiện tượng đoản mạch xảy ra khi
+A. nối hai cực của một nguồn điện bằng dây dẫn có điện trở rất nhỏ.
+B. sử dụng các dây dẫn ngắn để mắc mạch điện.
+C. không mắc cầu chì cho mạch điện kín.
+D. dùng pin (hay ắc quy) để mắc một mạch điện kín.
+
+Câu 58: Hai bóng đèn có công suất định mức lần lượt là \(P_1 < P_2\) đều làm việc bình thường ở hiệu điện thế \(U = 6V\). Cường độ dòng điện qua mỗi bóng đèn và điện trở của hai bóng đèn có mối liên hệ
+A. \(I_1 < I_2\) và \(R_1 > R_2\). B. \(I_1 > I_2\) và \(R_1 > R_2\). C. \(I_1 > I_2\) và \(R_1 < R_2\). D. \(I_1 < I_2\) và \(R_1 < R_2\).
+
+Câu 59: Một bếp điện khi hoạt động bình thường có điện trở \(R = 100 \Omega\) và cường độ dòng điện qua bếp là \(I = 5A\). Nhiệt lượng tỏa ra trong mỗi giờ là
+A. 2500 J B. 2,5 kWh C. 500 J D. 1500 J
+
+Câu 60: Một hiệu điện thế như nhau mắc vào hai loại mạch: Mạch 1 gồm hai điện trở giống nhau đều bằng \(R\) mắc nối tiếp thì dòng điện chạy trong mạch chính là \(I_1\), mạch 2 gồm hai điện trở giống nhau cũng đều bằng \(R\) mắc song song thì dòng điện chạy trong mạch chính là \(I_2\). Mối quan hệ giữa \(I_1\) và \(I_2\) là:
+A. \(I_1 = I_2\) B. \(I_2 = 2I_1\) C. \(I_2 = 4I_1\) D. \(I_2 = 16I_1\)
+
+Câu 61: Một nguồn có \(E = 3V, r = 1\Omega\) nối với điện trở ngoài \(R = 1\Omega\) thành mạch điện kín. Công suất của nguồn điện là:
+A. 2,25W B. 3W C. 3,5W D. 4,5W
+
+Câu 62: Một nguồn điện có suất điện động là \(E\), công của nguồn là \(A\), \(q\) là độ lớn điện tích dịch chuyển qua nguồn. Mối liên hệ giữa chúng là
+A. \(A = q.E\) B. \(q = A.E\) C. \(E = q.A\) D. \(A = q^2.E\)
+
+Câu 63: Cho dòng điện \(I\) chạy qua hai điện trở \(R_1\) và \(R_2\) mắc nối tiếp. Mối liên hệ giữa nhiệt lượng tỏa ra trên mỗi điện trở và giá trị các điện trở là:
+A. \(\frac{Q_1}{Q_2} = \frac{R_1}{R_2}\) B. \(\frac{Q_1}{Q_2} = \frac{R_2}{R_1}\) C. \(Q_1 Q_2 = R_1 R_2\) D. \(Q_1 R_2 = Q_2 R_1\)
+
+Câu 64: Trên các thiết bị điện gia dụng thường có ghi 220V và số oát (W). Số oát này có ý nghĩa gì?
+A. Công suất tiêu thụ điện của dụng cụ khi nó được sử dụng với những hiệu điện thế nhỏ hơn 220V.
+B. Công suất tiêu thụ điện của dụng cụ khi nó được sử dụng với đúng hiệu điện thế 220V.
+C. Công mà dòng điện thực hiện trong một phút khi dụng cụ này được sử dụng với đúng hiệu điện thế 220V.
+D. Điện năng mà dụng cụ tiêu thụ trong một giờ khi nó được sử dụng với đúng hiệu điện thế 220V.
+
+Câu 65: Khi mắc một bóng đèn vào hiệu điện thế 4V thì dòng điện qua bóng đèn có cường độ là 600 mA. Công suất tiêu thụ của bóng đèn này là
+A. 24W. B. 2,4W. C. 2400 W. D. 0,24 W.
+
+Câu 66: Kết luận nào sau đây đúng khi nói về tác dụng của nguồn điện?
+A. dùng để tạo ra và duy trì hiệu điện thế nhằm duy trì dòng điện trong mạch.
+B. dùng để tạo ra các ion âm.
+C. dùng để tạo ra các ion dương.
+D. dùng để tạo ra các ion âm chạy trong vật dẫn.
+
+Câu 67: Kết luận nào sau đây sai khi nói về suất điện động của nguồn điện?
+A. Suất điện động của nguồn điện đặc trưng cho khả năng thực hiện công của nguồn điện.
+B. Suất điện động của nguồn điện được đo bằng thương số \(A/q\).
+C. Đơn vị của suất điện động là vôn (V).
+D. Suất điện động của nguồn điện đặc trưng cho khả năng tích điện của nguồn điện.
+
+Câu 68: Biểu thức tính công của nguồn điện có dòng điện không đổi là
+A. \(A = UIt\) B. \(A = EIt\) C. \(EIt - rI^2t\) D. \(EIt + rI^2t\)
+
+Câu 69: Số vôn ghi trên pin ALKALINE là 12 V cho biết trị số của
+A. tụ điện. B. nguồn điện. C. công của nguồn điện. D. suất điện động của nguồn.
+
+Câu 70: Đơn vị đo điện trở là
+A. ôm (\(\Omega\)). B. fara (F). C. henry (H). D. oát (W).
+
+Câu 71: Phát biểu nào sau đây sai?
+A. Điện trở có vạch màu là căn cứ để xác định trị số.
+B. Đối với điện trở nhiệt có hệ số dương, khi nhiệt độ tăng thì điện trở tăng.
+C. Đối với điện trở biến đổi theo điện áp, khi U tăng thì điện trở tăng.
+D. Đối với điện trở quang, khi ánh sáng thích hợp rọi vào thì điện trở giảm.
+
+Câu 72: Đặc điểm của điện trở nhiệt có hệ số nhiệt điện trở
+A. dương khi nhiệt độ tăng thì điện trở tăng. B. dương khi nhiệt độ tăng thì điện trở giảm.
+C. âm khi nhiệt độ tăng thì điện trở tăng. D. âm khi nhiệt độ tăng thì điện trở giảm về bằng 0.
+
+Câu 73: Khi tiết diện của khối kim loại đồng chất, tiết diện đều tăng 2 lần thì điện trở của khối kim loại
+A. tăng 2 lần. B. tăng 4 lần. C. giảm 2 lần. D. giảm 4 lần.
+
+Câu 74: Dòng điện trong kim loại là
+A. dòng dịch chuyển của điện tích.
+B. dòng dịch chuyển có hướng của các electron tự do.
+C. dòng dịch chuyển có hướng của các hạt mang điện.
+D. dòng dịch chuyển có hướng của các ion dương và âm.
+
+Câu 75: Quy ước chiều dòng điện là
+A. chiều dịch chuyển của các electron. B. chiều dịch chuyển của các ion.
+C. chiều dịch chuyển của các ion âm. D. chiều dịch chuyển của các điện tích dương.
+
+Câu 76: Chỉ ra câu sai.
+A. Cường độ dòng điện được đo bằng ampe kế.
+B. Để đo cường độ dòng điện, phải mắc nối tiếp ampe kế với mạch điện.
+C. Dòng điện chạy qua ampe kế đi vào chốt dương, đi ra chốt âm của ampe kế.
+D. Dòng điện chạy qua ampe kế đi vào chốt âm, đi ra chốt dương của ampe kế.
+
+Câu 77: Cho một mạch điện gồm một pin 1,5 V có điện trở trong 0,5 Ω nối với mạch ngoài là một điện trở 4,5 Ω. Cường độ dòng điện trong toàn mạch là
+A. 0,3A. B. 0,25A. C. 0,5A. D. 3A.
+
+Câu 78: Đặt vào hai đầu một điện trở \(R\) một hiệu điện thế \(U = 12V\), cường độ dòng điện chạy qua điện trở là 1,5A. Nếu giữ nguyên hiệu điện thế nhưng muốn cường độ dòng điện chạy qua điện trở giảm đi 0,5 A thì ta phải tăng giá trị điện trở thêm một lượng là:
+A. 5,0 Ω B. 4,5 Ω C. 4,0 Ω D. 5,5 Ω
+
+Câu 79: Một dây dẫn bằng kim loại, có diện tích tiết diện thẳng là \(S = 3,14.10^{-6} m^2\), cho dòng điện \(I = 5 A\) chạy qua dây dẫn. Biết mật độ electron tự do là \(n = 8,45.10^{28} electron/m^3\), \(e = 1,6.10^{-19} C\). Tốc độ dịch chuyển có hướng của các electron trong dây dẫn xấp xỉ bằng
+A. 8,490 m/s. B. 8490 m/s. C. \(1,178.10^{-4}\) m/s. D. 1,178 m/s.
+
+Câu 80: Điện trở nhiệt là loại điện trở
+A. giá trị không đổi khi nhiệt độ thay đổi.
+B. giá trị giảm khi nhiệt độ thay đổi.
+C. giá trị thay đổi khi nhiệt độ thay đổi.
+D. giá trị tăng khi nhiệt độ thay đổi.
+
+Câu 81: Cường độ dòng điện chạy trong mạch điện kín
+A. tỉ lệ thuận với điện trở toàn phần của mạch điện và tỉ lệ nghịch với suất điện động của nguồn điện.
+B. tỉ lệ thuận với suất điện động của nguồn điện và tỉ lệ nghịch với điện trở toàn phần của mạch điện đó.
+C. tỉ lệ thuận với suất điện động của nguồn điện và tỉ lệ nghịch với điện trở mạch ngoài của mạch điện đó.
+D. tỉ lệ thuận với suất điện động của nguồn điện và tỉ lệ nghịch với điện trở trong của mạch điện đó.
+
+Câu 82: Năng lượng điện tiêu thụ của đoạn mạch
+A. bằng công suất tiêu thụ trên đoạn mạch đó.
+B. bằng công của lực điện thực hiện khi di chuyển các điện tích.
+C. được đo bằng đơn vị Oát (W).
+D. bằng điện năng sử dụng trong một đơn vị thời gian.
+
+Câu 83: Biểu thức liên hệ giữa cường độ dòng điện với mật độ và tốc độ của các hạt mang điện
+A. \(I = Snv\). B. \(I = Sve\). C. \(I = \frac{nve}{S}\). D. \(I = Snve\).
+
+Câu 84: Dòng điện qua một dây dẫn kim loại có cường độ 2 A. Số electron dịch chuyển qua tiết diện thẳng của dây dẫn này trong 2 s là
+A. \(2,5.10^{18}\). B. \(2,5.10^{19}\). C. \(0,4.10^{19}\). D. \(4.10^{19}\).
+
+Câu 85: Nếu chiều dài và đường kính của một dây dẫn bằng đồng có tiết diện tròn được tăng lên gấp đôi thì điện trở của dây dẫn sẽ
+A. không thay đổi. B. tăng lên hai lần. C. tăng lên gấp bốn lần. D. giảm đi hai lần.
+
+Câu 86: Biến trở là
+A. điện trở có thể thay đổi trị số và dùng để điều chỉnh chiều dòng điện trong mạch.
+B. điện trở có thể thay đổi trị số và dùng để điều chỉnh cường độ và chiều dòng điện trong mạch.
+C. điện trở có thể thay đổi trị số và dùng để điều chỉnh cường độ dòng điện trong mạch.
+D. điện trở không thay đổi trị số và dùng để điều chỉnh cường độ dòng điện trong mạch.
+
+Câu 87: Trước khi mắc biến trở vào mạch điện để điều chỉnh cường độ dòng điện thì cần điều chỉnh biến trở có giá trị nào dưới đây?
+A. Có giá trị bằng 0. B. Có giá trị nhỏ. C. Có giá trị lớn. D. Có giá trị lớn nhất.
+
+Câu 88: Cho mạch điện như hình vẽ. Trong đó, \(R_1 = R_3 = R_5 = 3\Omega, R_2 = 8\Omega, R_4 = 6\Omega, U_4 = 6 V, U_5 = 6V\). Cường độ dòng điện chạy qua điện trở \(R_2\) là
+A. 1 A. B. 1,5 A. C. 2 A. D. 0,75 A.
+
+Câu 89: Công của nguồn điện là
+A. lượng điện tích mà nguồn điện sinh ra trong 1 s.
+B. công của lực lạ làm dịch chuyển điện tích bên trong nguồn.
+C. công của dòng điện trong mạch kín sinh ra trong 1 s.
+D. công của dòng điện khi dịch chuyển một điện tích dương trong mạch kín.
+
+Câu 90: Suất điện động của nguồn điện một chiều là \(\varepsilon = 4 \, V\). Công của lực lạ làm dịch chuyển một lượng điện tích \(q = 5 \, mC\) giữa hai cực bên trong nguồn điện là
+A. 1,5 mJ. B. 0,8 mJ. C. 20 mJ. D. 5 MJ.
+
+Câu 91: Ba tụ điện giống nhau cùng điện dung \(C\) ghép song song với nhau thì điện dung của bộ tụ là:
+A. \(C\) B. \(2C\) C. \(C/3\) D. \(3C\)
+
+Câu 92: Bốn tụ điện mắc thành bộ theo sơ đồ như hình vẽ, \(C_1 = 1\mu F; C_2 = C_3 = 3\mu F\). Khi nối hai điểm M, N với nguồn điện thì \(C_1\) có điện tích \(q_1 = 6\mu C\) và cả bộ tụ có điện tích \(q = 15,6 \mu C\). Hiệu điện thế trên bộ tụ điện là
+A. 1 V B. 8V C. 6 V D. 12 V
+
+Câu 93: Tụ điện có điện dung \(2\mu F\) có khoảng cách giữa hai bản tụ là 1cm được tích điện với nguồn điện có hiệu điện thế 24V. Ngắt tụ khỏi nguồn và nối hai bản tụ bằng dây dẫn thì năng lượng tụ giải phóng ra là:
+A. \(5,76.10^{-4} J\) B. \(1,152.10^{-3} J\) C. \(2,304.10^{-3} J\) D. \(4,217.10^{-3} J\)
+
+Câu 94: Có bốn chiếc tụ điện như Hình 21.6 (trong sách), hãy sắp xếp theo thứ tự tăng dần về năng lượng khi chúng được tích điện tới mức tối đa cho phép.
+A. b, d, a, c. B. b, c, d, a. C. c, a, b, d. D. c, b, a, d.
+
+Câu 95: Chọn công thức sai cho hai tụ ghép nối tiếp \(C_1\) và \(C_2\) với \(C\) là điện dung của bộ tụ.
+A. \(\frac{1}{C} = \frac{1}{C_1} + \frac{1}{C_2}\) B. \(C = \frac{C_1 C_2}{C_1 + C_2}\) C. \(C = C_1 + C_2\) D. \(U = U_1 + U_2\)
+
+Câu 96: Một bộ gồm ba tụ điện ghép song song \(C_1 = C_2 = \frac{1}{2} C_3\). Khi được tích điện bằng nguồn điện có hiệu điện thế 45V thì điện tích của bộ tụ bằng \(18.10^{-4} C\). Tính điện dung của các tụ điện.
+A. \(C_1 = C_2 = 5\mu F; C_3 = 10 \mu F\) B. \(C_1 = C_2 = 8\mu F; C_3 = 16 \mu F\)
+C. \(C_1 = C_2 = 10\mu F; C_3 = 20 \mu F\) D. \(C_1 = C_2 = 15\mu F; C_3 = 30 \mu F\)
+
+Câu 97: Chọn công thức sai về năng lượng tụ điện
+A. \(W = \frac{U^2}{2C}\) B. \(W = \frac{QU}{2}\) C. \(W = \frac{Q^2}{2C}\) D. \(W = \frac{CU^2}{2}\)
+
+Câu 98: Một tụ điện có điện dung \(2000 \mu F\) được tích điện đến hiệu điện thế 10 V. Tính năng lượng của tụ điện.
+A. 0,1 J B. 1,1 J C. 10 J D. 20 J
+
+Câu 99: Cho mạch điện như hình vẽ. Biết \(E = 12V, r = 1\Omega, R_1 = 4\Omega, R_2 = 2\Omega, R_3 = 6\Omega\). Cường độ dòng điện qua \(R_3\) là:
+A. 1A B. 2A C. 3A D. 4A
+
+Câu 100: Một nguồn điện có suất điện động \(E = 6V\), điện trở trong \(r = 2\Omega\) được mắc với mạch ngoài gồm hai điện trở \(R_1 = 3\Omega\) và \(R_2 = 6\Omega\) mắc song song. Cường độ dòng điện qua nguồn là:
+A. 0,5A B. 1A C. 1,5A D. 2A

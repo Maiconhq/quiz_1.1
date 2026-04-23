@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>a11 - quizz </title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="window.__katexReady=true"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -353,6 +356,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
         <span class="stab-ico">📐</span>
         <span class="stab-name">Công Nghệ</span>
         <span class="stab-count">11 bài • 110 câu</span>
+      </button>
+      <button class="subj-tab" onclick="switchTab('vat-li',this)">
+        <span class="stab-ico">⚡</span>
+        <span class="stab-name">Vật Lí</span>
+        <span class="stab-count">100 câu</span>
       </button>
     </div>
 
@@ -814,6 +822,64 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
         </div>
       </div>
     </div>
+    
+    <!-- Tab: Vật Lí -->
+    <div class="tab-pane" id="tab-vat-li">
+      <div class="grid" style="margin-bottom:16px">
+        <div class="card card-rand" onclick="showSetupVatLi()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tạo đề ngẫu nhiên</h3>
+            <p>Làm bộ 100 câu hỏi Vật Lí, có thể chọn số lượng câu trước khi bắt đầu.</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">100 câu</span><span class="chip">Trộn đề</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-hdr">⚡ Vật Lí 11 – Theo bài</div>
+      <div class="grid">
+        <div class="card" onclick="startLessonVatLi('dongdien')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F97316,#F59E0B)"></div>
+          <div class="card-body">
+            <div class="card-ico">1</div>
+            <h3>Chủ đề 1</h3>
+            <p>Cường độ dòng điện, định luật Ôm và điện trở.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">1–40</span><span class="chip">40 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="startLessonVatLi('dientro')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">2</div>
+            <h3>Chủ đề 2</h3>
+            <p>Điện trở, nguồn điện và năng lượng điện – công suất điện.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">41–60</span><span class="chip">20 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="startLessonVatLi('nguon')">
+          <div class="card-top" style="background:linear-gradient(90deg,#8B5CF6,#7C3AED)"></div>
+          <div class="card-body">
+            <div class="card-ico">3</div>
+            <h3>Chủ đề 3</h3>
+            <p>Nguồn điện, công suất, suất điện động và điện trở trong.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">61–83</span><span class="chip">23 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="startLessonVatLi('nangluong')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">4</div>
+            <h3>Chủ đề 4</h3>
+            <p>Tụ điện, năng lượng tụ và mạch điện thực tế.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">84–100</span><span class="chip">17 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- WORD FORM -->
@@ -891,6 +957,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
         <label class="chk-row"><input type="checkbox" checked value="cnbai23" class="lchk"> 🚗 CN Bài 23 – Khái Quát Về Ô Tô (10 câu)</label>
         <label class="chk-row"><input type="checkbox" checked value="cnbai24" class="lchk"> ⚙️ CN Bài 24 – Hệ Thống Truyền Lực (10 câu)</label>
         <label class="chk-row"><input type="checkbox" checked value="cnbai25" class="lchk"> 🛑 CN Bài 25 – Phanh, Treo & Lái (10 câu)</label>
+        <label class="chk-row" style="opacity:.5;pointer-events:none;cursor:default"><span style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--txt3)">── ⚡ VẬT LÍ 11 ──</span></label>
+        <label class="chk-row"><input type="checkbox" checked value="vatliall" class="lchk"> ⚡ Vật Lí – Bộ 100 câu trắc nghiệm</label>
       </div>
     </div>
     <button class="btn btn-p btn-full" onclick="startRandom()">🚀 Bắt đầu làm bài</button>
@@ -929,6 +997,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
     <button class="btn btn-p btn-full" onclick="startRandomCN()">🚀 Bắt đầu làm bài</button>
   </div>
 
+  <!-- SETUP VẬT LÍ -->
+  <div class="scr" id="scr-setup-vat-li">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title">🎲 Tạo đề ngẫu nhiên – Vật Lí</h2>
+    <div class="sbox">
+      <div class="slabel">Số câu hỏi</div>
+      <div class="qty-row" id="vatli-qty-row">
+        <button class="qbtn on" onclick="pickQtyVatLi(this,10)">10 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,20)">20 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,30)">30 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,50)">50 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,'all')">Tất cả</button>
+      </div>
+    </div>
+    <div class="sbox">
+      <div class="slabel">Làm bài</div>
+      <div class="chk-col">
+        <label class="chk-row" style="opacity:.9;cursor:default"><span>Đã nạp sẵn bộ 100 câu Vật Lí từ file <strong>questions-vatli.js</strong>.</span></label>
+      </div>
+    </div>
+    <button class="btn btn-p btn-full" onclick="startRandomVatLi()">🚀 Bắt đầu làm bài</button>
+  </div>
+
   <!-- QUIZ -->
   <div class="scr" id="scr-quiz">
     <div class="qhdr">
@@ -941,6 +1032,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
     <div class="qcard">
       <div class="qbadge" id="qbadge">Câu 1</div>
       <p class="qtxt" id="qtxt"></p>
+      <div id="qimg"></div>
       <div class="opts" id="opts"></div>
       <div id="fbarea"></div>
     </div>
@@ -1242,6 +1334,7 @@ function showScr(id){
 function goHome(){showScr('home')}
 function showSetup(){showScr('setup')}
 function showSetupCN(){showScr('setup-cn')}
+function showSetupVatLi(){showScr('setup-vat-li')}
 
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
@@ -1264,18 +1357,33 @@ function pickQty(btn,q){
   btn.classList.add('on');qty=q;
 }
 let qtyCN=10;
+let qtyVatLi=10;
 function pickQtyCN(btn,q){
   document.querySelectorAll('#cn-qty-row .qbtn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');qtyCN=q;
 }
+function pickQtyVatLi(btn,q){
+  document.querySelectorAll('#vatli-qty-row .qbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');qtyVatLi=q;
+}
 
 // START
-function startLesson(l){lesson=l;mode='lesson';qs=[...QDB[l]];begin()}
+function normalizeQ(q){
+  if(!q)return {q:'',o:[],a:0};
+  const fix=s=>(typeof s==='string'?s.replace(/\\\\/g,'\\'):s);
+  if('q' in q)return { ...q, q: fix(q.q), o: (q.o||[]).map(fix) };
+  const aMap={A:0,B:1,C:2,D:3};
+  return {q:fix(q.text||''), o:(q.options||[]).map(fix), a:typeof q.correct==='string'?aMap[q.correct]??0:(q.correct??0), d:q.d, img:q.img||''};
+}
+function startLesson(l){lesson=l;mode='lesson';qs=[...QDB[l]].map(normalizeQ);begin()}
 function startRandom(){
   const cks=[...document.querySelectorAll('.lchk:checked')];
   if(!cks.length){showToast('⚠️ Chọn ít nhất một bài!');return}
   mode='random';
-  let pool=[];cks.forEach(c=>pool.push(...QDB[c.value]));
+  let pool=[];cks.forEach(c=>{
+    if(c.value==='vatliall') pool.push(...(window.questionsVatLi||[]).map(normalizeQ));
+    else pool.push(...QDB[c.value].map(normalizeQ));
+  });
   const e=shuffle(pool.filter(q=>q.d==='easy'));
   const m=shuffle(pool.filter(q=>q.d==='medium'));
   const h=shuffle(pool.filter(q=>q.d==='hard'));
@@ -1287,11 +1395,36 @@ function startRandomCN(){
   const cks=[...document.querySelectorAll('.cnchk:checked')];
   if(!cks.length){showToast('⚠️ Chọn ít nhất một bài!');return}
   mode='random';
-  let pool=[];cks.forEach(c=>pool.push(...QDB[c.value]));
+  let pool=[];cks.forEach(c=>pool.push(...QDB[c.value].map(normalizeQ)));
   pool=shuffle(pool);
   if(qtyCN!=='all')pool=pool.slice(0,qtyCN);
   qs=pool;begin();
 }
+function startRandomVatLi(){
+  mode='random';
+  let pool=shuffle([...(window.questionsVatLi||[]).map(normalizeQ)]);
+  qs=qtyVatLi==='all'?pool:pool.slice(0,qtyVatLi);
+  begin();
+}
+function showSetupVatLi(){showScr('setup-vat-li')}
+function getVatLiLessonQuestions(group){
+  const qs=window.questionsVatLi||[];
+  const ranges={dongdien:[1,35],dientro:[36,60],nguon:[61,83],nangluong:[84,100]};
+  const r=ranges[group];
+  if(!r)return qs;
+  return qs.filter(q=>q.id>=r[0]&&q.id<=r[1]);
+}
+function startLessonVatLi(group){lesson=group;mode='lesson';qs=[...getVatLiLessonQuestions(group)].map(normalizeQ);begin()}
+function renderMath(el){
+  if(!el||!window.renderMathInElement||!window.__katexReady)return;
+  renderMathInElement(el,{delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'\\[',right:'\\]',display:true},
+    {left:'\\(',right:'\\)',display:false}
+  ]});
+}
+function renderMathSoon(el){setTimeout(()=>renderMath(el),250)}
+window.addEventListener('load',()=>{document.querySelectorAll('.qtxt,.otxt,.fb-area,.ls-passage').forEach(renderMath)})
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function begin(){idx=0;score=0;answers=[];done=false;showScr('quiz');render()}
 
@@ -1302,7 +1435,11 @@ function render(){
   document.getElementById('qctr').textContent=`Câu ${idx+1} / ${tot}`;
   document.getElementById('qscore').textContent=`✓ ${score} đúng`;
   document.getElementById('qbadge').textContent=`Câu ${idx+1}`;
-  document.getElementById('qtxt').textContent=q.q;
+  document.getElementById('qtxt').innerHTML=q.q;
+  const imgBox=document.getElementById('qimg');
+  if(imgBox){
+    imgBox.innerHTML=q.img?`<img src="${q.img}" alt="Câu hỏi minh hoạ" style="display:block;max-width:min(100%,420px);max-height:260px;width:auto;height:auto;object-fit:contain;border-radius:12px;margin:12px auto 8px;box-shadow:var(--sh1)">`:'';
+  }
   const ol=document.getElementById('opts');
   ol.innerHTML='';
   q.o.forEach((o,i)=>{
@@ -1311,6 +1448,8 @@ function render(){
     d.innerHTML=`<span class="oltr">${L[i]}</span><span class="otxt">${o}</span>`;
     ol.appendChild(d);
   });
+  renderMathSoon(document.getElementById('qtxt'));
+  renderMathSoon(ol);
   document.getElementById('fbarea').innerHTML='';
   const nb=document.getElementById('nxtbtn');
   nb.disabled=true;
@@ -1333,6 +1472,7 @@ function pick(i){
   fb.innerHTML=ok
     ?`<div class="fb fb-ok"><div class="fb-ico">✓</div><span>Chính xác! Bạn đã chọn đúng.</span></div>`
     :`<div class="fb fb-err"><div class="fb-title"><div class="fb-ico">✕</div>Sai rồi!</div><div class="fb-ans">Đáp án đúng: <strong>${L[c]}. ${q.o[c]}</strong></div></div>`;
+  renderMathSoon(fb);
   document.getElementById('nxtbtn').disabled=false;
   document.getElementById('qscore').textContent=`✓ ${score} đúng`;
 }
@@ -1877,6 +2017,7 @@ function checkWordForm(){
   document.getElementById('wf-score').style.display='block';
   document.getElementById('wf-check-btn').style.display='none';
   document.getElementById('wf-retry-btn').style.display='flex';
+  renderMathSoon(document.getElementById('wf-passage'));
 }
 function retryWordForm(){startWordForm(curWF);}
 
@@ -1886,5 +2027,6 @@ function retryWordForm(){startWordForm(curWF);}
   if(t){document.documentElement.dataset.theme=t;document.getElementById('tbtn').textContent=t==='dark'?'☀️':'🌙'}
 })();
 </script>
+<script src="questions-vatli.js"></script>
 </body>
 </html>
