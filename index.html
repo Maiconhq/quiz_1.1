@@ -664,6 +664,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
 
     <!-- Tab: Công Nghệ -->
     <div class="tab-pane" id="tab-cong-nghe">
+      <div class="grid" style="margin-bottom:16px">
+        <div class="card card-rand" onclick="showSetupCN()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tạo đề ngẫu nhiên</h3>
+            <p>Trộn câu hỏi từ các bài CN, tự chọn số lượng</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">Tùy số câu</span><span class="chip">Tùy bài</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="section-hdr">📐 Công Nghệ 11 – Cánh Diều</div>
       <div class="grid">
         <div class="card" onclick="startLesson('cnbai15')">
@@ -880,6 +894,39 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
       </div>
     </div>
     <button class="btn btn-p btn-full" onclick="startRandom()">🚀 Bắt đầu làm bài</button>
+  </div>
+
+  <!-- SETUP CN -->
+  <div class="scr" id="scr-setup-cn">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title">🎲 Tạo đề ngẫu nhiên – Công Nghệ</h2>
+    <div class="sbox">
+      <div class="slabel">Số câu hỏi</div>
+      <div class="qty-row" id="cn-qty-row">
+        <button class="qbtn on" onclick="pickQtyCN(this,10)">10 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,20)">20 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,30)">30 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,50)">50 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,'all')">Tất cả</button>
+      </div>
+    </div>
+    <div class="sbox">
+      <div class="slabel">Chọn bài học</div>
+      <div class="chk-col">
+        <label class="chk-row"><input type="checkbox" checked value="cnbai15" class="cnchk"> ⚙️ Bài 15 – Cơ Khí Động Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai16" class="cnchk"> 👷 Bài 16 – Nghề Nghiệp CN (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai17" class="cnchk"> 🔧 Bài 17 – Động Cơ Đốt Trong (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai18" class="cnchk"> 🔄 Bài 18 – Nguyên Lý Làm Việc (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai19" class="cnchk"> 🏗️ Bài 19 – Thân Máy & Cơ Cấu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai20" class="cnchk"> 💧 Bài 20 – Bôi Trơn & Làm Mát (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai21" class="cnchk"> ⛽ Bài 21 – Hệ Thống Nhiên Liệu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai22" class="cnchk"> ⚡ Bài 22 – Đánh Lửa & Khởi Động (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai23" class="cnchk"> 🚗 Bài 23 – Khái Quát Về Ô Tô (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai24" class="cnchk"> ⚙️ Bài 24 – Hệ Thống Truyền Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai25" class="cnchk"> 🛑 Bài 25 – Phanh, Treo & Lái (10 câu)</label>
+      </div>
+    </div>
+    <button class="btn btn-p btn-full" onclick="startRandomCN()">🚀 Bắt đầu làm bài</button>
   </div>
 
   <!-- QUIZ -->
@@ -1194,6 +1241,7 @@ function showScr(id){
 }
 function goHome(){showScr('home')}
 function showSetup(){showScr('setup')}
+function showSetupCN(){showScr('setup-cn')}
 
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
@@ -1212,8 +1260,13 @@ function toggleTheme(){
 
 // SETUP
 function pickQty(btn,q){
-  document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('#scr-setup .qbtn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');qty=q;
+}
+let qtyCN=10;
+function pickQtyCN(btn,q){
+  document.querySelectorAll('#cn-qty-row .qbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');qtyCN=q;
 }
 
 // START
@@ -1229,6 +1282,15 @@ function startRandom(){
   let ord=[...e,...m,...h];
   if(qty!=='all')ord=ord.slice(0,qty);
   qs=ord;begin();
+}
+function startRandomCN(){
+  const cks=[...document.querySelectorAll('.cnchk:checked')];
+  if(!cks.length){showToast('⚠️ Chọn ít nhất một bài!');return}
+  mode='random';
+  let pool=[];cks.forEach(c=>pool.push(...QDB[c.value]));
+  pool=shuffle(pool);
+  if(qtyCN!=='all')pool=pool.slice(0,qtyCN);
+  qs=pool;begin();
 }
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function begin(){idx=0;score=0;answers=[];done=false;showScr('quiz');render()}
