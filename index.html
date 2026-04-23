@@ -276,6 +276,28 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
 .ls-ans-row:last-child{border-bottom:none}
 .ls-note{background:var(--sur2);border:1px solid var(--bdr2);border-radius:8px;
   padding:10px 14px;margin:8px 0 4px;font-size:13px;color:var(--txt2);font-style:italic;display:block}
+/* SUBJECT TABS */
+.subj-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.subj-tab{display:flex;flex-direction:column;align-items:center;gap:5px;padding:16px 10px;
+  border:1.5px solid var(--bdr);border-radius:var(--rl);background:var(--sur);
+  cursor:pointer;font-family:inherit;transition:all .22s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:var(--sh0);text-align:center}
+.subj-tab:hover{border-color:var(--pri);transform:translateY(-3px);box-shadow:var(--sh2)}
+.subj-tab.on{border-color:var(--pri);background:var(--pri-g);box-shadow:0 0 0 3px var(--pri-g)}
+.stab-ico{font-size:26px;line-height:1}
+.stab-name{font-size:13px;font-weight:700;color:var(--txt);line-height:1.2}
+.stab-count{font-size:11px;color:var(--txt3);font-weight:500}
+.subj-tab.on .stab-name{color:var(--pri)}
+.subj-tab.on .stab-count{color:var(--pri);opacity:.75}
+.tab-pane{display:none}
+.tab-pane.on{display:block;animation:scrIn .3s cubic-bezier(.34,1.56,.64,1)}
+@media(max-width:600px){
+  .subj-tabs{grid-template-columns:repeat(3,1fr);gap:7px}
+  .stab-ico{font-size:20px}
+  .stab-name{font-size:11px}
+  .stab-count{display:none}
+  .subj-tab{padding:12px 6px}
+}
 /* RESPONSIVE */
 @media(max-width:600px){
   .app{padding:14px}
@@ -306,309 +328,474 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
     <div class="hero">
       <div class="hero-badge">✨ Luyện thi thông minh</div>
       <h1>Chúc các bạn A11 <br>Ôn tốt &amp; Thi tốt</h1>
-      <p>Chọn bài học để luyện tập hoặc tạo đề ngẫu nhiên</p>
+      <p>Chọn môn học để bắt đầu luyện tập</p>
       <div class="hero-pills">
-        <div class="pill">📖 <strong>3</strong> bài học</div>
-        <div class="pill">❓ <strong>93</strong> câu hỏi</div>
+        <div class="pill">📚 <strong>3</strong> môn học</div>
+        <div class="pill">❓ <strong>203</strong> câu hỏi</div>
         <div class="pill">🎧 <strong>14</strong> bài nghe</div>
         <div class="pill">✍️ <strong>40</strong> word form</div>
       </div>
     </div>
-    <div class="grid">
-      <div class="card card-wish">
-        <div class="card-top" style="background:linear-gradient(135deg,#ff6b9d,#c44dff)"></div>
-        <div class="card-body" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
-          <img src="https://scontent-sin2-1.cdninstagram.com/v/t51.82787-15/670504296_17921454882314068_7129187890067082343_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzg3ODg4MDMyNjcyMzA0Mjk3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjQzM3g1Nzcuc2RyLkMzIn0%3D&_nc_ohc=fAz1Oadcj0MQ7kNvwHy1Fmo&_nc_oc=AdrIpHgcZCBwi-svsdDp7AZNMV7V7J9srYj_2hjN1UK-YjGMdAnxo2Dqa1rj6TnompN3wlxpd7aE8iEt_srxYbwQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sin2-1.cdninstagram.com&_nc_gid=dK-3Yn_ffQj-n6yvGiR96A&_nc_ss=7a32e&oh=00_Af3QI1TSmwDq7GlAkq_zFtFV1Q-CniozpErG5UE0etBX2w&oe=69EAC4F2" alt="Chúc thi tốt" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center top;border-radius:0">
-          <div style="padding:12px 16px 14px;text-align:center">
-            <p style="margin:0;font-size:0.95rem;font-weight:600;color:#c44dff">Cô Chúc các em thi tốt 💜</p>
+
+    <!-- Subject tabs -->
+    <div class="subj-tabs">
+      <button class="subj-tab on" onclick="switchTab('lich-su',this)">
+        <span class="stab-ico">📜</span>
+        <span class="stab-name">Lịch Sử</span>
+        <span class="stab-count">3 bài • 93 câu</span>
+      </button>
+      <button class="subj-tab" onclick="switchTab('tieng-anh',this)">
+        <span class="stab-ico">🎧</span>
+        <span class="stab-name">Tiếng Anh</span>
+        <span class="stab-count">14 nghe • 40 wf</span>
+      </button>
+      <button class="subj-tab" onclick="switchTab('cong-nghe',this)">
+        <span class="stab-ico">📐</span>
+        <span class="stab-name">Công Nghệ</span>
+        <span class="stab-count">11 bài • 110 câu</span>
+      </button>
+    </div>
+
+    <!-- Tab: Lịch Sử -->
+    <div class="tab-pane on" id="tab-lich-su">
+      <div class="grid">
+        <div class="card card-wish">
+          <div class="card-top" style="background:linear-gradient(135deg,#ff6b9d,#c44dff)"></div>
+          <div class="card-body" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+            <img src="https://scontent-sin2-1.cdninstagram.com/v/t51.82787-15/670504296_17921454882314068_7129187890067082343_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzg3ODg4MDMyNjcyMzA0Mjk3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjQzM3g1Nzcuc2RyLkMzIn0%3D&_nc_ohc=fAz1Oadcj0MQ7kNvwHy1Fmo&_nc_oc=AdrIpHgcZCBwi-svsdDp7AZNMV7V7J9srYj_2hjN1UK-YjGMdAnxo2Dqa1rj6TnompN3wlxpd7aE8iEt_srxYbwQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sin2-1.cdninstagram.com&_nc_gid=dK-3Yn_ffQj-n6yvGiR96A&_nc_ss=7a32e&oh=00_Af3QI1TSmwDq7GlAkq_zFtFV1Q-CniozpErG5UE0etBX2w&oe=69EAC4F2" alt="Chúc thi tốt" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center top;border-radius:0">
+            <div style="padding:12px 16px 14px;text-align:center">
+              <p style="margin:0;font-size:0.95rem;font-weight:600;color:#c44dff">Cô Chúc các em thi tốt 💜</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startLesson('bai10')">
-        <div class="card-top"></div>
-        <div class="card-body">
-          <div class="card-ico">🏛️</div>
-          <h3>Bài 10</h3>
-          <p>Cải cách của vua Lê Thánh Tông thế kỉ XV</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">32 câu</span><span class="chip">~15 phút</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('bai10')">
+          <div class="card-top"></div>
+          <div class="card-body">
+            <div class="card-ico">🏛️</div>
+            <h3>Bài 10</h3>
+            <p>Cải cách của vua Lê Thánh Tông thế kỉ XV</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">32 câu</span><span class="chip">~15 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startLesson('bai11')">
-        <div class="card-top g"></div>
-        <div class="card-body">
-          <div class="card-ico">⚖️</div>
-          <h3>Bài 11</h3>
-          <p>Cải cách của vua Minh Mạng nửa đầu thế kỉ XIX</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">31 câu</span><span class="chip">~15 phút</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('bai11')">
+          <div class="card-top g"></div>
+          <div class="card-body">
+            <div class="card-ico">⚖️</div>
+            <h3>Bài 11</h3>
+            <p>Cải cách của vua Minh Mạng nửa đầu thế kỉ XIX</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">31 câu</span><span class="chip">~15 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startLesson('bai12')">
-        <div class="card-top o"></div>
-        <div class="card-body">
-          <div class="card-ico">🌊</div>
-          <h3>Bài 12</h3>
-          <p>Vị trí và tầm quan trọng chiến lược của Biển Đông</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">30 câu</span><span class="chip">~12 phút</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('bai12')">
+          <div class="card-top o"></div>
+          <div class="card-body">
+            <div class="card-ico">🌊</div>
+            <h3>Bài 12</h3>
+            <p>Vị trí và tầm quan trọng chiến lược của Biển Đông</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">30 câu</span><span class="chip">~12 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card card-rand" onclick="showSetup()">
-        <div class="card-top p"></div>
-        <div class="card-body">
-          <div class="card-ico">🎲</div>
-          <h3>Tạo đề ngẫu nhiên</h3>
-          <p>Trộn câu hỏi từ nhiều bài, tự sắp từ dễ đến khó</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">Tùy số câu</span><span class="chip">Tùy bài</span></div>
-            <div class="arr">→</div>
+        <div class="card card-rand" onclick="showSetup()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tạo đề ngẫu nhiên</h3>
+            <p>Trộn câu hỏi từ nhiều bài, tự sắp từ dễ đến khó</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">Tùy số câu</span><span class="chip">Tùy bài</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="section-hdr">🎧 Listening – Tiếng Anh 1</div>
-    <div class="grid">
-      <div class="card" onclick="startListening('ban1')">
-        <div class="card-top ls"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 1</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+    <!-- Tab: Tiếng Anh -->
+    <div class="tab-pane" id="tab-tieng-anh">
+      <div class="section-hdr">🎧 Listening – Tiếng Anh 1</div>
+      <div class="grid">
+        <div class="card" onclick="startListening('ban1')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 1</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban2')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 2</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban3')">
+          <div class="card-top ls3"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 3</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban4')">
+          <div class="card-top ls4"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 4</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban5')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 5</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban6')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 6</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban7')">
+          <div class="card-top ls3"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 7</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban8')">
+          <div class="card-top ls4"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 8</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban9')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 9</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban10')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 10</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card" onclick="startListening('ban2')">
-        <div class="card-top ls2"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 2</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+
+      <div class="section-hdr">🎧 Luyện Listening – Tiếng Anh – Bài 2 (Paul)</div>
+      <div class="grid">
+        <div class="card" onclick="startListening('p_ban1')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 1</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('p_ban2')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 2</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('p_ban3')">
+          <div class="card-top ls3"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 3</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('p_ban4')">
+          <div class="card-top ls4"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 4</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="card" onclick="startListening('ban3')">
-        <div class="card-top ls3"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 3</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+
+      <div class="section-hdr">✍️ Luyện Word Form</div>
+      <div class="grid">
+        <div class="card" onclick="startWordForm('wf1')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F59E0B,#D97706)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 1</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('ban4')">
-        <div class="card-top ls4"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 4</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startWordForm('wf2')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 2</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('ban5')">
-        <div class="card-top ls"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 5</h3>
-          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startWordForm('wf3')">
+          <div class="card-top" style="background:linear-gradient(90deg,#6366F1,#4F46E5)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 3</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('ban6')">
-        <div class="card-top ls2"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 6</h3>
-          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startWordForm('wf4')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 4</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('ban7')">
-        <div class="card-top ls3"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 7</h3>
-          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
-          </div>
-        </div>
-      </div>
-      <div class="card" onclick="startListening('ban8')">
-        <div class="card-top ls4"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 8</h3>
-          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
-          </div>
-        </div>
-      </div>
-      <div class="card" onclick="startListening('ban9')">
-        <div class="card-top ls"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 9</h3>
-          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
-          </div>
-        </div>
-      </div>
-      <div class="card" onclick="startListening('ban10')">
-        <div class="card-top ls2"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 1 – Bản 10</h3>
-          <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startWordForm('wf5')">
+          <div class="card-top" style="background:linear-gradient(90deg,#14B8A6,#0D9488)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 5</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="section-hdr">🎧 Luyện Listening – Tiếng Anh – Bài 2 (Paul)</div>
-    <div class="grid">
-      <div class="card" onclick="startListening('p_ban1')">
-        <div class="card-top ls"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 2 – Bản 1</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+    <!-- Tab: Công Nghệ -->
+    <div class="tab-pane" id="tab-cong-nghe">
+      <div class="section-hdr">📐 Công Nghệ 11 – Cánh Diều</div>
+      <div class="grid">
+        <div class="card" onclick="startLesson('cnbai15')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F59E0B,#D97706)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚙️</div>
+            <h3>CN – Bài 15</h3>
+            <p>Khái Quát Về Cơ Khí Động Lực</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('p_ban2')">
-        <div class="card-top ls2"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 2 – Bản 2</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai16')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">👷</div>
+            <h3>CN – Bài 16</h3>
+            <p>Nghề Nghiệp Trong Ngành Cơ Khí Động Lực</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('p_ban3')">
-        <div class="card-top ls3"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 2 – Bản 3</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai17')">
+          <div class="card-top" style="background:linear-gradient(90deg,#6366F1,#4F46E5)"></div>
+          <div class="card-body">
+            <div class="card-ico">🔧</div>
+            <h3>CN – Bài 17</h3>
+            <p>Khái Quát Về Động Cơ Đốt Trong</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startListening('p_ban4')">
-        <div class="card-top ls4"></div>
-        <div class="card-body">
-          <div class="card-ico">🎧</div>
-          <h3>Listening Bài 2 – Bản 4</h3>
-          <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai18')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">🔄</div>
+            <h3>CN – Bài 18</h3>
+            <p>Nguyên Lý Làm Việc Của Động Cơ Đốt Trong</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="section-hdr">✍️ Luyện Word Form</div>
-    <div class="grid">
-      <div class="card" onclick="startWordForm('wf1')">
-        <div class="card-top" style="background:linear-gradient(90deg,#F59E0B,#D97706)"></div>
-        <div class="card-body">
-          <div class="card-ico">✍️</div>
-          <h3>Word Form – Bộ 1</h3>
-          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai19')">
+          <div class="card-top" style="background:linear-gradient(90deg,#14B8A6,#0D9488)"></div>
+          <div class="card-body">
+            <div class="card-ico">🏗️</div>
+            <h3>CN – Bài 19</h3>
+            <p>Thân Máy Và Các Cơ Cấu Của Động Cơ Đốt Trong</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startWordForm('wf2')">
-        <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
-        <div class="card-body">
-          <div class="card-ico">✍️</div>
-          <h3>Word Form – Bộ 2</h3>
-          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai20')">
+          <div class="card-top" style="background:linear-gradient(90deg,#0EA5E9,#0284C7)"></div>
+          <div class="card-body">
+            <div class="card-ico">💧</div>
+            <h3>CN – Bài 20</h3>
+            <p>Hệ Thống Bôi Trơn Và Hệ Thống Làm Mát</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startWordForm('wf3')">
-        <div class="card-top" style="background:linear-gradient(90deg,#6366F1,#4F46E5)"></div>
-        <div class="card-body">
-          <div class="card-ico">✍️</div>
-          <h3>Word Form – Bộ 3</h3>
-          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai21')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F97316,#EA580C)"></div>
+          <div class="card-body">
+            <div class="card-ico">⛽</div>
+            <h3>CN – Bài 21</h3>
+            <p>Hệ Thống Nhiên Liệu</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startWordForm('wf4')">
-        <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
-        <div class="card-body">
-          <div class="card-ico">✍️</div>
-          <h3>Word Form – Bộ 4</h3>
-          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai22')">
+          <div class="card-top" style="background:linear-gradient(90deg,#7C3AED,#6D28D9)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚡</div>
+            <h3>CN – Bài 22</h3>
+            <p>Hệ Thống Đánh Lửa Và Hệ Thống Khởi Động</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="card" onclick="startWordForm('wf5')">
-        <div class="card-top" style="background:linear-gradient(90deg,#14B8A6,#0D9488)"></div>
-        <div class="card-body">
-          <div class="card-ico">✍️</div>
-          <h3>Word Form – Bộ 5</h3>
-          <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
-          <div class="card-ft">
-            <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
-            <div class="arr">→</div>
+        <div class="card" onclick="startLesson('cnbai23')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EF4444,#DC2626)"></div>
+          <div class="card-body">
+            <div class="card-ico">🚗</div>
+            <h3>CN – Bài 23</h3>
+            <p>Khái Quát Về Ô Tô</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai24')">
+          <div class="card-top" style="background:linear-gradient(90deg,#64748B,#475569)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚙️</div>
+            <h3>CN – Bài 24</h3>
+            <p>Hệ Thống Truyền Lực</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai25')">
+          <div class="card-top" style="background:linear-gradient(90deg,#BE185D,#9D174D)"></div>
+          <div class="card-body">
+            <div class="card-ico">🛑</div>
+            <h3>CN – Bài 25</h3>
+            <p>Hệ Thống Phanh, Treo Và Lái</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
           </div>
         </div>
       </div>
@@ -678,6 +865,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
         <label class="chk-row"><input type="checkbox" checked value="bai10" class="lchk"> 🏛️ Bài 10 – Lê Thánh Tông (32 câu)</label>
         <label class="chk-row"><input type="checkbox" checked value="bai11" class="lchk"> ⚖️ Bài 11 – Minh Mạng (31 câu)</label>
         <label class="chk-row"><input type="checkbox" checked value="bai12" class="lchk"> 🌊 Bài 12 – Biển Đông (30 câu)</label>
+        <label class="chk-row" style="opacity:.5;pointer-events:none;cursor:default"><span style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--txt3)">── 📐 CÔNG NGHỆ 11 ──</span></label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai15" class="lchk"> ⚙️ CN Bài 15 – Cơ Khí Động Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai16" class="lchk"> 👷 CN Bài 16 – Nghề Nghiệp CN (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai17" class="lchk"> 🔧 CN Bài 17 – Động Cơ Đốt Trong (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai18" class="lchk"> 🔄 CN Bài 18 – Nguyên Lý Làm Việc (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai19" class="lchk"> 🏗️ CN Bài 19 – Thân Máy & Cơ Cấu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai20" class="lchk"> 💧 CN Bài 20 – Bôi Trơn & Làm Mát (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai21" class="lchk"> ⛽ CN Bài 21 – Hệ Thống Nhiên Liệu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai22" class="lchk"> ⚡ CN Bài 22 – Đánh Lửa & Khởi Động (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai23" class="lchk"> 🚗 CN Bài 23 – Khái Quát Về Ô Tô (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai24" class="lchk"> ⚙️ CN Bài 24 – Hệ Thống Truyền Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai25" class="lchk"> 🛑 CN Bài 25 – Phanh, Treo & Lái (10 câu)</label>
       </div>
     </div>
     <button class="btn btn-p btn-full" onclick="startRandom()">🚀 Bắt đầu làm bài</button>
@@ -850,6 +1049,138 @@ bai12:[
 {q:"Nội dung nào phản ánh đúng về tầm quan trọng chiến lược của Biển Đông đối với sự phát triển kinh tế Việt Nam?",o:["Vùng biển rộng lớn với nhiều đảo là không gian trọng yếu để phát triển văn hóa.","Hệ thống đảo, quần đảo trên Biển Đông chỉ thuận lợi để đầu tư và phát triển du lịch.","Việt Nam được đánh giá là quốc gia có lợi thế và tiềm năng to lớn về tài nguyên biển.","Biển đảo là nguồn cung cấp lương thực chủ yếu cho cuộc sống của nhân dân Việt Nam."],a:2,d:'hard'},
 {q:"Đặc điểm chung về vị trí địa lý của quần đảo Hoàng Sa và Trường Sa là",o:["gần với khu vực đất liền Việt Nam nhất","đều thuộc khu vực miền Bắc Việt Nam","nằm ở vị trí trung tâm của Biển Đông","đều thuộc khu vực miền Nam Việt Nam"],a:2,d:'hard'},
 {q:"Cả hai quần đảo Hoàng Sa và Trường Sa đều tạo thuận lợi để Việt Nam phát triển ngành kinh tế nào?",o:["công nghiệp chế tạo","lâm nghiệp","khai thác hải sản","nông nghiệp lúa nước"],a:2,d:'hard'}
+],
+cnbai15:[
+{q:"Ngành cơ khí động lực là ngành kỹ thuật tập trung vào việc gì?",o:["Chế tạo các loại máy công cụ phục vụ sản xuất.","Thiết kế, chế tạo, vận hành và bảo dưỡng các loại máy động lực và máy công tác.","Lắp đặt hệ thống điện dân dụng và công nghiệp.","Nghiên cứu các loại vật liệu mới trong xây dựng."],a:1,d:'easy'},
+{q:"Đâu là thiết bị thuộc nhóm máy động lực?",o:["Máy cày.","Ô tô.","Động cơ đốt trong.","Máy gặt đập liên hợp."],a:2,d:'easy'},
+{q:"Trong hệ thống cơ khí động lực, máy công tác nhận năng lượng từ đâu để thực hiện nhiệm vụ?",o:["Từ môi trường bên ngoài.","Từ hệ thống truyền lực kết nối với máy động lực.","Từ nguồn điện lưới trực tiếp.","Tự tạo ra năng lượng thông qua quá trình đốt cháy."],a:1,d:'easy'},
+{q:"Vai trò chính của cơ khí động lực đối với nền kinh tế quốc dân là gì?",o:["Chỉ phục vụ cho mục đích di chuyển của con người.","Đóng vai trò là trái tim của các hệ thống sản xuất và giao thông vận tải.","Giúp giảm thiểu tối đa lượng điện năng tiêu thụ.","Thay thế hoàn toàn con người trong mọi công đoạn sản xuất."],a:1,d:'easy'},
+{q:"Nhóm máy nào dưới đây được phân loại theo lĩnh vực giao thông vận tải?",o:["Máy kéo, máy xới đất.","Tàu thủy, máy bay, ô tô.","Máy ủi, máy xúc, cần trục.","Máy bơm nước, máy phát điện."],a:1,d:'medium'},
+{q:"Quy trình nào sau đây mô tả đúng chu kỳ hoạt động của cơ khí động lực?",o:["Thiết kế → Chế tạo → Sử dụng → Bảo dưỡng, sửa chữa.","Chế tạo → Thiết kế → Sử dụng → Loại bỏ.","Sử dụng → Bảo dưỡng → Chế tạo → Thiết kế.","Thiết kế → Chế tạo → Bán hàng → Kết thúc."],a:0,d:'medium'},
+{q:"Đối tượng lao động của ngành cơ khí động lực chủ yếu là:",o:["Các loại phần mềm máy tính.","Các loại máy động lực, hệ thống truyền lực và máy công tác.","Các bản vẽ kỹ thuật trên giấy.","Các loại cây trồng và vật nuôi."],a:1,d:'medium'},
+{q:"Nghề nghiệp nào sau đây trực tiếp thuộc lĩnh vực cơ khí động lực?",o:["Kỹ sư xây dựng dân dụng.","Kỹ sư thiết kế ô tô.","Chuyên viên tư vấn tài chính.","Bác sĩ thú y."],a:1,d:'hard'},
+{q:"Sự phát triển của ngành cơ khí động lực hiện nay đang hướng tới mục tiêu nào?",o:["Sử dụng hoàn toàn nhiên liệu hóa thạch.","Tăng kích thước máy móc càng lớn càng tốt.","Tiết kiệm năng lượng, giảm phát thải và thân thiện với môi trường.","Chỉ tập trung vào tốc độ mà không cần quan tâm đến độ an toàn."],a:2,d:'hard'},
+{q:"Tại sao nói cơ khí động lực thúc đẩy sự phát triển của các ngành khoa học khác?",o:["Vì nó cung cấp thiết bị và phương tiện thực nghiệm chính xác, hiện đại.","Vì nó là ngành duy nhất có sử dụng toán học.","Vì nó không cần sự hỗ trợ từ các ngành khác.","Vì nó ra đời sớm nhất trong lịch sử loài người."],a:0,d:'hard'}
+],
+cnbai16:[
+{q:"Ngành nghề nào dưới đây trực tiếp thực hiện quá trình thiết kế, chế tạo và bảo dưỡng các loại động cơ và máy động lực?",o:["Sư phạm kỹ thuật.","Cơ khí động lực.","Công nghệ thực phẩm.","Kỹ thuật xây dựng."],a:1,d:'easy'},
+{q:"Công việc nào thuộc về nhiệm vụ của một kỹ sư cơ khí động lực?",o:["Trực tiếp vận hành máy tiện để gia công chi tiết.","Thiết kế, tổ chức sản xuất và quản lý hệ thống cơ khí động lực.","Chỉ thực hiện bảo trì, thay dầu cho xe ô tô định kỳ.","Bán phụ tùng xe máy và ô tô tại cửa hàng."],a:1,d:'easy'},
+{q:"Đâu là đặc điểm về môi trường làm việc đặc trưng của nghề thợ sửa chữa xe có động cơ?",o:["Làm việc hoàn toàn trong văn phòng máy lạnh.","Thường xuyên tiếp xúc với dầu mỡ, tiếng ồn và khí thải.","Chỉ làm việc vào ban đêm để tránh nắng nóng.","Không yêu cầu sử dụng các thiết bị bảo hộ lao động."],a:1,d:'easy'},
+{q:"Kỹ thuật viên cơ khí động lực thường làm việc ở vị trí nào trong doanh nghiệp?",o:["Lãnh đạo cao cấp điều hành chiến lược kinh doanh.","Trung gian giữa kỹ sư và công nhân, giám sát lắp ráp và sửa chữa.","Nhân viên kế toán quản lý vật tư thiết bị.","Chuyên gia tư vấn pháp luật về an toàn giao thông."],a:1,d:'easy'},
+{q:"Yêu cầu về phẩm chất đối với người lao động trong ngành cơ khí động lực là gì?",o:["Có tính kiên trì, cẩn thận và trách nhiệm cao.","Chỉ cần có sức khỏe tốt, không cần tư duy sáng tạo.","Có khả năng thuyết trình trước đám đông xuất sắc.","Không cần quan tâm đến vấn đề bảo vệ môi trường."],a:0,d:'medium'},
+{q:"Một trong những kỹ năng quan trọng nhất của thợ cơ khí động lực là:",o:["Sử dụng thành thạo các loại nhạc cụ.","Sử dụng thành thạo các dụng cụ cầm tay và thiết bị đo kiểm.","Viết phần mềm quản lý tài chính doanh nghiệp.","Thiết kế thời trang bảo hộ lao động."],a:1,d:'medium'},
+{q:"Đối tượng lao động của ngành cơ khí động lực bao gồm:",o:["Các loại cây trồng và vật nuôi.","Các loại động cơ đốt trong, động cơ điện, các hệ thống truyền động.","Các công trình kiến trúc dân dụng.","Các phần mềm đồ họa máy tính chuyên dụng."],a:1,d:'medium'},
+{q:"Sự phát triển của ngành cơ khí động lực hiện nay đang hướng tới mục tiêu nào?",o:["Chỉ tập trung vào động cơ sử dụng nhiên liệu hóa thạch.","Phát triển động cơ thân thiện với môi trường (xe điện, xe hybrid).","Loại bỏ hoàn toàn các loại máy móc tự động hóa.","Giảm tối đa độ bền của sản phẩm để tăng doanh số bán hàng."],a:1,d:'hard'},
+{q:"Người làm nghề thiết kế trong ngành cơ khí động lực cần sử dụng thành thạo công cụ nào?",o:["Các phần mềm hỗ trợ thiết kế trên máy tính (CAD).","Các thiết bị đo huyết áp và nhịp tim.","Máy may công nghiệp.","Các dụng cụ làm vườn."],a:0,d:'hard'},
+{q:"Tại sao người lao động trong ngành cơ khí động lực cần có ý thức bảo vệ môi trường?",o:["Vì công việc này không gây ra bất kỳ tác động nào đến môi trường.","Để hạn chế tác động tiêu cực từ khí thải và chất thải độc hại (dầu, mỡ).","Chỉ để đối phó với các cơ quan kiểm tra chức năng.","Vì đây là yêu cầu không bắt buộc trong ngành kỹ thuật."],a:1,d:'hard'}
+],
+cnbai17:[
+{q:"Động cơ đốt trong là loại động cơ nhiệt mà quá trình biến đổi nhiệt năng thành công cơ học diễn ra ở đâu?",o:["Bên ngoài xi lanh của động cơ.","Bên trong buồng cháy (xi lanh) của động cơ.","Trong bình chứa nhiên liệu.","Trong hệ thống truyền động."],a:1,d:'easy'},
+{q:"Dựa vào nhiên liệu sử dụng, động cơ đốt trong phổ biến nhất hiện nay bao gồm:",o:["Động cơ chạy bằng sức gió và sức nước.","Động cơ xăng và động cơ diesel.","Động cơ chạy bằng điện và năng lượng mặt trời.","Động cơ hơi nước và động cơ phản lực."],a:1,d:'easy'},
+{q:"Theo số hành trình của piston trong một chu trình làm việc, động cơ đốt trong được phân loại thành:",o:["Động cơ 1 kỳ và 2 kỳ.","Động cơ 2 kỳ và 4 kỳ.","Động cơ 3 kỳ và 4 kỳ.","Động cơ nằm ngang và thẳng đứng."],a:1,d:'easy'},
+{q:"Cấu tạo chung của động cơ đốt trong (loại 4 kỳ) thường gồm có bao nhiêu cơ cấu và hệ thống chính?",o:["2 cơ cấu, 4 hệ thống.","3 cơ cấu, 5 hệ thống.","2 cơ cấu, 5 hệ thống.","3 cơ cấu, 4 hệ thống."],a:2,d:'easy'},
+{q:"Hai cơ cấu chính của động cơ đốt trong là:",o:["Cơ cấu trục khuỷu thanh truyền và Cơ cấu phân phối khí.","Cơ cấu khởi động và Cơ cấu làm mát.","Cơ cấu bôi trơn và Cơ cấu cung cấp nhiên liệu.","Cơ cấu piston và Cơ cấu bánh đà."],a:0,d:'medium'},
+{q:"Hệ thống nào có nhiệm vụ duy trì nhiệt độ làm việc của các chi tiết trong động cơ ở mức ổn định?",o:["Hệ thống bôi trơn.","Hệ thống cung cấp nhiên liệu và không khí.","Hệ thống làm mát.","Hệ thống khởi động."],a:2,d:'medium'},
+{q:"Điểm khác biệt cơ bản về cấu tạo giữa động cơ xăng và động cơ diesel là gì?",o:["Động cơ diesel không có hệ thống bôi trơn.","Động cơ xăng có hệ thống đánh lửa (bugi), động cơ diesel thì không.","Động cơ xăng không có cơ cấu trục khuỷu thanh truyền.","Động cơ diesel sử dụng nến điện để mồi cháy nhiên liệu."],a:1,d:'medium'},
+{q:"Trong động cơ đốt trong, chi tiết nào trực tiếp nhận áp lực của khí cháy để truyền lực cho trục khuỷu?",o:["Xupap.","Thanh truyền.","Piston.","Thân máy."],a:2,d:'hard'},
+{q:"Hệ thống nào dưới đây chỉ có ở động cơ xăng mà thường không có ở động cơ diesel?",o:["Hệ thống khởi động.","Hệ thống làm mát.","Hệ thống đánh lửa.","Hệ thống bôi trơn."],a:2,d:'hard'},
+{q:"Vai trò của hệ thống bôi trơn trong động cơ đốt trong là:",o:["Cung cấp năng lượng cho động cơ hoạt động.","Giảm ma sát, làm mát, tẩy rửa và bảo vệ các bề mặt chi tiết máy.","Đốt cháy hỗn hợp nhiên liệu trong xi lanh.","Đưa khí thải từ trong xi lanh ra môi trường bên ngoài."],a:1,d:'hard'}
+],
+cnbai18:[
+{q:"Trong động cơ đốt trong, một chu trình làm việc bao gồm các quá trình nào sau đây?",o:["Quay trục khuỷu, đẩy piston, đánh lửa.","Hút, nén, đẩy, xả.","Nạp, nén, nổ, thải.","Nạp, nén, đốt cháy, làm mát."],a:2,d:'easy'},
+{q:"Điểm chết dưới (ĐCD) của piston được định nghĩa là gì?",o:["Vị trí piston ở gần tâm trục khuỷu nhất.","Vị trí piston ở xa tâm trục khuỷu nhất.","Vị trí mà piston bắt đầu quá trình nén.","Vị trí mà xupap nạp bắt đầu đóng lại."],a:1,d:'easy'},
+{q:"Trong động cơ 4 kỳ, trục khuỷu quay bao nhiêu vòng để hoàn thành một chu trình làm việc?",o:["0,5 vòng.","1 vòng.","2 vòng.","4 vòng."],a:2,d:'easy'},
+{q:"Trong kỳ nén của động cơ diesel 4 kỳ, bộ phận nào được nén trong xi lanh?",o:["Hỗn hợp xăng và không khí.","Hỗn hợp dầu diesel và không khí.","Chỉ có nhiên liệu diesel.","Chỉ có không khí."],a:3,d:'easy'},
+{q:"Hiện tượng phun sớm trong động cơ đốt trong xảy ra ở thời điểm nào?",o:["Cuối kỳ nạp.","Đầu kỳ nén.","Cuối kỳ nén, trước khi piston lên đến ĐCT.","Đầu kỳ thải."],a:2,d:'medium'},
+{q:"Tại sao gọi là động cơ 2 kỳ?",o:["Vì nó chỉ có 2 xupap nạp và thải.","Vì động cơ chỉ có 2 xi lanh.","Vì nó sử dụng 2 loại nhiên liệu cùng lúc.","Vì một chu trình làm việc được thực hiện trong 2 hành trình của piston."],a:3,d:'medium'},
+{q:"Trong kỳ nổ (sinh công), trạng thái của các xupap nạp và xupap thải như thế nào?",o:["Cả hai xupap đều mở.","Cả hai xupap đều đóng.","Xupap nạp mở, xupap thải đóng.","Xupap nạp đóng, xupap thải mở."],a:1,d:'medium'},
+{q:"Thể tích toàn phần của xi lanh (Va) được tính bằng công thức nào?",o:["Va = Vh / Vbc","Va = Vh","Va = Vbc + Vh","Va = Vbc - Vh"],a:2,d:'hard'},
+{q:"Đặc điểm nào sau đây là của động cơ 2 kỳ so với động cơ 4 kỳ?",o:["Có cấu tạo phức tạp hơn.","Tiết kiệm nhiên liệu hơn.","Thực hiện nạp và thải khí thông qua các cửa khí ở thành xi lanh.","Trục khuỷu quay 2 vòng mới sinh công 1 lần."],a:2,d:'hard'},
+{q:"Trong chu trình làm việc của động cơ xăng 4 kỳ, hệ thống đánh lửa phát ra tia lửa điện vào thời điểm nào?",o:["Cuối kỳ nạp.","Đầu kỳ nén.","Cuối kỳ nén.","Giữa kỳ nổ."],a:2,d:'hard'}
+],
+cnbai19:[
+{q:"Thân máy và nắp máy của động cơ đốt trong có vai trò chính là gì?",o:["Biến nhiệt năng thành cơ năng.","Là nơi lắp đặt và làm giá đỡ cho các cơ cấu, hệ thống của động cơ.","Điều khiển quá trình nạp và thải khí.","Truyền lực từ piston đến trục khuỷu."],a:1,d:'easy'},
+{q:"Chi tiết nào dưới đây cùng với đỉnh piston và nắp máy tạo thành buồng cháy của động cơ?",o:["Trục khuỷu.","Thanh truyền.","Thân xi lanh.","Bánh đà."],a:2,d:'easy'},
+{q:"Cơ cấu trục khuỷu thanh truyền có nhiệm vụ gì trong quá trình động cơ làm việc?",o:["Biến chuyển động quay của trục khuỷu thành chuyển động tịnh tiến của piston.","Biến chuyển động tịnh tiến của piston thành chuyển động quay của trục khuỷu để đưa ra máy công tác.","Chỉ có nhiệm vụ truyền lực từ piston xuống.","Cả A và B đều đúng."],a:3,d:'easy'},
+{q:"Thanh truyền là chi tiết dùng để nối bộ phận nào với nhau?",o:["Piston và trục cam.","Piston và trục khuỷu.","Trục khuỷu và bánh đà.","Thân máy và nắp máy."],a:1,d:'easy'},
+{q:"Cấu tạo của piston gồm có các phần chính nào?",o:["Đỉnh, thân, đuôi.","Đầu, thân, chốt piston.","Đỉnh, đầu, thân.","Đầu, chân, thân."],a:2,d:'medium'},
+{q:"Trên đầu piston có xéc măng (vòng găng) với mục đích chủ yếu là:",o:["Làm tăng trọng lượng piston để chạy khỏe hơn.","Làm kín buồng cháy và ngăn dầu bôi trơn lọt vào buồng cháy.","Giúp piston chuyển động êm hơn.","Giảm ma sát trực tiếp giữa thân máy và nắp máy."],a:1,d:'medium'},
+{q:"Cơ cấu phân phối khí có nhiệm vụ gì?",o:["Đóng, mở các cửa nạp và cửa thải đúng lúc.","Phun nhiên liệu vào buồng cháy.","Đánh lửa để đốt cháy hòa khí.","Làm mát các chi tiết trong thân máy."],a:0,d:'medium'},
+{q:"Trong cơ cấu phân phối khí dùng xupap, bộ phận nào trực tiếp dẫn động xupap mở ra?",o:["Piston.","Trục khuỷu.","Cam (trên trục cam).","Thanh truyền."],a:2,d:'hard'},
+{q:"Điểm khác biệt chính về cấu tạo thân máy của động cơ làm mát bằng nước so với làm mát bằng không khí là:",o:["Có cánh tản nhiệt.","Có các đường nước (áo nước) bên trong.","Thân máy dày hơn.","Không có sự khác biệt."],a:1,d:'hard'},
+{q:"Bộ phận nào gắn trên trục khuỷu giúp động cơ vượt qua các điểm chết và làm việc ổn định hơn?",o:["Xéc măng.","Bánh đà.","Chốt piston.","Trục cam."],a:1,d:'hard'}
+],
+cnbai20:[
+{q:"Mục đích chính của hệ thống bôi trơn trong động cơ đốt trong là gì?",o:["Cung cấp nhiên liệu cho buồng cháy.","Đưa dầu đến các bề mặt ma sát để giảm mài mòn và làm mát, tẩy rửa chi tiết.","Tăng áp suất trong xi lanh để động cơ khỏe hơn.","Giúp động cơ khởi động nhanh hơn vào mùa đông."],a:1,d:'easy'},
+{q:"Trong hệ thống bôi trơn cưỡng bức, bộ phận nào có nhiệm vụ hút dầu từ các-te và đẩy đến các bề mặt ma sát?",o:["Lọc dầu.","Két làm mát dầu.","Bơm dầu.","Van khống chế lưu lượng."],a:2,d:'easy'},
+{q:"Tại sao dầu bôi trơn sau một thời gian sử dụng cần phải thay mới?",o:["Vì dầu bị biến chất, nhiễm bẩn và giảm khả năng bôi trơn.","Vì dầu bị bay hơi hết.","Vì dầu chuyển sang màu đen thì động cơ sẽ không nổ được.","Vì áp suất dầu sẽ tăng quá cao gây hỏng bơm."],a:0,d:'easy'},
+{q:"Khi nhiệt độ của dầu bôi trơn vượt quá giới hạn cho phép, dầu sẽ đi qua bộ phận nào để hạ nhiệt?",o:["Bộ lọc dầu.","Két làm mát dầu.","Các-te.","Đường dầu chính."],a:1,d:'easy'},
+{q:"Hệ thống làm mát bằng nước tuần hoàn cưỡng bức bao gồm các bộ phận chính nào?",o:["Cánh tản nhiệt, quạt gió.","Bơm nước, két nước, quạt gió, van hằng nhiệt.","Áo nước, cửa nạp, cửa thải.","Bơm dầu, lọc dầu, két làm mát."],a:1,d:'medium'},
+{q:"Van hằng nhiệt trong hệ thống làm mát bằng nước có vai trò gì?",o:["Giữ cho nhiệt độ của nước luôn ở mức 0°C.","Tự động đóng/mở để điều tiết lộ trình của nước tùy theo nhiệt độ của động cơ.","Tăng áp suất nước để nước chảy nhanh hơn.","Lọc sạch cặn bẩn trong nước làm mát."],a:1,d:'medium'},
+{q:"Khi động cơ mới khởi động (nhiệt độ nước còn thấp), van hằng nhiệt sẽ cho nước làm mát đi đâu?",o:["Đi vào két nước để làm mát ngay.","Đi thẳng về bơm nước rồi quay lại áo nước (không qua két nước).","Chảy ra ngoài động cơ.","Ngừng lưu thông để động cơ nhanh nóng lên."],a:1,d:'medium'},
+{q:"Đặc điểm nhận dạng dễ thấy nhất của động cơ làm mát bằng không khí là:",o:["Có các đường ống dẫn nước chằng chịt.","Có các cánh tản nhiệt đúc trực tiếp trên thân máy và nắp máy.","Có bình chứa nước phụ.","Động cơ luôn có kích thước rất lớn."],a:1,d:'hard'},
+{q:"Trong hệ thống làm mát bằng nước, quạt gió có tác dụng gì?",o:["Thổi gió trực tiếp vào xi lanh.","Tăng tốc độ lưu thông của không khí qua két nước để nâng cao hiệu quả làm mát.","Hút hơi nóng từ buồng cháy ra ngoài.","Quay trục khuỷu khi khởi động."],a:1,d:'hard'},
+{q:"Nếu hệ thống làm mát bị hỏng (động cơ quá nóng) mà vẫn tiếp tục vận hành thì điều gì sẽ xảy ra?",o:["Động cơ chạy càng khỏe vì nhiệt độ cao.","Tiết kiệm nhiên liệu hơn.","Các chi tiết bị giãn nở quá mức gây kẹt (bó máy), hỏng piston và xi lanh.","Không ảnh hưởng gì đến tuổi thọ động cơ."],a:2,d:'hard'}
+],
+cnbai21:[
+{q:"Nhiệm vụ chính của hệ thống nhiên liệu trong động cơ đốt trong là gì?",o:["Đốt cháy nhiên liệu để sinh công.","Cung cấp nhiên liệu và không khí sạch vào buồng cháy đúng thời điểm, đúng lượng.","Làm mát các chi tiết trong buồng cháy.","Thải khí sạch ra ngoài môi trường."],a:1,d:'easy'},
+{q:"Trong hệ thống nhiên liệu dùng bộ chế hòa khí (xe máy đời cũ), việc hòa trộn xăng và không khí diễn ra ở đâu?",o:["Bên trong xi lanh.","Trong bộ chế hòa khí.","Trong vòi phun.","Trong bình xăng."],a:1,d:'easy'},
+{q:"Ưu điểm nổi bật của hệ thống phun xăng điện tử (EFI) so với hệ thống dùng bộ chế hòa khí là:",o:["Cấu tạo đơn giản, dễ sửa chữa.","Tiết kiệm nhiên liệu và giảm ô nhiễm môi trường nhờ kiểm soát chính xác lượng xăng.","Không cần sử dụng điện.","Chỉ dùng được cho động cơ 2 kỳ."],a:1,d:'easy'},
+{q:"Bộ phận nào trong hệ thống phun xăng điện tử có nhiệm vụ quyết định lượng nhiên liệu phun dựa trên các tín hiệu cảm biến?",o:["Bơm xăng.","Vòi phun.","Bộ điều khiển điện tử (ECU).","Bầu lọc gió."],a:2,d:'easy'},
+{q:"Ở động cơ Diesel, nhiên liệu được đưa vào buồng cháy dưới dạng nào?",o:["Dạng lỏng chảy thành dòng.","Dạng hơi (đã bay hóa).","Dạng sương mù với áp suất cao.","Dạng hỗn hợp hòa khí đã trộn sẵn ngoài xi lanh."],a:2,d:'medium'},
+{q:"Thiết bị nào là linh hồn của hệ thống nhiên liệu Diesel truyền thống, có nhiệm vụ tạo áp suất cao và điều tiết lượng nhiên liệu?",o:["Bơm cao áp.","Vòi phun.","Bơm chuyển nhiên liệu.","Bầu lọc tinh."],a:0,d:'medium'},
+{q:"Tại sao trong hệ thống nhiên liệu Diesel lại cần có cả bầu lọc thô và bầu lọc tinh?",o:["Vì nhiên liệu Diesel rất rẻ tiền.","Để đảm bảo nhiên liệu cực kỳ sạch, tránh làm tắc nghẽn và mài mòn các chi tiết siêu chính xác như kim phun.","Để tăng áp suất nhiên liệu.","Để tách nước ra khỏi không khí."],a:1,d:'medium'},
+{q:"Hệ thống nhiên liệu Common Rail (đường dẫn chung) hiện đại ở động cơ Diesel có đặc điểm gì khác biệt?",o:["Không dùng vòi phun.","Nhiên liệu luôn được duy trì ở áp suất rất cao trong đường ống chung trước khi vào vòi phun.","Nhiên liệu được trộn với nước để làm mát.","Sử dụng bộ chế hòa khí giống động cơ xăng."],a:1,d:'hard'},
+{q:"Thứ tự di chuyển của nhiên liệu trong hệ thống Diesel là:",o:["Thùng xăng → Bộ chế hòa khí → Xi lanh.","Thùng dầu → Bầu lọc → Bơm cao áp → Vòi phun → Xi lanh.","Vòi phun → Bơm cao áp → Thùng dầu → Xi lanh.","Thùng dầu → Vòi phun → Bơm cao áp → Xi lanh."],a:1,d:'hard'},
+{q:"Khi động cơ xăng dùng hệ thống phun xăng trực tiếp (GDI), vòi phun sẽ đặt ở đâu?",o:["Trên đường ống nạp.","Trước bầu lọc gió.","Trực tiếp bên trong buồng cháy (xi lanh).","Gắn trên nắp bình xăng."],a:2,d:'hard'}
+],
+cnbai22:[
+{q:"Nhiệm vụ chính của hệ thống đánh lửa trên động cơ xăng là gì?",o:["Cung cấp hỗn hợp xăng và không khí vào xi lanh.","Tạo ra tia lửa điện cao áp để đốt cháy hòa khí đúng thời điểm.","Biến nhiệt năng thành cơ năng để làm quay trục khuỷu.","Làm mát các chi tiết của động cơ khi hoạt động."],a:1,d:'easy'},
+{q:"Trong hệ thống đánh lửa điện tử không tiếp điểm, bộ phận nào dùng để tích lũy năng lượng điện trước khi phóng qua bugi?",o:["Cuộn sơ cấp của biến áp đánh lửa.","Tụ điện hoặc cuộn dây (tùy loại hệ thống).","Ma-nhê-tô.","Điốt chặn."],a:1,d:'easy'},
+{q:"Bugi có vai trò gì trong hệ thống đánh lửa?",o:["Tăng điện áp từ thấp lên cao.","Ngắt mạch điện sơ cấp.","Phát sinh tia lửa điện để đốt cháy hòa khí trong xi lanh.","Lưu trữ điện năng từ bình ắc quy."],a:2,d:'easy'},
+{q:"Thời điểm đánh lửa sớm được hiểu là:",o:["Đánh lửa sau khi piston xuống điểm chết dưới.","Đánh lửa đúng lúc piston ở điểm chết trên.","Đánh lửa trước khi piston đến điểm chết trên ở cuối kỳ nén.","Đánh lửa khi piston bắt đầu quá trình nạp."],a:2,d:'easy'},
+{q:"Hệ thống khởi động có nhiệm vụ gì?",o:["Giúp động cơ đạt được tốc độ quay tối đa ngay lập tức.","Làm quay trục khuỷu động cơ đến tốc độ nhất định để động cơ tự nổ được.","Cung cấp điện năng cho các đèn tín hiệu trên xe.","Thay thế động cơ đốt trong khi xe bị hỏng."],a:1,d:'medium'},
+{q:"Bộ phận nào của hệ thống khởi động bằng động cơ điện có vai trò truyền momen quay từ mô tơ điện đến vành răng bánh đà?",o:["Khớp truyền động (khớp một chiều).","Tiếp điểm rơ le.","Cuộn dây cảm ứng.","Chổi than."],a:0,d:'medium'},
+{q:"Tại sao trong hệ thống khởi động bằng điện, người ta phải sử dụng khớp truyền động một chiều?",o:["Để tăng tốc độ quay cho động cơ điện.","Để bảo vệ mô tơ điện không bị động cơ kéo quay ngược lại khi động cơ đã nổ.","Để giúp bánh răng ăn khớp dễ dàng hơn.","Để tiết kiệm điện năng từ ắc quy."],a:1,d:'medium'},
+{q:"Động cơ Diesel thường khởi động bằng phương pháp nào phổ biến nhất trên các dòng xe tải lớn?",o:["Khởi động bằng tay (tay quay).","Khởi động bằng động cơ điện hoặc bằng khí nén.","Khởi động bằng động cơ xăng phụ.","Khởi động bằng bàn đạp (cần khởi động)."],a:1,d:'hard'},
+{q:"Trong sơ đồ khối hệ thống đánh lửa điện tử, bộ phận biến áp đánh lửa có chức năng:",o:["Chuyển dòng điện xoay chiều thành dòng điện một chiều.","Tăng điện áp thấp của nguồn điện thành điện áp cao (hàng chục nghìn vôn).","Điều khiển thời điểm đánh lửa theo tốc độ động cơ.","Ngắt dòng điện khi động cơ quá nóng."],a:1,d:'hard'},
+{q:"Khi người lái vặn chìa khóa sang nấc Start, bộ phận nào trong hệ thống khởi động sẽ đẩy bánh răng vào ăn khớp với vành răng bánh đà?",o:["Lò xo hồi vị.","Rơ le khởi động (Nam châm điện).","Trục khuỷu.","Bộ giảm tốc."],a:1,d:'hard'}
+],
+cnbai23:[
+{q:"Về mặt cấu tạo, một chiếc ô tô cơ bản thường được chia thành mấy phần chính?",o:["2 phần: Động cơ và Thân xe.","3 phần: Động cơ, Khung gầm và Điện ô tô.","4 phần: Động cơ, Gầm, Thân xe và Hệ thống điện.","5 phần: Động cơ, Hệ thống truyền lực, Bánh xe, Thân xe và Hệ thống lái."],a:2,d:'easy'},
+{q:"Bộ phận nào được coi là nguồn động lực của ô tô?",o:["Hệ thống truyền lực.","Động cơ đốt trong (hoặc động cơ điện).","Bánh xe chủ động.","Hệ thống khởi động."],a:1,d:'easy'},
+{q:"Phần gầm của ô tô bao gồm các hệ thống nào sau đây?",o:["Hệ thống truyền lực, hệ thống chuyển động, hệ thống lái và hệ thống phanh.","Động cơ, hệ thống đánh lửa và hệ thống khởi động.","Vỏ xe, ghế ngồi và các tiện nghi nội thất.","Hệ thống chiếu sáng và hệ thống điều hòa không khí."],a:0,d:'easy'},
+{q:"Dựa theo mục đích sử dụng, ô tô được phân loại thành:",o:["Ô tô dùng động cơ xăng và ô tô dùng động cơ diesel.","Ô tô con, ô tô khách, ô tô tải và ô tô chuyên dùng.","Ô tô 1 cầu và ô tô 2 cầu.","Ô tô số sàn và ô tô số tự động."],a:1,d:'easy'},
+{q:"Khoảng sáng gầm xe được định nghĩa là:",o:["Khoảng cách từ điểm cao nhất của xe đến mặt đất.","Khoảng cách từ trục bánh xe trước đến trục bánh xe sau.","Khoảng cách từ điểm thấp nhất của gầm xe đến mặt đường.","Chiều rộng lớn nhất của thân xe."],a:2,d:'medium'},
+{q:"Hệ thống nào có nhiệm vụ thay đổi hướng chuyển động hoặc giữ cho ô tô chuyển động ổn định theo hướng nhất định?",o:["Hệ thống truyền lực.","Hệ thống treo.","Hệ thống lái.","Hệ thống phanh."],a:2,d:'medium'},
+{q:"Thông số chiều dài cơ sở của ô tô là khoảng cách giữa:",o:["Hai mép ngoài cùng của bánh xe.","Tâm các bánh xe trên cùng một trục.","Tâm trục bánh xe trước đến tâm trục bánh xe sau.","Đầu xe và đuôi xe."],a:2,d:'medium'},
+{q:"Hệ thống phanh trên ô tô có chức năng chính là gì?",o:["Giúp xe tăng tốc nhanh hơn.","Giảm tốc độ, dừng hẳn ô tô hoặc giữ cho ô tô đứng yên trên dốc.","Truyền momen quay từ động cơ đến các bánh xe.","Giảm rung động từ mặt đường lên thân xe."],a:1,d:'hard'},
+{q:"Thân xe (vỏ xe) của ô tô con có vai trò gì?",o:["Là nơi lắp đặt các hệ thống của động cơ.","Tạo không gian chở người, hàng hóa và bảo vệ người dùng khỏi tác động môi trường.","Chứa toàn bộ hệ thống truyền lực và hệ thống phanh.","Chỉ dùng để tăng tính thẩm mỹ cho xe."],a:1,d:'hard'},
+{q:"Ô tô chuyên dùng là loại xe nào dưới đây?",o:["Xe buýt chở học sinh.","Xe sedan 5 chỗ.","Xe cứu hỏa, xe cần cẩu, xe chở rác.","Xe tải chở nông sản."],a:2,d:'hard'}
+],
+cnbai24:[
+{q:"Hệ thống truyền lực trên ô tô có nhiệm vụ chính là gì?",o:["Tạo ra năng lượng để xe hoạt động.","Truyền và biến đổi momen quay, tốc độ từ động cơ đến bánh xe chủ động.","Điều khiển hướng chuyển động của xe.","Giảm rung động từ mặt đường truyền lên thân xe."],a:1,d:'easy'},
+{q:"Các bộ phận chính của hệ thống truyền lực trên ô tô (loại cơ khí) sắp xếp theo đúng thứ tự là:",o:["Động cơ → Hộp số → Ly hợp → Cầu chủ động.","Động cơ → Ly hợp → Hộp số → Truyền lực các đăng → Cầu chủ động.","Động cơ → Cầu chủ động → Hộp số → Ly hợp.","Động cơ → Truyền lực các đăng → Ly hợp → Hộp số."],a:1,d:'easy'},
+{q:"Bộ phận nào dùng để ngắt hoặc nối truyền động từ động cơ đến hộp số một cách êm dịu?",o:["Hộp số.","Truyền lực các đăng.","Ly hợp.","Vi sai."],a:2,d:'easy'},
+{q:"Hộp số trên ô tô có những nhiệm vụ nào?",o:["Thay đổi momen quay và tốc độ của xe.","Giúp xe có khả năng chuyển động lùi.","Cho phép động cơ chạy không tải (ngắt truyền lực trong thời gian dài).","Cả 3 phương án trên đều đúng."],a:3,d:'easy'},
+{q:"Truyền lực các đăng được sử dụng để truyền momen giữa các trục có đặc điểm:",o:["Luôn luôn song song với nhau.","Luôn luôn thẳng hàng với nhau.","Có tâm thay đổi hoặc không cùng nằm trên một đường thẳng.","Cố định khoảng cách tuyệt đối."],a:2,d:'medium'},
+{q:"Bộ phận nào cho phép hai bánh xe chủ động quay với tốc độ khác nhau khi xe đi vào đường vòng (cua)?",o:["Ly hợp.","Hộp số.","Bộ vi sai.","Trục các đăng."],a:2,d:'medium'},
+{q:"Trong hệ thống truyền lực, cầu chủ động bao gồm các bộ phận cơ bản nào?",o:["Ly hợp và hộp số.","Truyền lực chính và bộ vi sai.","Trục các đăng và bánh xe.","Động cơ và hộp số."],a:1,d:'medium'},
+{q:"Kí hiệu 4WD hoặc 4x4 trên ô tô có nghĩa là gì?",o:["Xe có 4 bánh nhưng chỉ có 1 bánh chủ động.","Xe dẫn động 4 bánh (tất cả các bánh đều là bánh chủ động).","Xe có hộp số 4 cấp.","Xe chỉ chạy được tối đa 40 km/h."],a:1,d:'hard'},
+{q:"Ưu điểm của xe dẫn động cầu trước (FF) so với dẫn động cầu sau là:",o:["Cấu tạo phức tạp hơn.","Giúp không gian nội thất rộng rãi hơn do không có trục các đăng chạy dọc thân xe.","Khả năng leo dốc tốt hơn khi chở nặng.","Xe dễ bị mất lái khi vào cua."],a:1,d:'hard'},
+{q:"Khi tài xế đạp bàn đạp ly hợp (côn), trạng thái của hệ thống truyền lực lúc đó là:",o:["Đang nối truyền động.","Đang ngắt truyền động từ động cơ sang hộp số.","Đang chuyển sang số lùi.","Đang hãm cứng bánh xe lại."],a:1,d:'hard'}
+],
+cnbai25:[
+{q:"Hệ thống lái trên ô tô có nhiệm vụ chính là gì?",o:["Giảm tốc độ của xe khi gặp chướng ngại vật.","Thay đổi hướng chuyển động hoặc giữ cho ô tô chuyển động ổn định theo hướng nhất định.","Truyền momen từ hộp số đến các bánh xe.","Đảm bảo độ êm dịu cho người ngồi trên xe."],a:1,d:'easy'},
+{q:"Trong hệ thống lái, bộ phận nào truyền lực quay từ vô lăng xuống cơ cấu lái?",o:["Trục lái.","Thanh kéo.","Đòn quay đứng.","Hình thang lái."],a:0,d:'easy'},
+{q:"Hệ thống phanh có chức năng nào sau đây?",o:["Giảm tốc độ của xe.","Dừng hẳn ô tô.","Giữ cho ô tô đứng yên trên dốc (phanh đỗ).","Tất cả các phương án trên."],a:3,d:'easy'},
+{q:"Phanh đĩa khác với phanh tang trống ở điểm cơ bản nào?",o:["Phanh đĩa không dùng dầu phanh.","Phanh đĩa sử dụng má phanh ép vào hai mặt của đĩa phanh thay vì ép vào mặt trong tang trống.","Phanh đĩa chỉ dùng cho xe tải nặng.","Phanh đĩa không có khả năng tự thoát nhiệt."],a:1,d:'easy'},
+{q:"Hệ thống treo có nhiệm vụ gì trong cấu tạo ô tô?",o:["Nối cứng bánh xe với khung xe để xe chạy nhanh hơn.","Nối đàn hồi khung (hoặc thân xe) với các cầu (hoặc bánh xe) để giảm rung động và va đập.","Truyền lực phanh đến các bánh xe.","Điều khiển các bánh xe dẫn hướng."],a:1,d:'medium'},
+{q:"Bộ phận nào trong hệ thống treo có tác dụng dập tắt nhanh các dao động của khung và vỏ xe?",o:["Bộ phận đàn hồi (như lò xo, lá nhíp).","Bộ phận dẫn hướng.","Bộ phận giảm chấn (ống nhún).","Thanh ổn định."],a:2,d:'medium'},
+{q:"Hệ thống chống bó cứng phanh (ABS) có vai trò gì?",o:["Làm xe dừng lại tức thì ngay khi đạp phanh.","Ngăn không cho bánh xe bị trượt lết (bị khóa cứng) khi phanh gấp, giúp duy trì khả năng lái.","Tăng lực phanh lên gấp đôi bình thường.","Giúp xe tăng tốc nhanh hơn sau khi phanh."],a:1,d:'medium'},
+{q:"Cơ cấu lái thường được sử dụng phổ biến trên ô tô con hiện nay là:",o:["Cơ cấu lái trục vít - cung răng.","Cơ cấu lái bánh răng - thanh răng.","Cơ cấu lái trục vít - chốt quay.","Cơ cấu lái kiểu cam - đòn."],a:1,d:'hard'},
+{q:"Thành phần nào dưới đây thuộc bộ phận đàn hồi của hệ thống treo?",o:["Kích thủy lực.","Nhíp lá hoặc lò xo.","Thước lái.","Bầu phanh."],a:1,d:'hard'},
+{q:"Hình thang lái có vai trò gì trong hệ thống lái?",o:["Đảm bảo các bánh xe dẫn hướng quay với các góc quay khác nhau để xe không bị trượt khi vào cua.","Giúp vô lăng quay nhẹ nhàng hơn.","Hạn chế độ rơ của trục lái.","Kết nối trực tiếp động cơ với bánh xe."],a:0,d:'hard'}
 ]};
 
 // STATE
@@ -863,6 +1194,13 @@ function showScr(id){
 }
 function goHome(){showScr('home')}
 function showSetup(){showScr('setup')}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.subj-tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+}
 
 // THEME
 function toggleTheme(){
