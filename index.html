@@ -301,6 +301,41 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
   .stab-count{display:none}
   .subj-tab{padding:12px 6px}
 }
+/* TRUE/FALSE QUIZ */
+.ds-stmts{display:flex;flex-direction:column;gap:9px;margin-top:14px}
+.ds-row{display:flex;align-items:flex-start;gap:10px;padding:11px 13px;border-radius:12px;
+  border:1.5px solid var(--bdr);background:var(--sur2);transition:border-color .2s,background .2s}
+.ds-lbl{font-size:13px;font-weight:700;color:var(--pri);min-width:18px;margin-top:2px;flex-shrink:0}
+.ds-txt{flex:1;font-size:14px;line-height:1.55;color:var(--txt)}
+.ds-btns{display:flex;gap:6px;flex-shrink:0;margin-top:1px}
+.ds-btn{border:1.5px solid var(--bdr);border-radius:8px;background:var(--sur);color:var(--txt2);
+  font-size:12px;font-weight:600;font-family:inherit;padding:5px 11px;cursor:pointer;
+  transition:all .15s;white-space:nowrap}
+.ds-btn:hover:not(.done){border-color:var(--pri);color:var(--pri)}
+.ds-btn.sel-t{border-color:#22c55e;background:#dcfce7;color:#16a34a}
+.ds-btn.sel-f{border-color:#f97316;background:#ffedd5;color:#ea580c}
+.ds-btn.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok);font-weight:700}
+.ds-btn.err{border-color:var(--err);background:var(--err-bg);color:var(--err);font-weight:700}
+.ds-btn.done{cursor:default}
+.ds-row.revealed.correct-row{border-color:var(--ok-b);background:var(--ok-bg)}
+.ds-row.revealed.wrong-row{border-color:var(--err-b);background:var(--err-bg)}
+[data-theme=dark] .ds-btn.sel-t{background:#14532d;border-color:#22c55e;color:#86efac}
+[data-theme=dark] .ds-btn.sel-f{background:#7c2d12;border-color:#f97316;color:#fdba74}
+@media(max-width:480px){
+  .ds-row{flex-wrap:wrap}
+  .ds-btns{width:100%;justify-content:flex-end;margin-top:6px}
+}
+/* TỰ LUẬN */
+.tl-input-area{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.tl-part{display:flex;align-items:center;gap:10px}
+.tl-part-lbl{font-size:14px;font-weight:700;color:var(--txt2);min-width:22px;flex-shrink:0}
+.tl-inp{flex:1;max-width:280px;padding:10px 14px;border:1.5px solid var(--bdr);border-radius:10px;font-size:17px;font-weight:600;font-family:inherit;background:var(--sur2);color:var(--txt);transition:border-color .2s,background .2s,color .2s;outline:none}
+.tl-inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri-g)}
+.tl-inp.tl-ok{border-color:var(--ok)!important;background:var(--ok-bg)!important;color:var(--ok)!important}
+.tl-inp.tl-err{border-color:var(--err)!important;background:var(--err-bg)!important;color:var(--err)!important}
+.tl-ans-area{background:var(--ok-bg);border:1.5px solid var(--ok-b);border-radius:12px;padding:14px 18px;margin-top:16px;animation:scrIn .3s ease}
+.tl-ans-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--ok);margin-bottom:8px}
+.tl-ans-val{font-size:16px;font-weight:700;color:var(--ok);line-height:1.8}
 /* RESPONSIVE */
 @media(max-width:600px){
   .app{padding:14px}
@@ -878,6 +913,74 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
           </div>
         </div>
       </div>
+
+      <div class="section-hdr">✍️ Phần II – Đúng Sai</div>
+      <div class="grid">
+        <div class="card card-rand" onclick="dsStart('all')">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tất cả đúng/sai</h3>
+            <p>Làm toàn bộ 12 câu đúng/sai Vật Lí.</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">12 câu</span><span class="chip">48 ý</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="dsStart('dongdien')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F97316,#F59E0B)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚡</div>
+            <h3>Chủ đề 1 – Đúng/Sai</h3>
+            <p>Dòng điện, cường độ và điện lượng.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">Câu 1–3</span><span class="chip">3 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="dsStart('dientro')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">🔌</div>
+            <h3>Chủ đề 2 – Đúng/Sai</h3>
+            <p>Điện trở, mạch điện và định luật Ohm.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">Câu 4–6</span><span class="chip">3 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="dsStart('nguon')">
+          <div class="card-top" style="background:linear-gradient(90deg,#8B5CF6,#7C3AED)"></div>
+          <div class="card-body">
+            <div class="card-ico">🔋</div>
+            <h3>Chủ đề 3 – Đúng/Sai</h3>
+            <p>Nguồn điện, acquy và suất điện động.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">Câu 7–10</span><span class="chip">4 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="dsStart('nangluong')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">💡</div>
+            <h3>Chủ đề 4 – Đúng/Sai</h3>
+            <p>Năng lượng điện và công suất tiêu thụ.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">Câu 11–12</span><span class="chip">2 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-hdr">📝 Phần III – Tự Luận</div>
+      <div class="grid">
+        <div class="card card-rand" onclick="tlStart()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">📝</div>
+            <h3>Phần III – Tự Luận</h3>
+            <p>11 câu tự luận ngắn vật lí, tự kiểm tra đáp án sau khi làm.</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">11 câu</span><span class="chip">Tự kiểm tra</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -995,6 +1098,62 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
       </div>
     </div>
     <button class="btn btn-p btn-full" onclick="startRandomCN()">🚀 Bắt đầu làm bài</button>
+  </div>
+
+  <!-- DS VẬT LÍ QUIZ -->
+  <div class="scr" id="scr-ds-vl">
+    <div class="qhdr">
+      <div class="qtop">
+        <span class="qctr" id="ds-ctr">Câu 1 / 12</span>
+        <span class="qscore" id="ds-score">✓ 0/0</span>
+      </div>
+      <div class="pbar"><div class="pfill" id="ds-pfill" style="width:0%"></div></div>
+    </div>
+    <div class="qcard">
+      <div class="qbadge" id="ds-badge">Câu 1</div>
+      <p class="qtxt" id="ds-qtxt"></p>
+      <div id="ds-imgbox"></div>
+      <div class="ds-stmts" id="ds-stmts"></div>
+      <div id="ds-fbarea"></div>
+    </div>
+    <div class="qft">
+      <div></div>
+      <button class="btn btn-p" id="ds-nxtbtn" onclick="dsNext()" disabled>Câu tiếp →</button>
+    </div>
+    <div class="quit-area">
+      <button class="quit-btn" onclick="confirmQuit()">✕ Thoát bài thi</button>
+    </div>
+  </div>
+
+  <!-- PHẦN III – TỰ LUẬN VẬT LÍ -->
+  <div class="scr" id="scr-tl-vl">
+    <div class="qhdr">
+      <div class="qtop">
+        <span class="qctr" id="tl-ctr">Câu 1 / 11</span>
+        <span class="qscore" id="tl-score">✓ 0/0</span>
+      </div>
+      <div class="pbar"><div class="pfill" id="tl-pfill" style="width:0%"></div></div>
+    </div>
+    <div class="qcard">
+      <div class="qbadge" id="tl-badge">Câu 1</div>
+      <p class="qtxt" id="tl-qtxt"></p>
+      <div id="tl-imgbox"></div>
+      <div class="tl-input-area" id="tl-input-area"></div>
+      <div class="tl-ans-area" id="tl-ans-area" style="display:none">
+        <div class="tl-ans-label">Đáp án</div>
+        <div class="tl-ans-val" id="tl-ans-val"></div>
+      </div>
+    </div>
+    <div class="qft">
+      <div></div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-s" id="tl-check-btn" onclick="tlCheck()">✓ Kiểm tra</button>
+        <button class="btn btn-p" id="tl-nxt-btn" onclick="tlNext()" disabled>Câu tiếp →</button>
+      </div>
+    </div>
+    <div class="quit-area">
+      <button class="quit-btn" onclick="confirmQuit()">✕ Thoát</button>
+    </div>
   </div>
 
   <!-- SETUP VẬT LÍ -->
@@ -1542,8 +1701,225 @@ function toggleRev(){
   rl.style.display=h?'flex':'none';
   document.getElementById('ricon').textContent=h?'▲':'▼';
 }
-function retryQuiz(){if(mode==='lesson')startLesson(lesson);else{qs=shuffle(qs);begin()}}
-function confirmQuit(){if(idx>0||done){if(confirm('Thoát bài thi? Tiến độ sẽ không được lưu.'))goHome()}else goHome()}
+function retryQuiz(){
+  if(lastQuizType==='ds'){dsStart(dsRetryGroup);return;}
+  if(lastQuizType==='tl'){tlStart();return;}
+  if(mode==='lesson')startLesson(lesson);else{qs=shuffle(qs);begin()}
+}
+function confirmQuit(){
+  const inProg=lastQuizType==='ds'?(dsIdx>0||dsDone):lastQuizType==='tl'?(tlDone>0):(idx>0||done);
+  if(inProg){if(confirm('Thoát bài thi? Tiến độ sẽ không được lưu.'))goHome()}else goHome()
+}
+
+// TỰ LUẬN VATLI
+let tlQs=[], tlIdx=0, tlOk=0, tlDone=0;
+
+function tlGetTol(numStr){
+  const s=String(numStr).replace(',','.');
+  const d=s.indexOf('.');
+  return d<0?0.5:0.5*Math.pow(10,-(s.length-d-1));
+}
+function tlNumMatch(inp,numStr,numeric){
+  const v=parseFloat(String(inp).replace(',','.').trim());
+  return !isNaN(v)&&Math.abs(v-numeric)<=tlGetTol(numStr);
+}
+
+function tlStart(){
+  tlQs=window.questionsTLVatLi||[];
+  if(!tlQs.length){showToast('⚠️ Chưa có câu tự luận!');return;}
+  tlIdx=0;tlOk=0;tlDone=0;
+  lastQuizType='tl';
+  showScr('tl-vl');
+  tlRender();
+}
+
+function tlRender(){
+  const q=tlQs[tlIdx],tot=tlQs.length;
+  document.getElementById('tl-pfill').style.width=((tlIdx/tot)*100)+'%';
+  document.getElementById('tl-ctr').textContent=`Câu ${tlIdx+1} / ${tot}`;
+  document.getElementById('tl-badge').textContent=`Câu ${q.id}`;
+  document.getElementById('tl-score').textContent=`✓ ${tlOk}/${tlDone}`;
+  document.getElementById('tl-qtxt').innerHTML=q.text;
+  const imgBox=document.getElementById('tl-imgbox');
+  imgBox.innerHTML=q.img?`<img src="${q.img}" alt="" style="display:block;max-width:min(100%,420px);max-height:260px;width:auto;height:auto;object-fit:contain;border-radius:12px;margin:12px auto 8px;box-shadow:var(--sh1)">`:'' ;
+  const ia=document.getElementById('tl-input-area');
+  if(q.parts){
+    ia.innerHTML=q.parts.map((p,i)=>`<div class="tl-part" id="tl-part-${i}"><span class="tl-part-lbl">${p.label}</span><input class="tl-inp" id="tl-inp-${i}" type="text" inputmode="decimal" placeholder="Nhập số..." autocomplete="off"></div>`).join('');
+  } else {
+    ia.innerHTML=`<input class="tl-inp" id="tl-inp-0" type="text" inputmode="decimal" placeholder="Nhập số..." autocomplete="off">`;
+  }
+  document.querySelectorAll('.tl-inp').forEach(inp=>{
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){const b=document.getElementById('tl-check-btn');if(!b.disabled)tlCheck();}});
+  });
+  document.getElementById('tl-ans-area').style.display='none';
+  document.getElementById('tl-check-btn').disabled=false;
+  const nb=document.getElementById('tl-nxt-btn');
+  nb.disabled=true;
+  nb.textContent=tlIdx===tot-1?'Hoàn thành 🎯':'Câu tiếp →';
+  setTimeout(()=>{const i=document.getElementById('tl-inp-0');if(i)i.focus();},150);
+  renderMathSoon(document.getElementById('tl-qtxt'));
+}
+
+function tlCheck(){
+  const q=tlQs[tlIdx];
+  let qOk=true;
+  if(q.parts){
+    q.parts.forEach((p,i)=>{
+      const inp=document.getElementById(`tl-inp-${i}`);
+      const ok=tlNumMatch(inp.value,p.numStr,p.numeric);
+      if(!ok)qOk=false;
+      inp.disabled=true;
+      inp.className='tl-inp '+(ok?'tl-ok':'tl-err');
+    });
+  } else {
+    const inp=document.getElementById('tl-inp-0');
+    const ok=tlNumMatch(inp.value,q.numStr,q.numeric);
+    qOk=ok;
+    inp.disabled=true;
+    inp.className='tl-inp '+(ok?'tl-ok':'tl-err');
+  }
+  if(qOk)tlOk++;
+  tlDone++;
+  document.getElementById('tl-score').textContent=`✓ ${tlOk}/${tlDone}`;
+  document.getElementById('tl-ans-val').innerHTML=q.answer;
+  document.getElementById('tl-ans-area').style.display='block';
+  document.getElementById('tl-check-btn').disabled=true;
+  document.getElementById('tl-nxt-btn').disabled=false;
+  renderMathSoon(document.getElementById('tl-ans-area'));
+}
+
+function tlNext(){
+  if(++tlIdx>=tlQs.length){showToast(`✅ Hoàn thành! Đúng ${tlOk}/${tlDone} câu.`);goHome();return;}
+  tlRender();
+}
+
+// TRUE/FALSE VATLI
+let dsQs=[], dsIdx=0, dsCorrect=0, dsTot=0, dsAnswers=[], dsDone=false;
+let lastQuizType='mcq', dsRetryGroup='all';
+
+function dsStart(group){
+  const all=window.questionsDSVatLi||[];
+  dsQs=group==='all'?[...all]:all.filter(q=>q.group===group);
+  if(!dsQs.length){showToast('⚠️ Chưa có câu đúng/sai!');return}
+  dsIdx=0;dsCorrect=0;dsTot=0;dsAnswers=[];dsDone=false;
+  lastQuizType='ds';dsRetryGroup=group;
+  showScr('ds-vl');
+  dsRender();
+}
+
+function dsRender(){
+  const q=dsQs[dsIdx],tot=dsQs.length;
+  document.getElementById('ds-pfill').style.width=((dsIdx/tot)*100)+'%';
+  document.getElementById('ds-ctr').textContent=`Câu ${dsIdx+1} / ${tot}`;
+  document.getElementById('ds-badge').textContent=`Câu ${dsIdx+1}`;
+  document.getElementById('ds-qtxt').innerHTML=q.text;
+  const imgBox=document.getElementById('ds-imgbox');
+  imgBox.innerHTML=q.img?`<img src="${q.img}" alt="" style="display:block;max-width:min(100%,420px);max-height:260px;width:auto;height:auto;object-fit:contain;border-radius:12px;margin:12px auto 8px;box-shadow:var(--sh1)">`:'' ;
+  const stmtsEl=document.getElementById('ds-stmts');
+  stmtsEl.innerHTML='';
+  q.stmts.forEach((s,i)=>{
+    const row=document.createElement('div');
+    row.className='ds-row';row.id=`ds-row-${i}`;
+    row.innerHTML=`<span class="ds-lbl">${s.l})</span><span class="ds-txt">${s.t}</span><div class="ds-btns"><button class="ds-btn" id="ds-t-${i}" onclick="dsPick(${i},true)">Đúng</button><button class="ds-btn" id="ds-f-${i}" onclick="dsPick(${i},false)">Sai</button></div>`;
+    stmtsEl.appendChild(row);
+  });
+  dsAnswers.push(new Array(q.stmts.length).fill(null));
+  document.getElementById('ds-fbarea').innerHTML='';
+  const nb=document.getElementById('ds-nxtbtn');
+  nb.disabled=true;
+  nb.textContent=dsIdx===tot-1?'Xem kết quả 🎯':'Câu tiếp →';
+  dsDone=false;
+  renderMathSoon(document.getElementById('ds-qtxt'));
+  renderMathSoon(stmtsEl);
+}
+
+function dsPick(si,val){
+  if(dsDone)return;
+  const curAns=dsAnswers[dsIdx];
+  curAns[si]=val;
+  document.getElementById(`ds-t-${si}`).className='ds-btn'+(val===true?' sel-t':'');
+  document.getElementById(`ds-f-${si}`).className='ds-btn'+(val===false?' sel-f':'');
+  if(curAns.every(a=>a!==null)) dsReveal();
+}
+
+function dsReveal(){
+  dsDone=true;
+  const q=dsQs[dsIdx];
+  const curAns=dsAnswers[dsIdx];
+  let qOk=0;
+  q.stmts.forEach((s,i)=>{
+    const ok=(curAns[i]===s.c);
+    if(ok){qOk++;dsCorrect++;}
+    dsTot++;
+    const row=document.getElementById(`ds-row-${i}`);
+    const tBtn=document.getElementById(`ds-t-${i}`);
+    const fBtn=document.getElementById(`ds-f-${i}`);
+    row.classList.add('revealed', ok?'correct-row':'wrong-row');
+    if(s.c===true){
+      tBtn.className='ds-btn ok done';tBtn.textContent='✓ Đúng';
+      if(curAns[i]===false){fBtn.className='ds-btn err done';}else{fBtn.className='ds-btn done';}
+    } else {
+      fBtn.className='ds-btn ok done';fBtn.textContent='✓ Sai';
+      if(curAns[i]===true){tBtn.className='ds-btn err done';}else{tBtn.className='ds-btn done';}
+    }
+  });
+  const fb=document.getElementById('ds-fbarea');
+  fb.innerHTML=qOk===q.stmts.length
+    ?`<div class="fb fb-ok"><div class="fb-ico">✓</div><span>Hoàn hảo! Đúng cả ${qOk}/${q.stmts.length} ý.</span></div>`
+    :`<div class="fb fb-err"><div class="fb-ico">!</div><span>Đúng ${qOk}/${q.stmts.length} ý — xem lại ý được đánh dấu đỏ.</span></div>`;
+  document.getElementById('ds-score').textContent=`✓ ${dsCorrect}/${dsTot}`;
+  document.getElementById('ds-nxtbtn').disabled=false;
+}
+
+function dsNext(){
+  if(!dsDone)return;
+  if(++dsIdx>=dsQs.length) dsShowResults();
+  else dsRender();
+}
+
+function dsShowResults(){
+  const pct=Math.round((dsCorrect/dsTot)*100);
+  const C=408,offset=C-(pct/100)*C;
+  const ring=document.getElementById('rring');
+  ring.style.strokeDasharray=C;ring.style.strokeDashoffset=C;
+  document.getElementById('rnum').textContent=`${dsCorrect}/${dsTot}`;
+  document.getElementById('rcok').textContent=dsCorrect;
+  document.getElementById('rcerr').textContent=dsTot-dsCorrect;
+  document.getElementById('rcpct').textContent=pct+'%';
+  let emoji,title,sub;
+  if(pct>=90){emoji='🏆';title='Xuất sắc!';sub='Bạn nắm vững phần đúng/sai này rồi!';}
+  else if(pct>=75){emoji='🎉';title='Rất tốt GUDD👍🫡!';sub='Kết quả tuyệt vời, tiếp tục cố gắng!';}
+  else if(pct>=60){emoji='👍';title='NGU!';sub='Bạn đã hiểu phần lớn nội dung.';}
+  else if(pct>=40){emoji='💪';title='LÀM BÀI NHƯ CC!';sub='Ôn lại lý thuyết và thử lại nhé!';}
+  else{emoji='📖';title='Cần ôn tập lại!';sub='Đọc kỹ lý thuyết rồi làm lại bài.';}
+  document.getElementById('remoji').textContent=emoji;
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rsub').textContent=sub;
+  const rl=document.getElementById('revlist');
+  rl.innerHTML='';
+  dsQs.forEach((q,qi)=>{
+    const ans=dsAnswers[qi]||[];
+    const allOk=q.stmts.every((s,i)=>ans[i]===s.c);
+    const d=document.createElement('div');
+    d.className='rev-item '+(allOk?'ok':'err');
+    const stmtsHtml=q.stmts.map((s,i)=>{
+      const ok=ans[i]===s.c;
+      const uLabel=ans[i]===true?'Đúng':ans[i]===false?'Sai':'?';
+      return `<div style="font-size:13px;color:var(--txt2);margin:4px 0;line-height:1.5">
+        <strong style="color:var(--pri)">${s.l})</strong> ${s.t}
+        <span style="color:${ok?'var(--ok)':'var(--err)'}"> — ${uLabel} ${ok?'✓':'✗ (Đ/A: '+(s.c?'Đúng':'Sai')+')'}</span>
+      </div>`;
+    }).join('');
+    d.innerHTML=`<div class="rev-bar"></div><div class="rev-body"><div class="rev-q">${qi+1}. ${q.text}</div>${stmtsHtml}</div>`;
+    rl.appendChild(d);
+  });
+  rl.style.display='none';
+  document.getElementById('ricon').textContent='▼';
+  showScr('results');
+  setTimeout(()=>{ring.style.strokeDashoffset=offset},350);
+  animN(document.getElementById('rcok'),dsCorrect,1000);
+  animN(document.getElementById('rcerr'),dsTot-dsCorrect,1000);
+}
 
 // TOAST
 function showToast(msg,ms=3000){

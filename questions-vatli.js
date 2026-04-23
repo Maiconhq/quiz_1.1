@@ -86,15 +86,15 @@ const questions = [
   { id: 85, text: 'Nếu chiều dài và đường kính của một dây dẫn bằng đồng có tiết diện tròn được tăng lên gấp đôi thì điện trở của dây dẫn sẽ', options: ['không thay đổi.', 'tăng lên hai lần.', 'tăng lên gấp bốn lần.', 'giảm đi hai lần.'], correct: 'D' },
   { id: 86, text: 'Biến trở là', options: ['điện trở có thể thay đổi trị số và dùng để điều chỉnh chiều dòng điện trong mạch.', 'điện trở có thể thay đổi trị số và dùng để điều chỉnh cường độ và chiều dòng điện trong mạch.', 'điện trở có thể thay đổi trị số và dùng để điều chỉnh cường độ dòng điện trong mạch.', 'điện trở không thay đổi trị số và dùng để điều chỉnh cường độ dòng điện trong mạch.'], correct: 'C' },
   { id: 87, text: 'Trước khi mắc biến trở vào mạch điện để điều chỉnh cường độ dòng điện thì cần điều chỉnh biến trở có giá trị nào dưới đây?', options: ['Có giá trị bằng 0.', 'Có giá trị nhỏ.', 'Có giá trị lớn.', 'Có giá trị lớn nhất.'], correct: 'D' },
-  { id: 88, text: 'Cho mạch điện như hình vẽ. Trong đó, \\(R_1 = R_3 = R_5 = 3\\Omega, R_2 = 8\\Omega, R_4 = 6\\Omega, U_4 = 6 V, U_5 = 6V\\). Cường độ dòng điện chạy qua điện trở \\(R_2\\) là', options: ['1 A.', '1,5 A.', '2 A.', '0,75 A.'], correct: 'A' },
-  { id: 89, text: 'Công của nguồn điện là', options: ['lượng điện tích mà nguồn điện sinh ra trong 1 s.', 'công của lực lạ làm dịch chuyển điện tích bên trong nguồn.', 'công của dòng điện trong mạch kín sinh ra trong 1 s.', 'công của dòng điện khi dịch chuyển một điện tích dương trong mạch kín.'], correct: 'A', img: 'vat_li_db/cau_89.png' },
+  { id: 88, text: 'Cho mạch điện như hình vẽ. Trong đó, \\(R_1 = R_3 = R_5 = 3\\Omega, R_2 = 8\\Omega, R_4 = 6\\Omega, U_4 = 6 V, U_5 = 6V\\). Cường độ dòng điện chạy qua điện trở \\(R_2\\) là', options: ['1 A.', '1,5 A.', '2 A.', '0,75 A.'], correct: 'A', img: 'vat_li_db/cau_89.png' },
+  { id: 89, text: 'Công của nguồn điện là', options: ['lượng điện tích mà nguồn điện sinh ra trong 1 s.', 'công của lực lạ làm dịch chuyển điện tích bên trong nguồn.', 'công của dòng điện trong mạch kín sinh ra trong 1 s.', 'công của dòng điện khi dịch chuyển một điện tích dương trong mạch kín.'], correct: 'A' },
   { id: 90, text: 'Suất điện động của nguồn điện một chiều là \\(\\varepsilon = 3V\\). Công của lực lạ làm dịch chuyển một lượng điện tích \\(q = 2mC\\) giữa hai cực bên trong nguồn điện là', options: ['1,5 mJ.', '0,8 mJ.', '6 mJ.', '5 MJ.'], correct: 'C' }, // Đã sửa nội dung khác câu 4
   { id: 91, text: 'Ba tụ điện giống nhau cùng điện dung \\(C\\) ghép song song với nhau thì điện dung của bộ tụ là:', options: ['\\(C\\)', '\\(2C\\)', '\\(C/3\\)', '\\(3C\\)'], correct: 'D' },
-  { id: 92, text: 'Bốn tụ điện mắc thành bộ theo sơ đồ như hình vẽ, \\(C_1 = 1\\mu F; C_2 = C_3 = 3\\mu F\\). Khi nối hai điểm M, N với nguồn điện thì \\(C_1\\) có điện tích \\(q_1 = 6\\mu C\\) và cả bộ tụ có điện tích \\(q = 15,6 \\mu C\\). Hiệu điện thế trên bộ tụ điện là', options: ['1 V', '8V', '6 V', '12 V'], correct: 'D' },
-  { id: 93, text: 'Tụ điện có điện dung \\(2\\mu F\\) có khoảng cách giữa hai bản tụ là 1cm được tích điện với nguồn điện có hiệu điện thế 24V. Ngắt tụ khỏi nguồn và nối hai bản tụ bằng dây dẫn thì năng lượng tụ giải phóng ra là:', options: ['\\(5,76.10^{-4} J\\)', '\\(1,152.10^{-3} J\\)', '\\(2,304.10^{-3} J\\)', '\\(4,217.10^{-3} J\\)'], correct: 'B', img: 'https://video.vietjack.com/upload2/quiz_source1/2020/06/p162-1590962394.PNG' },
-  { id: 94, text: 'Có bốn chiếc tụ điện như Hình 21.6 (trong sách), hãy sắp xếp theo thứ tự tăng dần về năng lượng khi chúng được tích điện tới mức tối đa cho phép.', options: ['b, d, a, c.', 'b, c, d, a.', 'c, a, b, d.', 'c, b, a, d.'], correct: 'A' },
+  { id: 92, text: 'Bốn tụ điện mắc thành bộ theo sơ đồ như hình vẽ, \\(C_1 = 1\\mu F; C_2 = C_3 = 3\\mu F\\). Khi nối hai điểm M, N với nguồn điện thì \\(C_1\\) có điện tích \\(q_1 = 6\\mu C\\) và cả bộ tụ có điện tích \\(q = 15,6 \\mu C\\). Hiệu điện thế trên bộ tụ điện là', options: ['1 V', '8V', '6 V', '12 V'], correct: 'D', img: 'https://video.vietjack.com/upload2/quiz_source1/2020/06/p162-1590962394.PNG' },
+  { id: 93, text: 'Tụ điện có điện dung \\(2\\mu F\\) có khoảng cách giữa hai bản tụ là 1cm được tích điện với nguồn điện có hiệu điện thế 24V. Ngắt tụ khỏi nguồn và nối hai bản tụ bằng dây dẫn thì năng lượng tụ giải phóng ra là:', options: ['\\(5,76.10^{-4} J\\)', '\\(1,152.10^{-3} J\\)', '\\(2,304.10^{-3} J\\)', '\\(4,217.10^{-3} J\\)'], correct: 'B' },
+  { id: 94, text: 'Có bốn chiếc tụ điện như Hình 21.6 (trong sách), hãy sắp xếp theo thứ tự tăng dần về năng lượng khi chúng được tích điện tới mức tối đa cho phép.', options: ['b, d, a, c.', 'b, c, d, a.', 'c, a, b, d.', 'c, b, a, d.'], correct: 'A', img: 'vat_li_db/cau_96.png' },
   { id: 95, text: 'Chọn công thức sai cho hai tụ ghép nối tiếp \\(C_1\\) và \\(C_2\\) với \\(C\\) là điện dung của bộ tụ.', options: ['\\(\\frac{1}{C} = \\frac{1}{C_1} + \\frac{1}{C_2}\\)', '\\(C = \\frac{C_1 C_2}{C_1 + C_2}\\)', '\\(C = C_1 + C_2\\)', '\\(U = U_1 + U_2\\)'], correct: 'C' },
-  { id: 96, text: 'Một bộ gồm ba tụ điện ghép song song \\(C_1 = C_2 = \\frac{1}{2} C_3\\). Khi được tích điện bằng nguồn điện có hiệu điện thế 45V thì điện tích của bộ tụ bằng \\(18.10^{-4} C\\). Tính điện dung của các tụ điện.', options: ['\\(C_1 = C_2 = 5\\mu F; C_3 = 10 \\mu F\\)', '\\(C_1 = C_2 = 8\\mu F; C_3 = 16 \\mu F\\)', '\\(C_1 = C_2 = 10\\mu F; C_3 = 20 \\mu F\\)', '\\(C_1 = C_2 = 15\\mu F; C_3 = 30 \\mu F\\)'], correct: 'C', img: 'vat_li_db/cau_96.png' },
+  { id: 96, text: 'Một bộ gồm ba tụ điện ghép song song \\(C_1 = C_2 = \\frac{1}{2} C_3\\). Khi được tích điện bằng nguồn điện có hiệu điện thế 45V thì điện tích của bộ tụ bằng \\(18.10^{-4} C\\). Tính điện dung của các tụ điện.', options: ['\\(C_1 = C_2 = 5\\mu F; C_3 = 10 \\mu F\\)', '\\(C_1 = C_2 = 8\\mu F; C_3 = 16 \\mu F\\)', '\\(C_1 = C_2 = 10\\mu F; C_3 = 20 \\mu F\\)', '\\(C_1 = C_2 = 15\\mu F; C_3 = 30 \\mu F\\)'], correct: 'C' },
   { id: 97, text: 'Chọn công thức sai về năng lượng tụ điện', options: ['\\(W = \\frac{U^2}{2C}\\)', '\\(W = \\frac{QU}{2}\\)', '\\(W = \\frac{Q^2}{2C}\\)', '\\(W = \\frac{CU^2}{2}\\)'], correct: 'A' },
   { id: 98, text: 'Một tụ điện có điện dung \\(2000 \\mu F\\) được tích điện đến hiệu điện thế 10 V. Tính năng lượng của tụ điện.', options: ['0,1 J', '1,1 J', '10 J', '20 J'], correct: 'C' },
   { id: 99, text: 'Cho mạch điện như hình vẽ. Biết \\(E = 12V, r = 1\\Omega, R_1 = 4\\Omega, R_2 = 2\\Omega, R_3 = 6\\Omega\\). Cường độ dòng điện qua \\(R_3\\) là:', options: ['1A', '2A', '3A', '4A'], correct: 'A' },
@@ -107,4 +107,192 @@ if (typeof window !== 'undefined') {
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { questions };
+}
+
+// PHẦN II – ĐÚNG SAI
+const questionsDSVatLi = [
+  {id:1, group:'dongdien', text:'Cho những phát biểu sau, phát biểu nào đúng, phát biểu nào sai?',
+   stmts:[
+    {l:'a',t:'Cu-lông là điện lượng chuyển qua tiết diện thẳng của dây dẫn trong 1 s khi có dòng điện không đổi 1 A chạy qua.',c:true},
+    {l:'b',t:'Cường độ dòng điện là đại lượng đặc trưng cho tác dụng mạnh, yếu của dòng điện và được đo bằng điện lượng chuyển qua tiết diện thẳng của vật dẫn trong một đơn vị thời gian.',c:true},
+    {l:'c',t:'Dòng điện là dòng các điện tích dịch chuyển có hướng.',c:true},
+    {l:'d',t:'Chiều của dòng điện được quy ước là chiều dịch chuyển của các điện tích âm.',c:false}
+   ]
+  },
+  {id:2, group:'dongdien', text:'Dòng điện chạy trong dây dẫn kim loại có các đặc điểm:',
+   stmts:[
+    {l:'a',t:'Có hạt mang điện tự do là các electron tự do.',c:true},
+    {l:'b',t:'Quy ước chiều dòng điện là chiều từ cực âm sang cực dương của nguồn.',c:false},
+    {l:'c',t:'Các electron tự do dịch chuyển ngược với chiều quy ước của dòng điện.',c:true},
+    {l:'d',t:'Cường độ dòng điện chạy qua dây dẫn kim loại \\(I = Snve\\).',c:true}
+   ]
+  },
+  {id:3, group:'dongdien', text:'Một dây dẫn kim loại có tiết diện ngang \\(S = 0{,}6\\,\\text{mm}^2\\), trong thời gian 10 s có điện lượng \\(q = 9{,}6\\,\\text{C}\\) đi qua. Biết \\(e = 1{,}6\\cdot10^{-19}\\,\\text{C}\\); mật độ electron tự do \\(n = 4\\cdot10^{28}\\,\\text{hạt/m}^3\\).',
+   stmts:[
+    {l:'a',t:'Cường độ dòng điện qua dây dẫn là 1 A.',c:false},
+    {l:'b',t:'Số electron đi qua tiết diện ngang của dây dẫn trong thời gian trên là \\(6\\cdot10^{19}\\) hạt.',c:true},
+    {l:'c',t:'Tốc độ trung bình của các electron tạo nên dòng điện là 0,25 mm/s.',c:true},
+    {l:'d',t:'Thời gian trung bình mỗi electron dẫn di chuyển hết chiều dài đoạn dây 1 m là 4000 s.',c:true}
+   ]
+  },
+  {id:4, group:'dientro', text:'Một thỏi đồng khối lượng 176 gam được kéo thành dây dẫn có tiết diện tròn, điện trở dây dẫn bằng 32 Ω. Khối lượng riêng của đồng là \\(8{,}8\\cdot10^3\\,\\text{kg/m}^3\\), điện trở suất của đồng là \\(1{,}6\\cdot10^{-8}\\,\\Omega\\text{m}\\).',
+   stmts:[
+    {l:'a',t:'Thể tích của thỏi đồng là \\(2\\cdot10^{-5}\\,\\text{m}^3\\).',c:true},
+    {l:'b',t:'Chiều dài của dây dẫn là 200 cm.',c:false},
+    {l:'c',t:'Đường kính tiết diện của dây là 0,36 mm.',c:true},
+    {l:'d',t:'Quấn được 100 vòng dây dẫn quanh một ống hình trụ có đường kính 3,6 cm.',c:true}
+   ]
+  },
+  {id:5, group:'dientro', text:'Đường đặc trưng Vôn – Ampe của hai điện trở \\(R_1\\) và \\(R_2\\) được cho như hình.', img:'https://images.tuyensinh247.com/picture/images_question/1743065273-tb3l.jpg',
+   stmts:[
+    {l:'a',t:'Đường đặc trưng Vôn – Ampe của điện trở là hàm bậc nhất xuất phát từ gốc tọa độ.',c:true},
+    {l:'b',t:'Hệ số góc của đường đặc trưng Vôn – Ampe cho chúng ta biết thời gian dòng điện chạy qua điện trở.',c:false},
+    {l:'c',t:'Khi U tăng thì \\(R_1\\) tăng nhanh hơn \\(R_2\\).',c:false},
+    {l:'d',t:'\\(R_2 = 2{,}5\\,R_1\\).',c:true}
+   ]
+  },
+  {id:6, group:'dientro', text:'Cho mạch điện như hình vẽ. Các giá trị điện trở: \\(R_1 = 2\\,\\Omega\\), \\(R_2 = 3\\,\\Omega\\), \\(R_3 = 4\\,\\Omega\\), \\(R_4 = 6\\,\\Omega\\). Hiệu điện thế giữa hai đầu đoạn mạch \\(U_{AB} = 18\\,\\text{V}\\).', img:'https://vietjack.com/sbt-vat-li-11-kn/images/cau-23-17-trang-56-sbt-vat-li-lop-11.PNG',
+   stmts:[
+    {l:'a',t:'Mạch cấu tạo gồm \\((R_1 \\parallel R_2)\\) nối tiếp \\((R_3 \\parallel R_4)\\).',c:true},
+    {l:'b',t:'Điện trở tương đương của mạch là 3,6 Ω.',c:true},
+    {l:'c',t:'Cường độ dòng điện chạy trong mạch chính có độ lớn là 5 A.',c:true},
+    {l:'d',t:'Hiệu điện thế hai đầu điện trở \\(R_1\\) là 10 V.',c:false}
+   ]
+  },
+  {id:7, group:'nguon', text:'Một bộ acquy đầy điện có thể cung cấp dòng điện 4 A liên tục trong 2 giờ thì phải nạp lại.',
+   stmts:[
+    {l:'a',t:'Điện lượng dịch chuyển trong acquy là 28 800 C.',c:true},
+    {l:'b',t:'Cường độ dòng điện mà acquy này có thể cung cấp liên tục trong 40 giờ thì phải nạp lại là 0,25 A.',c:false},
+    {l:'c',t:'Nếu trong thời gian hoạt động trên đây, nó sinh ra một công là 172,8 kJ thì suất điện động của acquy là 3 V.',c:false},
+    {l:'d',t:'Nếu acquy có suất điện động bằng 9 V thì trong thời gian hoạt động trên nó sinh ra một công là 259,2 kJ.',c:true}
+   ]
+  },
+  {id:8, group:'nguon', text:'Một nguồn điện có suất điện động 12 V, điện trở trong \\(2\\,\\Omega\\). Khi mắc với một bóng đèn tạo thành mạch điện kín thì dòng chạy qua có cường độ 0,5 A.',
+   stmts:[
+    {l:'a',t:'Nguồn điện tạo ra hiệu điện thế giữa hai cực bằng cách tách electron ra khỏi nguyên tử và chuyển electron và ion về các cực của nguồn.',c:false},
+    {l:'b',t:'Điện lượng dịch chuyển qua tiết diện thẳng của dây tóc trong 10 phút là 350 C.',c:false},
+    {l:'c',t:'Số electron dịch chuyển qua tiết diện thẳng của dây tóc trong 10 phút là \\(18{,}75\\cdot10^{20}\\) hạt.',c:true},
+    {l:'d',t:'Độ lớn công cần thiết của nguồn điện để dịch chuyển một electron từ cực dương sang cực âm của nguồn là \\(1{,}92\\cdot10^{-18}\\,\\text{J}\\).',c:true}
+   ]
+  },
+  {id:9, group:'nguon', text:'Một nguồn điện có suất điện động 11,5 V và điện trở trong \\(0{,}8\\,\\Omega\\) được nối với mạch ngoài tạo thành mạch kín. Nguồn phát dòng điện có cường độ 1 A.',
+   stmts:[
+    {l:'a',t:'Hiệu điện thế hai đầu nguồn điện bằng 10,7 V.',c:true},
+    {l:'b',t:'Công do nguồn điện sản sinh ra trong 2 phút bằng 23 J.',c:false},
+    {l:'c',t:'Tốc độ sinh công của nguồn điện trong 1 s bằng 11,5 W.',c:true},
+    {l:'d',t:'Công suất điện mà nguồn cung cấp cho mạch ngoài bằng 10,7 W.',c:true}
+   ]
+  },
+  {id:10, group:'nguon', text:'Mạch điện gồm 3 điện trở \\(R_1 = 4\\,\\Omega\\), \\(R_2 = 6\\,\\Omega\\), \\(R_3 = 12\\,\\Omega\\) mắc song song với nhau rồi mắc thành mạch điện kín với nguồn điện có suất điện động \\(E = 6\\,\\text{V}\\), điện trở trong \\(r = 1\\,\\Omega\\).',
+   stmts:[
+    {l:'a',t:'Độ giảm thế ở mạch ngoài có giá trị bằng suất điện động của nguồn.',c:false},
+    {l:'b',t:'Khi điện trở trong của nguồn tăng thì hiệu điện thế giữa hai cực của nguồn tăng.',c:false},
+    {l:'c',t:'Công của lực lạ khi di chuyển lượng điện tích 0,12 C qua nguồn là 0,36 J.',c:false},
+    {l:'d',t:'Cường độ dòng điện trong mạch điện kín là 2 A.',c:true}
+   ]
+  },
+  {id:11, group:'nangluong', text:'Trên một bóng đèn dây tóc có ghi 12 V − 18 W.',
+   stmts:[
+    {l:'a',t:'Bóng đèn này luôn có công suất là 18 W khi hoạt động.',c:false},
+    {l:'b',t:'Bóng đèn này có cường độ dòng điện định mức là 1,5 A.',c:true},
+    {l:'c',t:'Bóng đèn này tiêu thụ điện năng 30 J trong 2 giây khi hoạt động bình thường.',c:false},
+    {l:'d',t:'Bóng đèn này có điện trở \\(8\\,\\Omega\\) khi hoạt động bình thường.',c:true}
+   ]
+  },
+  {id:12, group:'nangluong', text:'Một quạt điện được sử dụng dưới hiệu điện thế 220 V thì dòng điện chạy qua quạt có cường độ 5 A. Biết giá điện là 2 000 đồng/kWh.',
+   stmts:[
+    {l:'a',t:'Tốc độ tiêu thụ năng lượng của quạt là 1 100 J trong mỗi giây.',c:true},
+    {l:'b',t:'Trong 8 giờ quạt tiêu thụ năng lượng là 8 800 J.',c:false},
+    {l:'c',t:'Quạt đã chuyển hóa năng lượng điện thành cơ năng (năng lượng có ích).',c:true},
+    {l:'d',t:'Tiền điện phải trả cho việc sử dụng quạt trong 30 ngày, mỗi ngày sử dụng 30 phút là 33 000 đồng.',c:true}
+   ]
+  }
+];
+
+if (typeof window !== 'undefined') {
+  window.questionsDSVatLi = questionsDSVatLi;
+}
+
+// PHẦN III – TỰ LUẬN
+const questionsTLVatLi = [
+  {
+    id: 1,
+    text: 'Một tụ điện có điện dung \\(2\\,\\mu F\\) được tích điện ở hiệu điện thế 12 V. Năng lượng điện trường dự trữ trong tụ điện là bao nhiêu \\(\\mu J\\)?',
+    numStr: '144', numeric: 144,
+    answer: '\\(W = \\dfrac{CU^2}{2} = \\dfrac{2\\cdot10^{-6}\\cdot12^2}{2} = 144\\,\\mu J\\)'
+  },
+  {
+    id: 2,
+    text: 'Ba tụ điện ghép nối tiếp có \\(C_1 = 20\\,pF\\), \\(C_2 = 10\\,pF\\), \\(C_3 = 20\\,pF\\). Điện dung của bộ tụ đó bằng bao nhiêu pF?',
+    numStr: '5', numeric: 5,
+    answer: '\\(\\tfrac{1}{C}=\\tfrac{1}{20}+\\tfrac{1}{10}+\\tfrac{1}{20}=\\tfrac{4}{20} \\Rightarrow C=5\\,pF\\)'
+  },
+  {
+    id: 3,
+    text: 'Một tụ điện phẳng có điện môi là không khí, điện dung \\(C = 2\\,\\mu F\\), khoảng cách giữa hai bản tụ \\(d = 1\\,mm\\). Biết điện trường giới hạn đối với không khí là \\(E_{gh} = 3 \\cdot 10^6\\,V/m\\). Năng lượng tối đa mà tụ tích trữ được là bao nhiêu J?',
+    numStr: '9', numeric: 9,
+    answer: '\\(U_{max}=E_{gh}\\cdot d=3000\\,V \\Rightarrow W_{max}=\\dfrac{CU_{max}^2}{2}=9\\,J\\)'
+  },
+  {
+    id: 4,
+    text: 'Trong một dây dẫn điện bằng đồng có cường độ dòng điện \\(I = 10{,}0\\,A\\). Biết dây đồng có tiết diện \\(S = 3{,}00 \\cdot 10^{-6}\\,m^2\\), khối lượng riêng \\(\\rho = 8{,}92\\,g/cm^3\\), khối lượng mol \\(M = 63{,}5\\,g/mol\\), số Avogadro \\(N_A = 6{,}02 \\cdot 10^{23}\\,nguyên\\,tử/mol\\). Mỗi nguyên tử đồng đóng góp một electron tự do. Tốc độ dịch chuyển có hướng của các electron theo đơn vị mm/s?',
+    numStr: '0,246', numeric: 0.246,
+    answer: '\\(n=\\tfrac{\\rho N_A}{M}\\approx8{,}46\\cdot10^{28}\\,e/m^3\\)<br>\\(v=\\tfrac{I}{neSt}=\\tfrac{10}{8{,}46\\cdot10^{28}\\cdot1{,}6\\cdot10^{-19}\\cdot3\\cdot10^{-6}}\\approx0{,}246\\,mm/s\\)'
+  },
+  {
+    id: 5,
+    text: 'Nguồn điện có \\(\\mathcal{E} = 12\\,V\\), \\(r = 4\\,\\Omega\\) được dùng thắp sáng bóng đèn \\(6\\,V - 6\\,W\\). Để đèn sáng bình thường phải mắc nối tiếp với đèn một điện trở \\(R\\). Tính \\(R\\) (\\(\\Omega\\))?',
+    numStr: '2', numeric: 2,
+    answer: '\\(I_{đèn}=\\tfrac{P}{U}=1\\,A\\)<br>\\(U_R=\\mathcal{E}-U_{đèn}-Ir=12-6-4=2\\,V\\)<br>\\(R=\\tfrac{U_R}{I}=2\\,\\Omega\\)'
+  },
+  {
+    id: 6,
+    text: 'Cho hai bóng đèn dây tóc: \\(60\\,V - 30\\,W\\) và \\(25\\,V - 12{,}5\\,W\\). Mắc hai bóng vào nguồn có \\(\\mathcal{E} = 66\\,V\\), \\(r = 1\\,\\Omega\\) theo sơ đồ như hình. Biết các bóng sáng bình thường. Giá trị của \\(R_1\\) bằng bao nhiêu \\(\\Omega\\)?',
+    img: 'https://video.vietjack.com/upload2/quiz_source1/2020/04/29-1587228983.PNG',
+    numStr: '70', numeric: 70,
+    answer: '\\(R_1 = 70\\,\\Omega\\)'
+  },
+  {
+    id: 7,
+    text: 'Cho mạch điện như hình vẽ. Nguồn điện có \\(\\mathcal{E} = 30\\,V\\), \\(r = 1\\,\\Omega\\). Các điện trở \\(R_1 = 12\\,\\Omega\\), \\(R_2 = 36\\,\\Omega\\), \\(R_3 = 18\\,\\Omega\\). Bỏ qua điện trở ampe kế. Ampe kế chỉ bao nhiêu A?',
+    img: 'https://images.tuyensinh247.com/picture/2020/0328/1_12.PNG',
+    numStr: '0,8', numeric: 0.8,
+    answer: '\\(I_A = 0{,}8\\,A\\)'
+  },
+  {
+    id: 9,
+    text: 'Nguồn điện có \\(\\mathcal{E} = 12\\,V\\), \\(r = 2\\,\\Omega\\) nối với mạch ngoài AB: \\(R_1 = 4{,}5\\,\\Omega\\); \\(R_2 = 1{,}5\\,\\Omega\\); \\(R_3 = 9{,}0\\,\\Omega\\); \\(R_4\\) là biến trở.<br><br><strong>1.</strong> K mở, \\(R_4 = 2{,}4\\,\\Omega\\). Số chỉ ampe kế (A)?<br><strong>2.</strong> Thay K bằng vôn kế (\\(R_V \\to \\infty\\)), \\(R_4 = 2{,}4\\,\\Omega\\). Số chỉ vôn kế (V)?<br><strong>3.</strong> Điều chỉnh \\(R_4\\) sao cho khi K đóng và K mở, số chỉ ampe kế không đổi. \\(R_4\\) (\\(\\Omega\\))?',
+    img: 'vat_li_db/cau9-tln.png',
+    parts: [
+      { label: '1.', numStr: '0,6',  numeric: 0.6,  answer: '\\(I_A = 0{,}6\\,A\\)' },
+      { label: '2.', numStr: '0,36', numeric: 0.36, answer: '\\(U_V = 0{,}36\\,V\\)' },
+      { label: '3.', numStr: '4,5',  numeric: 4.5,  answer: '\\(R_4 = 4{,}5\\,\\Omega\\)' },
+    ],
+    answer: '<strong>1.</strong> \\(I_A=0{,}6\\,A\\) &nbsp; <strong>2.</strong> \\(U_V=0{,}36\\,V\\) &nbsp; <strong>3.</strong> \\(R_4=4{,}5\\,\\Omega\\)'
+  },
+  {
+    id: 11,
+    text: 'Nguồn điện có \\(\\mathcal{E} = 12\\,V\\), điện trở trong \\(r\\). Khi mắc vào hai cực nguồn các điện trở \\(R_1 = 2\\,\\Omega\\) và \\(R_2 = 4{,}5\\,\\Omega\\) thì công suất tỏa nhiệt trên các điện trở bằng nhau. Điện trở trong của nguồn là bao nhiêu \\(\\Omega\\)?',
+    numStr: '3', numeric: 3,
+    answer: '\\(r = 3\\,\\Omega\\)'
+  },
+  {
+    id: 12,
+    text: 'Một bếp điện được sử dụng liên tục trong 1,6 giờ, chỉ số trên công tơ điện tăng 2,4 kWh. Công suất tiêu thụ của bếp là bao nhiêu kW?',
+    numStr: '1,5', numeric: 1.5,
+    answer: '\\(P=\\dfrac{W}{t}=\\dfrac{2{,}4}{1{,}6}=1{,}5\\,kW\\)'
+  },
+  {
+    id: 13,
+    text: 'Tháng 6, một gia đình dùng các thiết bị điện (mỗi ngày):<br><table style="border-collapse:collapse;font-size:14px;margin:8px 0"><tr><th style="border:1px solid var(--bdr);padding:5px 10px">Thiết bị</th><th style="border:1px solid var(--bdr);padding:5px 10px">Số lượng</th><th style="border:1px solid var(--bdr);padding:5px 10px">Công suất</th><th style="border:1px solid var(--bdr);padding:5px 10px">Thời gian</th></tr><tr><td style="border:1px solid var(--bdr);padding:5px 10px">Tủ lạnh</td><td style="border:1px solid var(--bdr);padding:5px 10px;text-align:center">1</td><td style="border:1px solid var(--bdr);padding:5px 10px">60 W</td><td style="border:1px solid var(--bdr);padding:5px 10px">24 h</td></tr><tr><td style="border:1px solid var(--bdr);padding:5px 10px">Tivi</td><td style="border:1px solid var(--bdr);padding:5px 10px;text-align:center">2</td><td style="border:1px solid var(--bdr);padding:5px 10px">145 W</td><td style="border:1px solid var(--bdr);padding:5px 10px">4 h</td></tr><tr><td style="border:1px solid var(--bdr);padding:5px 10px">Bóng đèn</td><td style="border:1px solid var(--bdr);padding:5px 10px;text-align:center">3</td><td style="border:1px solid var(--bdr);padding:5px 10px">75 W</td><td style="border:1px solid var(--bdr);padding:5px 10px">5 h</td></tr><tr><td style="border:1px solid var(--bdr);padding:5px 10px">Máy lạnh</td><td style="border:1px solid var(--bdr);padding:5px 10px;text-align:center">4</td><td style="border:1px solid var(--bdr);padding:5px 10px">1100 W</td><td style="border:1px solid var(--bdr);padding:5px 10px">8 h</td></tr><tr><td style="border:1px solid var(--bdr);padding:5px 10px">Quạt</td><td style="border:1px solid var(--bdr);padding:5px 10px;text-align:center">5</td><td style="border:1px solid var(--bdr);padding:5px 10px">65 W</td><td style="border:1px solid var(--bdr);padding:5px 10px">10 h</td></tr></table>Giá điện theo bậc thang (VNĐ/kWh): 1–50: 1484 · 51–100: 1533 · 101–200: 1786 · 201–300: 2242 · 301–400: 2503 · ≥401: 2587.<br>Số tiền điện phải trả trong 30 ngày là bao nhiêu nghìn VNĐ (3 chữ số thập phân)?',
+    numStr: '3042,352', numeric: 3042.352,
+    answer: '3042,352 nghìn VNĐ<br><small style="color:var(--txt2)">Tổng tiêu thụ: 1265,25 kWh</small>'
+  },
+];
+
+if (typeof window !== 'undefined') {
+  window.questionsTLVatLi = questionsTLVatLi;
+}
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports.questionsTLVatLi = questionsTLVatLi;
 }
