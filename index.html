@@ -1146,10 +1146,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-he
     </div>
     <div class="qft">
       <div></div>
-      <div style="display:flex;gap:10px">
-        <button class="btn btn-s" id="tl-check-btn" onclick="tlCheck()">✓ Kiểm tra</button>
-        <button class="btn btn-p" id="tl-nxt-btn" onclick="tlNext()" disabled>Câu tiếp →</button>
-      </div>
+      <button class="btn btn-s" id="tl-action-btn" onclick="tlAction()" disabled>✓ Kiểm tra</button>
     </div>
     <div class="quit-area">
       <button class="quit-btn" onclick="confirmQuit()">✕ Thoát</button>
@@ -1712,7 +1709,7 @@ function confirmQuit(){
 }
 
 // TỰ LUẬN VATLI
-let tlQs=[], tlIdx=0, tlOk=0, tlDone=0;
+let tlQs=[], tlIdx=0, tlOk=0, tlDone=0, tlChecked=false;
 
 function tlGetTol(numStr){
   const s=String(numStr).replace(',','.');
@@ -1733,8 +1730,16 @@ function tlStart(){
   tlRender();
 }
 
+function tlUpdateBtn(){
+  if(tlChecked)return;
+  const inputs=document.querySelectorAll('.tl-inp');
+  const allFilled=[...inputs].every(i=>i.value.trim()!=='');
+  document.getElementById('tl-action-btn').disabled=!allFilled;
+}
+
 function tlRender(){
   const q=tlQs[tlIdx],tot=tlQs.length;
+  tlChecked=false;
   document.getElementById('tl-pfill').style.width=((tlIdx/tot)*100)+'%';
   document.getElementById('tl-ctr').textContent=`Câu ${tlIdx+1} / ${tot}`;
   document.getElementById('tl-badge').textContent=`Câu ${q.id}`;
@@ -1749,19 +1754,24 @@ function tlRender(){
     ia.innerHTML=`<input class="tl-inp" id="tl-inp-0" type="text" inputmode="decimal" placeholder="Nhập số..." autocomplete="off">`;
   }
   document.querySelectorAll('.tl-inp').forEach(inp=>{
-    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){const b=document.getElementById('tl-check-btn');if(!b.disabled)tlCheck();}});
+    inp.addEventListener('input',tlUpdateBtn);
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'){const b=document.getElementById('tl-action-btn');if(!b.disabled)tlAction();}});
   });
   document.getElementById('tl-ans-area').style.display='none';
-  document.getElementById('tl-check-btn').disabled=false;
-  const nb=document.getElementById('tl-nxt-btn');
-  nb.disabled=true;
-  nb.textContent=tlIdx===tot-1?'Hoàn thành 🎯':'Câu tiếp →';
+  const btn=document.getElementById('tl-action-btn');
+  btn.disabled=true;
+  btn.textContent='✓ Kiểm tra';
+  btn.className='btn btn-s';
   setTimeout(()=>{const i=document.getElementById('tl-inp-0');if(i)i.focus();},150);
   renderMathSoon(document.getElementById('tl-qtxt'));
 }
 
+function tlAction(){
+  if(!tlChecked)tlCheck();else tlNext();
+}
+
 function tlCheck(){
-  const q=tlQs[tlIdx];
+  const q=tlQs[tlIdx],tot=tlQs.length;
   let qOk=true;
   if(q.parts){
     q.parts.forEach((p,i)=>{
@@ -1780,11 +1790,14 @@ function tlCheck(){
   }
   if(qOk)tlOk++;
   tlDone++;
+  tlChecked=true;
   document.getElementById('tl-score').textContent=`✓ ${tlOk}/${tlDone}`;
   document.getElementById('tl-ans-val').innerHTML=q.answer;
   document.getElementById('tl-ans-area').style.display='block';
-  document.getElementById('tl-check-btn').disabled=true;
-  document.getElementById('tl-nxt-btn').disabled=false;
+  const btn=document.getElementById('tl-action-btn');
+  btn.textContent=tlIdx===tot-1?'Hoàn thành 🎯':'Câu tiếp →';
+  btn.className='btn btn-p';
+  btn.disabled=false;
   renderMathSoon(document.getElementById('tl-ans-area'));
 }
 
