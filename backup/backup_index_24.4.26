@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a11 - quizz </title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="window.__katexReady=true"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#F0F4FF;--sur:#FFFFFF;--sur2:#F8FAFF;
+  --pri:#4361EE;--pri-d:#3451D4;--pri-g:rgba(67,97,238,.15);
+  --acc:#7C3AED;
+  --txt:#0F172A;--txt2:#64748B;--txt3:#94A3B8;
+  --bdr:#E2E8F0;--bdr2:#CBD5E1;
+  --ok:#059669;--ok-l:#10B981;--ok-bg:#ECFDF5;--ok-b:#6EE7B7;
+  --err:#E11D48;--err-l:#F43F5E;--err-bg:#FFF1F2;--err-b:#FDA4AF;
+  --sh0:0 1px 2px rgba(0,0,0,.05);
+  --sh1:0 4px 6px -1px rgba(0,0,0,.07),0 2px 4px -2px rgba(0,0,0,.05);
+  --sh2:0 10px 15px -3px rgba(0,0,0,.07),0 4px 6px -4px rgba(0,0,0,.05);
+  --sh3:0 20px 25px -5px rgba(0,0,0,.08),0 8px 10px -6px rgba(0,0,0,.04);
+  --sh-pri:0 8px 24px rgba(67,97,238,.25);
+  --r:14px;--rl:20px;--rxl:28px;
+}
+[data-theme=dark]{
+  --bg:#070B14;--sur:#0F172A;--sur2:#1E293B;
+  --pri:#818CF8;--pri-d:#6366F1;--pri-g:rgba(129,140,248,.15);
+  --acc:#A78BFA;
+  --txt:#F1F5F9;--txt2:#94A3B8;--txt3:#64748B;
+  --bdr:#1E293B;--bdr2:#334155;
+  --ok-bg:#064E3B;--ok-b:#065F46;
+  --err-bg:#4C0519;--err-b:#881337;
+  --sh0:0 1px 2px rgba(0,0,0,.4);
+  --sh1:0 4px 6px -1px rgba(0,0,0,.4);
+  --sh2:0 10px 15px -3px rgba(0,0,0,.5);
+  --sh3:0 20px 25px -5px rgba(0,0,0,.6);
+  --sh-pri:0 8px 24px rgba(129,140,248,.3);
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;
+  transition:background .4s,color .4s;line-height:1.6;-webkit-font-smoothing:antialiased}
+.app{max-width:800px;margin:0 auto;padding:20px;min-height:100vh}
+
+/* HEADER */
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:16px 0 32px}
+.logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:var(--pri)}
+.logo-box{width:36px;height:36px;background:var(--pri);border-radius:10px;display:flex;
+  align-items:center;justify-content:center;font-size:18px;box-shadow:var(--sh-pri)}
+.tbtn{width:40px;height:40px;border-radius:12px;border:1.5px solid var(--bdr);
+  background:var(--sur);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:18px;transition:all .2s;box-shadow:var(--sh0)}
+.tbtn:hover{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri-g);transform:rotate(15deg)}
+
+/* SCREENS */
+.scr{display:none}
+.scr.on{display:block;animation:scrIn .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes scrIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+
+/* HOME */
+.hero{text-align:center;margin-bottom:48px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--pri-g);color:var(--pri);
+  font-size:13px;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:16px;
+  border:1px solid rgba(67,97,238,.2)}
+.hero h1{font-size:clamp(26px,5vw,38px);font-weight:800;line-height:1.15;margin-bottom:12px;
+  background:linear-gradient(135deg,var(--txt) 40%,var(--pri));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--txt2);font-size:16px;max-width:400px;margin:0 auto}
+.hero-pills{display:flex;justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap}
+.pill{display:flex;align-items:center;gap:7px;background:var(--sur);border:1px solid var(--bdr);
+  border-radius:100px;padding:7px 14px;font-size:13px;font-weight:500;color:var(--txt2);box-shadow:var(--sh0)}
+.pill strong{color:var(--pri)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  cursor:pointer;transition:all .25s cubic-bezier(.34,1.56,.64,1);box-shadow:var(--sh1);overflow:hidden}
+.card:hover{transform:translateY(-5px) scale(1.01);box-shadow:var(--sh3);border-color:var(--pri)}
+.card:active{transform:scale(.99)}
+.card-top{height:4px;background:linear-gradient(90deg,var(--pri),var(--acc))}
+.card-top.g{background:linear-gradient(90deg,#10B981,#059669)}
+.card-top.o{background:linear-gradient(90deg,#F59E0B,#D97706)}
+.card-top.p{background:linear-gradient(90deg,var(--acc),#EC4899)}
+.card-body{padding:22px}
+.card-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;margin-bottom:14px;background:var(--sur2)}
+.card-body h3{font-size:17px;font-weight:700;margin-bottom:4px}
+.card-body p{font-size:13px;color:var(--txt2);line-height:1.45;margin-bottom:16px}
+.card-ft{display:flex;align-items:center;justify-content:space-between}
+.chips{display:flex;gap:6px}
+.chip{background:var(--sur2);color:var(--txt2);font-size:11px;font-weight:600;padding:3px 10px;border-radius:100px}
+.arr{width:28px;height:28px;border-radius:8px;background:var(--pri-g);color:var(--pri);
+  display:flex;align-items:center;justify-content:center;font-size:13px;transition:transform .2s}
+.card:hover .arr{transform:translateX(3px)}
+.card-rand{background:linear-gradient(135deg,#4361EE,#7C3AED);border:none;color:#fff}
+.card-rand:hover{border-color:transparent;box-shadow:0 20px 40px rgba(67,97,238,.35)}
+.card-rand .card-body h3,.card-rand .card-body p{color:#fff}
+.card-rand .card-body p{opacity:.85}
+.card-rand .card-ico{background:rgba(255,255,255,.2)}
+.card-rand .chip{background:rgba(255,255,255,.2);color:#fff}
+.card-rand .arr{background:rgba(255,255,255,.25);color:#fff}
+
+/* SETUP */
+.back{display:inline-flex;align-items:center;gap:7px;color:var(--txt2);background:var(--sur);
+  border:1.5px solid var(--bdr);border-radius:10px;cursor:pointer;font-size:14px;font-weight:500;
+  padding:8px 14px;margin-bottom:22px;transition:all .2s;font-family:inherit}
+.back:hover{color:var(--txt);border-color:var(--bdr2)}
+.pg-title{font-size:24px;font-weight:800;margin-bottom:22px}
+.sbox{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);padding:20px;margin-bottom:14px;box-shadow:var(--sh0)}
+.slabel{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);margin-bottom:12px}
+.qty-row{display:flex;gap:10px;flex-wrap:wrap}
+.qbtn{padding:9px 20px;border:1.5px solid var(--bdr);border-radius:100px;background:var(--sur2);
+  color:var(--txt);cursor:pointer;font-size:14px;font-weight:600;transition:all .2s;font-family:inherit}
+.qbtn:hover{border-color:var(--pri);color:var(--pri)}
+.qbtn.on{background:var(--pri);border-color:var(--pri);color:#fff;box-shadow:var(--sh-pri)}
+.chk-col{display:flex;flex-direction:column;gap:10px}
+.chk-row{display:flex;align-items:center;gap:12px;cursor:pointer;padding:12px 16px;
+  border-radius:var(--r);border:1.5px solid var(--bdr);background:var(--sur2);
+  transition:all .2s;font-size:15px;font-weight:500}
+.chk-row:hover{border-color:var(--pri);background:var(--sur)}
+.chk-row input{width:18px;height:18px;accent-color:var(--pri);cursor:pointer}
+
+/* QUIZ HEADER */
+.qhdr{position:sticky;top:0;background:var(--bg);padding:12px 0;z-index:10;margin-bottom:20px}
+.qtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.qctr{font-size:13px;font-weight:600;color:var(--txt2)}
+.qscore{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--ok);
+  background:var(--ok-bg);padding:4px 12px;border-radius:100px;border:1px solid var(--ok-b)}
+.pbar{height:8px;background:var(--bdr);border-radius:100px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--pri),var(--acc));border-radius:100px;
+  transition:width .5s cubic-bezier(.4,0,.2,1);position:relative}
+.pfill::after{content:'';position:absolute;right:0;top:0;bottom:0;width:40px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35));border-radius:100px;
+  animation:shim 1.8s infinite}
+@keyframes shim{0%,100%{opacity:0}50%{opacity:1}}
+
+/* QUESTION CARD */
+.qbadge{display:inline-flex;align-items:center;background:var(--pri-g);color:var(--pri);
+  font-size:12px;font-weight:700;padding:4px 12px;border-radius:100px;margin-bottom:12px;
+  border:1px solid rgba(67,97,238,.2)}
+.qcard{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rxl);
+  padding:28px;box-shadow:var(--sh2);margin-bottom:16px}
+.qtxt{font-size:18px;font-weight:600;line-height:1.65;margin-bottom:22px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;
+  border:1.5px solid var(--bdr);border-radius:var(--r);cursor:pointer;
+  transition:all .2s cubic-bezier(.4,0,.2,1);user-select:none;background:var(--sur2)}
+.opt:hover:not(.done){border-color:var(--pri);background:var(--sur);transform:translateX(4px);box-shadow:var(--sh0)}
+.opt:active:not(.done){transform:scale(.99)}
+.opt.right{border-color:var(--ok-b);background:var(--ok-bg);animation:pop .3s cubic-bezier(.34,1.56,.64,1)}
+.opt.wrong{border-color:var(--err-b);background:var(--err-bg);animation:shk .4s ease}
+.opt.done{cursor:default}
+@keyframes pop{0%{transform:scale(.97)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+@keyframes shk{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.oltr{width:32px;height:32px;min-width:32px;border-radius:10px;background:var(--sur);
+  border:1.5px solid var(--bdr);display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:var(--txt2);transition:all .2s}
+.opt:hover:not(.done) .oltr{background:var(--pri);color:#fff;border-color:var(--pri)}
+.opt.right .oltr{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong .oltr{background:var(--err);color:#fff;border-color:var(--err)}
+.otxt{font-size:15px;line-height:1.55;padding-top:4px;font-weight:450}
+.opt.right .otxt{font-weight:500;color:var(--ok)}
+.opt.wrong .otxt{color:var(--err)}
+
+/* FEEDBACK */
+.fb{border-radius:var(--r);overflow:hidden;animation:fbIn .3s cubic-bezier(.34,1.56,.64,1);margin-top:14px}
+@keyframes fbIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.fb-ok{background:var(--ok-bg);border:1.5px solid var(--ok-b);border-radius:var(--r);
+  padding:14px 18px;display:flex;align-items:center;gap:12px;color:var(--ok);font-weight:600;font-size:15px}
+.fb-err{background:var(--err-bg);border:1.5px solid var(--err-b);border-radius:var(--r);padding:14px 18px;color:var(--err)}
+.fb-title{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;margin-bottom:6px}
+.fb-ans{font-size:14px;color:var(--txt2);padding-left:32px;line-height:1.5}
+.fb-ico{width:28px;height:28px;min-width:28px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:14px;font-weight:700}
+.fb-ok .fb-ico{background:var(--ok);color:#fff}
+.fb-err .fb-ico{background:var(--err);color:#fff}
+
+/* QUIZ FOOTER */
+.qft{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.hint{font-size:12px;color:var(--txt3);display:flex;align-items:center;gap:4px}
+.hint kbd{background:var(--sur);border:1px solid var(--bdr2);border-radius:4px;
+  padding:1px 6px;font-family:monospace;font-size:11px;color:var(--txt2)}
+.quit-area{margin-top:12px;text-align:center}
+.quit-btn{display:inline-flex;align-items:center;gap:6px;color:var(--txt3);background:none;
+  border:none;cursor:pointer;font-size:13px;padding:4px 10px;border-radius:8px;
+  transition:all .2s;font-family:inherit}
+.quit-btn:hover{color:var(--err);background:var(--err-bg)}
+
+/* BUTTONS */
+.btn{padding:12px 24px;border-radius:var(--r);border:none;font-size:15px;font-weight:600;
+  cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);min-height:46px;
+  display:inline-flex;align-items:center;gap:8px;font-family:inherit}
+.btn-p{background:var(--pri);color:#fff;box-shadow:var(--sh-pri)}
+.btn-p:hover{background:var(--pri-d);transform:translateY(-2px);box-shadow:0 12px 28px rgba(67,97,238,.35)}
+.btn-p:active{transform:translateY(0)}
+.btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-s{background:var(--sur);color:var(--txt);border:1.5px solid var(--bdr);box-shadow:var(--sh0)}
+.btn-s:hover{background:var(--sur2);border-color:var(--bdr2)}
+.btn-full{width:100%;justify-content:center}
+
+/* RESULTS */
+.res-top{text-align:center;padding:28px 0 24px}
+.res-emoji{font-size:44px;display:block;margin-bottom:16px;animation:emojiIn .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes emojiIn{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+.ring-wrap{position:relative;width:160px;height:160px;margin:0 auto 22px}
+.ring-svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--bdr);stroke-width:12}
+.ring-fill{fill:none;stroke:url(#rg);stroke-width:12;stroke-linecap:round;
+  stroke-dasharray:408;stroke-dashoffset:408;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+.ring-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.ring-num{font-size:30px;font-weight:800;display:block;line-height:1;color:var(--txt)}
+.ring-sub{font-size:12px;color:var(--txt2);font-weight:500}
+.res-title{font-size:24px;font-weight:800;margin-bottom:6px}
+.res-sub{color:var(--txt2);font-size:15px;margin-bottom:28px}
+
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.stat{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:18px;text-align:center;box-shadow:var(--sh0)}
+.stat-v{font-size:28px;font-weight:800;display:block;line-height:1.1;margin-bottom:4px}
+.stat-v.ok{color:var(--ok)}.stat-v.err{color:var(--err-l)}.stat-v.pri{color:var(--pri)}
+.stat-l{font-size:12px;color:var(--txt2);font-weight:500}
+
+.res-btns{display:flex;gap:12px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.rev-hdr{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;
+  background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);cursor:pointer;
+  transition:all .2s;font-weight:600;font-size:15px;color:var(--txt);font-family:inherit;width:100%;box-shadow:var(--sh0)}
+.rev-hdr:hover{border-color:var(--pri)}
+.rev-list{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.rev-item{border-radius:var(--r);border:1.5px solid var(--bdr);overflow:hidden}
+.rev-item.ok{border-color:var(--ok-b)}
+.rev-item.err{border-color:var(--err-b)}
+.rev-bar{height:3px;background:var(--ok)}
+.rev-item.err .rev-bar{background:var(--err)}
+.rev-body{padding:14px 16px;background:var(--sur)}
+.rev-item.ok .rev-body{background:var(--ok-bg)}
+.rev-item.err .rev-body{background:var(--err-bg)}
+.rev-q{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:7px}
+.rev-a{font-size:13px;color:var(--txt2);line-height:1.6}
+.rv-ok{color:var(--ok);font-weight:600}.rv-err{color:var(--err)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--txt);color:var(--sur);padding:11px 22px;border-radius:100px;
+  font-size:14px;font-weight:600;transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  z-index:1000;white-space:nowrap;box-shadow:var(--sh3);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* LISTENING */
+.section-hdr{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--txt3);margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+.section-hdr::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.card-top.ls{background:linear-gradient(90deg,#0EA5E9,#0284C7)}
+.card-top.ls2{background:linear-gradient(90deg,#06B6D4,#0891B2)}
+.card-top.ls3{background:linear-gradient(90deg,#14B8A6,#0D9488)}
+.card-top.ls4{background:linear-gradient(90deg,#6366F1,#4F46E5)}
+.audio-wrap{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:18px;margin-bottom:20px;box-shadow:var(--sh0)}
+.audio-label{font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ls-passage{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:24px 28px;margin-bottom:20px;box-shadow:var(--sh1);font-size:15px;line-height:2.2}
+.ls-para{margin-bottom:14px}
+.ls-para:last-child{margin-bottom:0}
+.blank-wrap{display:inline-flex;align-items:center;gap:2px;vertical-align:middle}
+.blank-num{font-size:12px;font-weight:700;color:var(--pri)}
+.ls-blank{border:none;border-bottom:2px solid var(--pri);background:transparent;
+  color:var(--txt);font-size:15px;font-family:'Inter',sans-serif;
+  padding:2px 6px;width:110px;text-align:center;outline:none;margin:0 2px;
+  transition:border-color .2s,color .2s}
+.ls-blank:focus{border-bottom-color:var(--acc);background:var(--pri-g);border-radius:4px 4px 0 0}
+.ls-blank.ls-correct{border-bottom-color:var(--ok);color:var(--ok);font-weight:600}
+.ls-blank.ls-incorrect{border-bottom-color:var(--err);color:var(--err)}
+.ls-score-box{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rl);
+  padding:20px 24px;margin-bottom:16px;box-shadow:var(--sh1)}
+.ls-score-top{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.ls-score-num{font-size:36px;font-weight:800;color:var(--pri);line-height:1}
+.ls-score-sub{font-size:13px;color:var(--txt2)}
+.ls-ans-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:14px}
+.ls-ans-row:last-child{border-bottom:none}
+.ls-note{background:var(--sur2);border:1px solid var(--bdr2);border-radius:8px;
+  padding:10px 14px;margin:8px 0 4px;font-size:13px;color:var(--txt2);font-style:italic;display:block}
+/* SUBJECT TABS */
+.subj-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.subj-tab{display:flex;flex-direction:column;align-items:center;gap:5px;padding:16px 10px;
+  border:1.5px solid var(--bdr);border-radius:var(--rl);background:var(--sur);
+  cursor:pointer;font-family:inherit;transition:all .22s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:var(--sh0);text-align:center}
+.subj-tab:hover{border-color:var(--pri);transform:translateY(-3px);box-shadow:var(--sh2)}
+.subj-tab.on{border-color:var(--pri);background:var(--pri-g);box-shadow:0 0 0 3px var(--pri-g)}
+.stab-ico{font-size:26px;line-height:1}
+.stab-name{font-size:13px;font-weight:700;color:var(--txt);line-height:1.2}
+.stab-count{font-size:11px;color:var(--txt3);font-weight:500}
+.subj-tab.on .stab-name{color:var(--pri)}
+.subj-tab.on .stab-count{color:var(--pri);opacity:.75}
+.tab-pane{display:none}
+.tab-pane.on{display:block;animation:scrIn .3s cubic-bezier(.34,1.56,.64,1)}
+@media(max-width:600px){
+  .subj-tabs{grid-template-columns:repeat(3,1fr);gap:7px}
+  .stab-ico{font-size:20px}
+  .stab-name{font-size:11px}
+  .stab-count{display:none}
+  .subj-tab{padding:12px 6px}
+}
+/* RESPONSIVE */
+@media(max-width:600px){
+  .app{padding:14px}
+  .grid{grid-template-columns:1fr}
+  .qtxt{font-size:16px}
+  .stats-row{grid-template-columns:1fr}
+  .res-btns{flex-direction:column}
+  .qft{flex-direction:column-reverse;align-items:stretch}
+  .btn-full{width:100%;justify-content:center}
+  .hint{display:none}
+  .hero h1{font-size:24px}
+  .ls-blank{width:90px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hdr">
+    <div class="logo">
+      <div class="logo-box">📚</div>
+      Quizzz
+    </div>
+    <button class="tbtn" id="tbtn" onclick="toggleTheme()" title="Đổi giao diện">🌙</button>
+  </header>
+
+  <!-- HOME -->
+  <div class="scr on" id="scr-home">
+    <div class="hero">
+      <div class="hero-badge">✨ Luyện thi thông minh</div>
+      <h1>Chúc các bạn A11 <br>Ôn tốt &amp; Thi tốt</h1>
+      <p>Chọn môn học để bắt đầu luyện tập</p>
+      <div class="hero-pills">
+        <div class="pill">📚 <strong>3</strong> môn học</div>
+        <div class="pill">❓ <strong>203</strong> câu hỏi</div>
+        <div class="pill">🎧 <strong>14</strong> bài nghe</div>
+        <div class="pill">✍️ <strong>40</strong> word form</div>
+      </div>
+    </div>
+
+    <!-- Subject tabs -->
+    <div class="subj-tabs">
+      <button class="subj-tab on" onclick="switchTab('lich-su',this)">
+        <span class="stab-ico">📜</span>
+        <span class="stab-name">Lịch Sử</span>
+        <span class="stab-count">3 bài • 93 câu</span>
+      </button>
+      <button class="subj-tab" onclick="switchTab('tieng-anh',this)">
+        <span class="stab-ico">🎧</span>
+        <span class="stab-name">Tiếng Anh</span>
+        <span class="stab-count">14 nghe • 40 wf</span>
+      </button>
+      <button class="subj-tab" onclick="switchTab('cong-nghe',this)">
+        <span class="stab-ico">📐</span>
+        <span class="stab-name">Công Nghệ</span>
+        <span class="stab-count">11 bài • 110 câu</span>
+      </button>
+      <button class="subj-tab" onclick="switchTab('vat-li',this)">
+        <span class="stab-ico">⚡</span>
+        <span class="stab-name">Vật Lí</span>
+        <span class="stab-count">100 câu</span>
+      </button>
+    </div>
+
+    <!-- Tab: Lịch Sử -->
+    <div class="tab-pane on" id="tab-lich-su">
+      <div class="grid">
+        <div class="card card-wish">
+          <div class="card-top" style="background:linear-gradient(135deg,#ff6b9d,#c44dff)"></div>
+          <div class="card-body" style="padding:0;overflow:hidden;display:flex;flex-direction:column">
+            <img src="https://scontent-sin2-1.cdninstagram.com/v/t51.82787-15/670504296_17921454882314068_7129187890067082343_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=Mzg3ODg4MDMyNjcyMzA0Mjk3NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjQzM3g1Nzcuc2RyLkMzIn0%3D&_nc_ohc=fAz1Oadcj0MQ7kNvwHy1Fmo&_nc_oc=AdrIpHgcZCBwi-svsdDp7AZNMV7V7J9srYj_2hjN1UK-YjGMdAnxo2Dqa1rj6TnompN3wlxpd7aE8iEt_srxYbwQ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sin2-1.cdninstagram.com&_nc_gid=dK-3Yn_ffQj-n6yvGiR96A&_nc_ss=7a32e&oh=00_Af3QI1TSmwDq7GlAkq_zFtFV1Q-CniozpErG5UE0etBX2w&oe=69EAC4F2" alt="Chúc thi tốt" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center top;border-radius:0">
+            <div style="padding:12px 16px 14px;text-align:center">
+              <p style="margin:0;font-size:0.95rem;font-weight:600;color:#c44dff">Cô Chúc các em thi tốt 💜</p>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('bai10')">
+          <div class="card-top"></div>
+          <div class="card-body">
+            <div class="card-ico">🏛️</div>
+            <h3>Bài 10</h3>
+            <p>Cải cách của vua Lê Thánh Tông thế kỉ XV</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">32 câu</span><span class="chip">~15 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('bai11')">
+          <div class="card-top g"></div>
+          <div class="card-body">
+            <div class="card-ico">⚖️</div>
+            <h3>Bài 11</h3>
+            <p>Cải cách của vua Minh Mạng nửa đầu thế kỉ XIX</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">31 câu</span><span class="chip">~15 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('bai12')">
+          <div class="card-top o"></div>
+          <div class="card-body">
+            <div class="card-ico">🌊</div>
+            <h3>Bài 12</h3>
+            <p>Vị trí và tầm quan trọng chiến lược của Biển Đông</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">30 câu</span><span class="chip">~12 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-rand" onclick="showSetup()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tạo đề ngẫu nhiên</h3>
+            <p>Trộn câu hỏi từ nhiều bài, tự sắp từ dễ đến khó</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">Tùy số câu</span><span class="chip">Tùy bài</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Tiếng Anh -->
+    <div class="tab-pane" id="tab-tieng-anh">
+      <div class="section-hdr">🎧 Listening – Tiếng Anh 1</div>
+      <div class="grid">
+        <div class="card" onclick="startListening('ban1')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 1</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban2')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 2</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban3')">
+          <div class="card-top ls3"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 3</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban4')">
+          <div class="card-top ls4"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 4</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban5')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 5</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban6')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 6</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban7')">
+          <div class="card-top ls3"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 7</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban8')">
+          <div class="card-top ls4"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 8</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban9')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 9</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('ban10')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 1 – Bản 10</h3>
+            <p>Nghe và điền từ/cụm từ còn thiếu vào đoạn văn</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-hdr">🎧 Luyện Listening – Tiếng Anh – Bài 2 (Paul)</div>
+      <div class="grid">
+        <div class="card" onclick="startListening('p_ban1')">
+          <div class="card-top ls"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 1</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('p_ban2')">
+          <div class="card-top ls2"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 2</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('p_ban3')">
+          <div class="card-top ls3"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 3</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startListening('p_ban4')">
+          <div class="card-top ls4"></div>
+          <div class="card-body">
+            <div class="card-ico">🎧</div>
+            <h3>Listening Bài 2 – Bản 4</h3>
+            <p>Nghe và điền từ còn thiếu vào đoạn hội thoại</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">5 chỗ trống</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-hdr">✍️ Luyện Word Form</div>
+      <div class="grid">
+        <div class="card" onclick="startWordForm('wf1')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F59E0B,#D97706)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 1</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startWordForm('wf2')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 2</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startWordForm('wf3')">
+          <div class="card-top" style="background:linear-gradient(90deg,#6366F1,#4F46E5)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 3</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startWordForm('wf4')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 4</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startWordForm('wf5')">
+          <div class="card-top" style="background:linear-gradient(90deg,#14B8A6,#0D9488)"></div>
+          <div class="card-body">
+            <div class="card-ico">✍️</div>
+            <h3>Word Form – Bộ 5</h3>
+            <p>Điền dạng đúng của từ trong ngoặc vào chỗ trống</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">8 câu</span><span class="chip">Fill-in</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Công Nghệ -->
+    <div class="tab-pane" id="tab-cong-nghe">
+      <div class="grid" style="margin-bottom:16px">
+        <div class="card card-rand" onclick="showSetupCN()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tạo đề ngẫu nhiên</h3>
+            <p>Trộn câu hỏi từ các bài CN, tự chọn số lượng</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">Tùy số câu</span><span class="chip">Tùy bài</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-hdr">📐 Công Nghệ 11 – Cánh Diều</div>
+      <div class="grid">
+        <div class="card" onclick="startLesson('cnbai15')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F59E0B,#D97706)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚙️</div>
+            <h3>CN – Bài 15</h3>
+            <p>Khái Quát Về Cơ Khí Động Lực</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai16')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">👷</div>
+            <h3>CN – Bài 16</h3>
+            <p>Nghề Nghiệp Trong Ngành Cơ Khí Động Lực</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai17')">
+          <div class="card-top" style="background:linear-gradient(90deg,#6366F1,#4F46E5)"></div>
+          <div class="card-body">
+            <div class="card-ico">🔧</div>
+            <h3>CN – Bài 17</h3>
+            <p>Khái Quát Về Động Cơ Đốt Trong</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai18')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">🔄</div>
+            <h3>CN – Bài 18</h3>
+            <p>Nguyên Lý Làm Việc Của Động Cơ Đốt Trong</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai19')">
+          <div class="card-top" style="background:linear-gradient(90deg,#14B8A6,#0D9488)"></div>
+          <div class="card-body">
+            <div class="card-ico">🏗️</div>
+            <h3>CN – Bài 19</h3>
+            <p>Thân Máy Và Các Cơ Cấu Của Động Cơ Đốt Trong</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai20')">
+          <div class="card-top" style="background:linear-gradient(90deg,#0EA5E9,#0284C7)"></div>
+          <div class="card-body">
+            <div class="card-ico">💧</div>
+            <h3>CN – Bài 20</h3>
+            <p>Hệ Thống Bôi Trơn Và Hệ Thống Làm Mát</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai21')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F97316,#EA580C)"></div>
+          <div class="card-body">
+            <div class="card-ico">⛽</div>
+            <h3>CN – Bài 21</h3>
+            <p>Hệ Thống Nhiên Liệu</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai22')">
+          <div class="card-top" style="background:linear-gradient(90deg,#7C3AED,#6D28D9)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚡</div>
+            <h3>CN – Bài 22</h3>
+            <p>Hệ Thống Đánh Lửa Và Hệ Thống Khởi Động</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai23')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EF4444,#DC2626)"></div>
+          <div class="card-body">
+            <div class="card-ico">🚗</div>
+            <h3>CN – Bài 23</h3>
+            <p>Khái Quát Về Ô Tô</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai24')">
+          <div class="card-top" style="background:linear-gradient(90deg,#64748B,#475569)"></div>
+          <div class="card-body">
+            <div class="card-ico">⚙️</div>
+            <h3>CN – Bài 24</h3>
+            <p>Hệ Thống Truyền Lực</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" onclick="startLesson('cnbai25')">
+          <div class="card-top" style="background:linear-gradient(90deg,#BE185D,#9D174D)"></div>
+          <div class="card-body">
+            <div class="card-ico">🛑</div>
+            <h3>CN – Bài 25</h3>
+            <p>Hệ Thống Phanh, Treo Và Lái</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">10 câu</span><span class="chip">~5 phút</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tab: Vật Lí -->
+    <div class="tab-pane" id="tab-vat-li">
+      <div class="grid" style="margin-bottom:16px">
+        <div class="card card-rand" onclick="showSetupVatLi()">
+          <div class="card-top p"></div>
+          <div class="card-body">
+            <div class="card-ico">🎲</div>
+            <h3>Tạo đề ngẫu nhiên</h3>
+            <p>Làm bộ 100 câu hỏi Vật Lí, có thể chọn số lượng câu trước khi bắt đầu.</p>
+            <div class="card-ft">
+              <div class="chips"><span class="chip">100 câu</span><span class="chip">Trộn đề</span></div>
+              <div class="arr">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-hdr">⚡ Vật Lí 11 – Theo bài</div>
+      <div class="grid">
+        <div class="card" onclick="startLessonVatLi('dongdien')">
+          <div class="card-top" style="background:linear-gradient(90deg,#F97316,#F59E0B)"></div>
+          <div class="card-body">
+            <div class="card-ico">1</div>
+            <h3>Chủ đề 1</h3>
+            <p>Cường độ dòng điện, định luật Ôm và điện trở.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">1–40</span><span class="chip">40 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="startLessonVatLi('dientro')">
+          <div class="card-top" style="background:linear-gradient(90deg,#10B981,#059669)"></div>
+          <div class="card-body">
+            <div class="card-ico">2</div>
+            <h3>Chủ đề 2</h3>
+            <p>Điện trở, nguồn điện và năng lượng điện – công suất điện.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">41–60</span><span class="chip">20 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="startLessonVatLi('nguon')">
+          <div class="card-top" style="background:linear-gradient(90deg,#8B5CF6,#7C3AED)"></div>
+          <div class="card-body">
+            <div class="card-ico">3</div>
+            <h3>Chủ đề 3</h3>
+            <p>Nguồn điện, công suất, suất điện động và điện trở trong.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">61–83</span><span class="chip">23 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+        <div class="card" onclick="startLessonVatLi('nangluong')">
+          <div class="card-top" style="background:linear-gradient(90deg,#EC4899,#DB2777)"></div>
+          <div class="card-body">
+            <div class="card-ico">4</div>
+            <h3>Chủ đề 4</h3>
+            <p>Tụ điện, năng lượng tụ và mạch điện thực tế.</p>
+            <div class="card-ft"><div class="chips"><span class="chip">84–100</span><span class="chip">17 câu</span></div><div class="arr">→</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WORD FORM -->
+  <div class="scr" id="scr-wordform">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title" id="wf-title">Word Form – Bộ 1</h2>
+    <div class="ls-passage" id="wf-passage"></div>
+    <div class="ls-score-box" id="wf-score" style="display:none">
+      <div class="ls-score-top">
+        <div>
+          <div class="ls-score-num" id="wf-score-num">0/8</div>
+          <div class="ls-score-sub">câu đúng</div>
+        </div>
+        <div style="flex:1;font-size:13px;color:var(--txt2)">Kết quả kiểm tra đáp án</div>
+      </div>
+      <div id="wf-ans-list"></div>
+    </div>
+    <button class="btn btn-p btn-full" id="wf-check-btn" onclick="checkWordForm()">✓ Kiểm tra đáp án</button>
+    <button class="btn btn-s btn-full" id="wf-retry-btn" onclick="retryWordForm()" style="display:none;margin-top:10px">🔄 Làm lại</button>
+  </div>
+
+  <!-- LISTENING -->
+  <div class="scr" id="scr-listening">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title" id="ls-title">Listening Bài 1 – Bản 1</h2>
+    <div class="audio-wrap">
+      <div class="audio-label">🎧 Nghe audio rồi điền từ vào chỗ trống:</div>
+      <audio id="ls-audio" controls style="width:100%;border-radius:8px">
+        <source src="tienganh 1.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+    <div class="ls-passage" id="ls-passage"></div>
+    <div class="ls-score-box" id="ls-score" style="display:none">
+      <div class="ls-score-top">
+        <div>
+          <div class="ls-score-num" id="ls-score-num">0/5</div>
+          <div class="ls-score-sub">câu đúng</div>
+        </div>
+        <div style="flex:1;font-size:13px;color:var(--txt2)">Kết quả kiểm tra đáp án</div>
+      </div>
+      <div id="ls-ans-list"></div>
+    </div>
+    <button class="btn btn-p btn-full" id="ls-check-btn" onclick="checkListening()">✓ Kiểm tra đáp án</button>
+    <button class="btn btn-s btn-full" id="ls-retry-btn" onclick="retryListening()" style="display:none;margin-top:10px">🔄 Làm lại</button>
+  </div>
+
+  <!-- SETUP -->
+  <div class="scr" id="scr-setup">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title">🎲 Tạo đề ngẫu nhiên</h2>
+    <div class="sbox">
+      <div class="slabel">Số câu hỏi</div>
+      <div class="qty-row">
+        <button class="qbtn on" onclick="pickQty(this,10)">10 câu</button>
+        <button class="qbtn" onclick="pickQty(this,20)">20 câu</button>
+        <button class="qbtn" onclick="pickQty(this,30)">30 câu</button>
+        <button class="qbtn" onclick="pickQty(this,'all')">Tất cả</button>
+      </div>
+    </div>
+    <div class="sbox">
+      <div class="slabel">Chọn bài học</div>
+      <div class="chk-col">
+        <label class="chk-row"><input type="checkbox" checked value="bai10" class="lchk"> 🏛️ Bài 10 – Lê Thánh Tông (32 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="bai11" class="lchk"> ⚖️ Bài 11 – Minh Mạng (31 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="bai12" class="lchk"> 🌊 Bài 12 – Biển Đông (30 câu)</label>
+        <label class="chk-row" style="opacity:.5;pointer-events:none;cursor:default"><span style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--txt3)">── 📐 CÔNG NGHỆ 11 ──</span></label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai15" class="lchk"> ⚙️ CN Bài 15 – Cơ Khí Động Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai16" class="lchk"> 👷 CN Bài 16 – Nghề Nghiệp CN (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai17" class="lchk"> 🔧 CN Bài 17 – Động Cơ Đốt Trong (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai18" class="lchk"> 🔄 CN Bài 18 – Nguyên Lý Làm Việc (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai19" class="lchk"> 🏗️ CN Bài 19 – Thân Máy & Cơ Cấu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai20" class="lchk"> 💧 CN Bài 20 – Bôi Trơn & Làm Mát (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai21" class="lchk"> ⛽ CN Bài 21 – Hệ Thống Nhiên Liệu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai22" class="lchk"> ⚡ CN Bài 22 – Đánh Lửa & Khởi Động (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai23" class="lchk"> 🚗 CN Bài 23 – Khái Quát Về Ô Tô (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai24" class="lchk"> ⚙️ CN Bài 24 – Hệ Thống Truyền Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai25" class="lchk"> 🛑 CN Bài 25 – Phanh, Treo & Lái (10 câu)</label>
+        <label class="chk-row" style="opacity:.5;pointer-events:none;cursor:default"><span style="font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--txt3)">── ⚡ VẬT LÍ 11 ──</span></label>
+        <label class="chk-row"><input type="checkbox" checked value="vatliall" class="lchk"> ⚡ Vật Lí – Bộ 100 câu trắc nghiệm</label>
+      </div>
+    </div>
+    <button class="btn btn-p btn-full" onclick="startRandom()">🚀 Bắt đầu làm bài</button>
+  </div>
+
+  <!-- SETUP CN -->
+  <div class="scr" id="scr-setup-cn">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title">🎲 Tạo đề ngẫu nhiên – Công Nghệ</h2>
+    <div class="sbox">
+      <div class="slabel">Số câu hỏi</div>
+      <div class="qty-row" id="cn-qty-row">
+        <button class="qbtn on" onclick="pickQtyCN(this,10)">10 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,20)">20 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,30)">30 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,50)">50 câu</button>
+        <button class="qbtn" onclick="pickQtyCN(this,'all')">Tất cả</button>
+      </div>
+    </div>
+    <div class="sbox">
+      <div class="slabel">Chọn bài học</div>
+      <div class="chk-col">
+        <label class="chk-row"><input type="checkbox" checked value="cnbai15" class="cnchk"> ⚙️ Bài 15 – Cơ Khí Động Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai16" class="cnchk"> 👷 Bài 16 – Nghề Nghiệp CN (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai17" class="cnchk"> 🔧 Bài 17 – Động Cơ Đốt Trong (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai18" class="cnchk"> 🔄 Bài 18 – Nguyên Lý Làm Việc (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai19" class="cnchk"> 🏗️ Bài 19 – Thân Máy & Cơ Cấu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai20" class="cnchk"> 💧 Bài 20 – Bôi Trơn & Làm Mát (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai21" class="cnchk"> ⛽ Bài 21 – Hệ Thống Nhiên Liệu (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai22" class="cnchk"> ⚡ Bài 22 – Đánh Lửa & Khởi Động (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai23" class="cnchk"> 🚗 Bài 23 – Khái Quát Về Ô Tô (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai24" class="cnchk"> ⚙️ Bài 24 – Hệ Thống Truyền Lực (10 câu)</label>
+        <label class="chk-row"><input type="checkbox" checked value="cnbai25" class="cnchk"> 🛑 Bài 25 – Phanh, Treo & Lái (10 câu)</label>
+      </div>
+    </div>
+    <button class="btn btn-p btn-full" onclick="startRandomCN()">🚀 Bắt đầu làm bài</button>
+  </div>
+
+  <!-- SETUP VẬT LÍ -->
+  <div class="scr" id="scr-setup-vat-li">
+    <button class="back" onclick="goHome()">← Quay lại</button>
+    <h2 class="pg-title">🎲 Tạo đề ngẫu nhiên – Vật Lí</h2>
+    <div class="sbox">
+      <div class="slabel">Số câu hỏi</div>
+      <div class="qty-row" id="vatli-qty-row">
+        <button class="qbtn on" onclick="pickQtyVatLi(this,10)">10 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,20)">20 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,30)">30 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,50)">50 câu</button>
+        <button class="qbtn" onclick="pickQtyVatLi(this,'all')">Tất cả</button>
+      </div>
+    </div>
+    <div class="sbox">
+      <div class="slabel">Làm bài</div>
+      <div class="chk-col">
+        <label class="chk-row" style="opacity:.9;cursor:default"><span>Đã nạp sẵn bộ 100 câu Vật Lí từ file <strong>questions-vatli.js</strong>.</span></label>
+      </div>
+    </div>
+    <button class="btn btn-p btn-full" onclick="startRandomVatLi()">🚀 Bắt đầu làm bài</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="scr" id="scr-quiz">
+    <div class="qhdr">
+      <div class="qtop">
+        <span class="qctr" id="qctr">Câu 1 / 32</span>
+        <span class="qscore" id="qscore">✓ 0 đúng</span>
+      </div>
+      <div class="pbar"><div class="pfill" id="pfill" style="width:0%"></div></div>
+    </div>
+    <div class="qcard">
+      <div class="qbadge" id="qbadge">Câu 1</div>
+      <p class="qtxt" id="qtxt"></p>
+      <div id="qimg"></div>
+      <div class="opts" id="opts"></div>
+      <div id="fbarea"></div>
+    </div>
+    <div class="qft">
+      <div class="hint">Phím <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd> chọn · <kbd>Enter</kbd> tiếp</div>
+      <button class="btn btn-p" id="nxtbtn" onclick="nextQ()" disabled>Câu tiếp →</button>
+    </div>
+    <div class="quit-area">
+      <button class="quit-btn" onclick="confirmQuit()">✕ Thoát bài thi</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="scr" id="scr-results">
+    <div class="res-top">
+      <span class="res-emoji" id="remoji">🎉</span>
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="160" height="160" viewBox="0 0 160 160">
+          <defs>
+            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#4361EE"/>
+              <stop offset="100%" stop-color="#7C3AED"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg" cx="80" cy="80" r="65"/>
+          <circle class="ring-fill" id="rring" cx="80" cy="80" r="65"/>
+        </svg>
+        <div class="ring-center">
+          <span class="ring-num" id="rnum">0/0</span>
+          <span class="ring-sub">điểm</span>
+        </div>
+      </div>
+      <img src="https://scontent-sin11-1.cdninstagram.com/v/t51.82787-15/670287373_17921453376314068_8742077830470040990_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ig_cache_key=Mzg3ODg3NDUwNjM3MTI0MTAyNw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjYyNHg2MjQuc2RyLkMzIn0%3D&_nc_ohc=2J1DZtHR7VUQ7kNvwEpj1oE&_nc_oc=Adr8YjqwU7DJ36TtpwA2RPL7t_yoHvgE6Ge8g8eigKEexIoWAii61xZPI6du6V5UtgGguYiNTjW3mCCmt9nTYdHj&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-sin11-1.cdninstagram.com&_nc_gid=ZFkSOxulXUGfLexIlgJhVQ&_nc_ss=7a32e&oh=00_Af0KVoneKAMXCqAfdsKNd9C_KnduNCfcMdBzeHtN3CaEMw&oe=69EAE40A"
+        style="width:110px;height:110px;object-fit:cover;border-radius:16px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.12);" alt="">
+      <div class="res-title" id="rtitle">Hoàn thành!</div>
+      <div class="res-sub" id="rsub"></div>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-v ok" id="rcok">0</span><span class="stat-l">Câu đúng</span></div>
+      <div class="stat"><span class="stat-v err" id="rcerr">0</span><span class="stat-l">Câu sai</span></div>
+      <div class="stat"><span class="stat-v pri" id="rcpct">0%</span><span class="stat-l">Tỉ lệ đúng</span></div>
+    </div>
+    <div class="res-btns">
+      <button class="btn btn-p" onclick="retryQuiz()">🔄 Làm lại</button>
+      <button class="btn btn-s" onclick="goHome()">🏠 Trang chủ</button>
+    </div>
+    <button class="rev-hdr" onclick="toggleRev()">
+      <span>📋 Xem lại đáp án chi tiết</span><span id="ricon">▼</span>
+    </button>
+    <div class="rev-list" id="revlist" style="display:none"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const L=['A','B','C','D'];
+const QDB={
+bai10:[
+{q:"Cuộc cải cách của vua Lê Thánh Tông được tiến hành trong bối cảnh lịch sử nào sau đây?",o:["Nội bộ triều đình có nhiều mâu thuẫn, biến động.","Chế độ phong kiến lâm vào khủng hoảng trầm trọng","Nền kinh tế sa sút, nạn đói diễn ra thường xuyên","Đất nước đứng trước nguy cơ bị nhà Minh xâm lược"],a:0,d:'easy'},
+{q:"Công cuộc cải cách của Lê Thánh Tông tập trung chủ yếu vào lĩnh vực",o:["giáo dục.","kinh tế.","văn hóa.","hành chính."],a:3,d:'easy'},
+{q:"Để quản lý đất nước, vua Lê Thánh Tông đã cho ban hành bộ luật nào sau đây?",o:["Quốc triều hình luật.","Hình thư","Hoàng Việt luật lệ.","Hình luật."],a:0,d:'easy'},
+{q:"Trong lĩnh vực văn hóa, Lê Thánh Tông đặc biệt đề cao hệ tư tưởng",o:["Nho giáo","Đạo giáo","Thiên chúa giáo","Phật giáo"],a:0,d:'easy'},
+{q:"Ban cấp ruộng đất cho quý tộc, quan lại cao cấp từ nhất phẩm đến tứ phẩm là nội dung của chính sách",o:["Hạn nô","Lộc điền","Quân điền","Hạn điền"],a:1,d:'easy'},
+{q:"Ruộng đất công ở các làng xã thời Lê Thánh Tông được phân chia theo chế độ nào?",o:["Lộc điền.","Điền trang.","Hạn điền","Quân điền."],a:3,d:'easy'},
+{q:"Dưới thời vua Lê Thánh Tông, hệ thống cơ quan phụ trách đạo thừa tuyên có tên gọi là",o:["Thông chính ty","Lục bộ","Lục khoa","Tam ty"],a:3,d:'easy'},
+{q:"Năm 1471, vua Lê Thánh Tông cho lập thêm đạo thừa tuyên thứ 13 có tên gọi là",o:["Quảng Nam.","Tây Đô.","Phú Xuân.","Hà Nội."],a:0,d:'easy'},
+{q:"Trong cuộc cải cách thế kỉ XV, dưới đạo thừa tuyên, vua Lê Thánh Tông thiết lập hệ thống",o:["tỉnh, phủ, huyện, làng.","phủ, huyện/châu, xã.","tỉnh/thành phố, huyện, xã","lộ, trấn, phủ, huyện/châu"],a:1,d:'easy'},
+{q:"Dưới thời vua Lê Thánh Tông, hệ thống quan lại được tuyển chọn chủ yếu thông qua",o:["tiến cử","đề cử","dòng dõi tôn thất","giáo dục – khoa cử"],a:3,d:'easy'},
+{q:"Nội dung nào phản ánh đúng mục đích cải cách của vua Lê Thánh Tông?",o:["Tăng cường quyền lực của hoàng đế và củng cố bộ máy nhà nước","Tăng cường tiềm lực đất nước chuẩn bị đối phó với giặc ngoại xâm","Giải quyết tình trạng khủng hoảng trầm trọng của đất nước bấy giờ","Biến nước ta trở thành cường quốc lớn mạnh hàng đầu trong khu vực."],a:0,d:'medium'},
+{q:"Để tập trung quyền lực vào nhà vua, Lê Thánh Tông đã",o:["Bãi bỏ nhiều cơ quan, chức quan cũ","Chú trọng đổi mới giáo dục khoa cử","Coi trọng bảo vệ quyền lợi phụ nữ, trẻ em","Ban hành chính sách hạn điền và hạn nô"],a:0,d:'medium'},
+{q:"\"Đây là một bộ luật đầy đủ… gồm hơn 700 điều, quy định khá đầy đủ tội danh và hình phạt…\". Nhận xét trên đề cập đến bộ luật nào?",o:["Quốc triều hình luật.","Hình thư.","Hoàng Việt luật lệ.","Hình luật."],a:0,d:'medium'},
+{q:"Năm 1460, sau khi lên ngôi, vua Lê Thánh Tông đã tiến hành",o:["khuyến khích phát triển ngoại thương.","công cuộc thống nhất đất nước.","cuộc cải cách trên nhiều lĩnh vực.","mở cuộc tiến công sang Trung Quốc."],a:2,d:'medium'},
+{q:"Một trong những điểm mới và tiến bộ của bộ luật Quốc triều hình luật là",o:["đề cao quyền tự do, dân chủ của nhân dân.","bảo vệ quyền lợi và địa vị của người phụ nữ.","bảo vệ tuyệt đối quyền và lợi ích của vua.","bảo vệ quyền và lợi ích của quân cấm binh."],a:1,d:'medium'},
+{q:"Nội dung nào phản ánh đúng về chức năng của Lục bộ dưới thời vua Lê Thánh Tông?",o:["Cơ quan cao cấp chủ chốt trong triều đình.","Theo dõi, giám sát hoạt động của Lục khoa.","Phụ trách hoạt động quân sự của nhà nước.","Cơ quan giúp việc cho Lục Tự, Lục khoa"],a:0,d:'medium'},
+{q:"Nội dung nào không phải là cải cách hành chính ở cấp trung ương của vua Lê Thánh Tông?",o:["Xóa bỏ hầu hết các chức quan đại thần có quyền lực lớn.","Giữ lại một số ít quan đại thần cùng vua bàn việc khi cần.","Chia đất nước thành 12 đạo thừa tuyên và phủ Trung Đô.","Tổ chức hoàn thiện cơ cấu, chức năng của Lục Bộ, Lục khoa"],a:2,d:'medium'},
+{q:"Nội dung nào phản ánh đúng ý nghĩa cải cách của vua Lê Thánh Tông thế kỉ XV?",o:["Đưa đất nước thoát khỏi tình trạng khủng hoảng trầm trọng","Góp phần ổn định và phát triển kinh tế, văn hóa, xã hội Đại Việt","Nâng cao tiềm lực quốc gia, đẩy lùi nguy cơ ngoại xâm cận kề","Hoàn thành thống nhất đất nước về mặt lãnh thổ và hành chính"],a:1,d:'medium'},
+{q:"Nội dung nào không phải là cải cách của vua Lê Thánh Tông trên lĩnh vực hành chính?",o:["Chia cả nước từ 5 đạo thành 12 đạo thừa tuyên và phủ Trung Đô","Đề cao Nho giáo, đưa Nho giáo trở thành hệ tư tưởng độc tôn","Tăng cường chế độ kiểm tra, giám sát lẫn nhau giữa các cơ quan","Thành lập Lục bộ đảm nhiệm công việc chủ yếu của quốc gia"],a:1,d:'medium'},
+{q:"Nội dung nào là cải cách của vua Lê Thánh Tông trên lĩnh vực văn hóa – giáo dục?",o:["Hạn chế quyền lực của vương hầu, quý tộc","Quy định chặt chẽ chế độ khoa cử","Ban hành chế độ lộc điền và quân điền","Thành lập Lục khoa giám sát Lục bộ"],a:1,d:'medium'},
+{q:"Nội dung nào là cải cách của vua Lê Thánh Tông trên lĩnh vực quân đội, quốc phòng?",o:["Chú trọng hoàn thiện hệ thống pháp luật quản lý đất nước","Chú trọng xây dựng đội ngũ quan lại có phẩm chất tốt","Tổ chức các kì thi khảo võ nghệ để tuyển chọn tướng sĩ","Bãi bỏ hầu hết các chức quan đại thần có quyền lực lớn"],a:2,d:'hard'},
+{q:"Nội dung nào phản ánh đúng điểm giống nhau giữa cải cách của Hồ Quý Ly và vua Lê Thánh Tông?",o:["Cải cách thành công trọn vẹn và mang tính triệt để trên mọi lĩnh vực","Cải cách nhằm tập trung quyền lực về tay vua và triều đình trung ương","Cải cách chủ yếu mô phỏng theo mô hình nhà Minh (Trung Quốc)","Cải cách toàn diện, quy mô lớn nhưng tập trung vào lĩnh vực quân đội"],a:1,d:'hard'},
+{q:"Phân chia ruộng công ở các làng xã cho quan lại từ tam phẩm trở xuống đến các tầng lớp nhân dân là nội dung của chính sách",o:["Quân điền","Hạn nô","Lộc điền","Hạn điền"],a:0,d:'hard'},
+{q:"Công cuộc cải cách của vua Lê Thánh Tông thế kỉ XV không được tiến hành trên lĩnh vực nào?",o:["Hành chính","Giáo dục","Kinh tế","Ngoại giao"],a:3,d:'hard'},
+{q:"\"Coi trọng biên soạn quốc sử\" là nội dung cải cách của vua Lê Thánh Tông trên lĩnh vực nào?",o:["Quân đội","Kinh tế","Luật pháp","Văn hóa"],a:3,d:'hard'},
+{q:"Trong nội dung cải cách, Hồ Quý Ly và vua Lê Thánh Tông đều",o:["bãi bỏ nhiều cơ quan, chức quan cũ có nhiều quyền lực","tăng cường cơ chế giám sát, ràng buộc nhau giữa các cơ quan","hạn chế sở hữu ruộng đất quy mô lớn của quý tộc tôn thất","khuyến khích và đề cao sử dụng chữ Nôm trong thi cử"],a:0,d:'hard'},
+{q:"Năm 1484, vua Lê Thánh Tông quyết định cho dựng bia ghi tên Tiến sĩ nhằm",o:["phát huy những phong tục tập quán tốt đẹp của dân tộc","tăng cường sự ràng buộc lẫn nhau giữa các cơ quan","tập trung quyền lực vào tay vua và triều đình trung ương","đề cao Nho học và tôn vinh các bậc trí thức Nho học"],a:3,d:'hard'},
+{q:"Nội dung nào không phải là cải cách hành chính ở cấp địa phương của vua Lê Thánh Tông?",o:["Thành lập cơ quan đứng đầu các đạo Thừa tuyên là Tam ty","Xóa bỏ hầu hết các chức quan đại thần có quyền lực lớn.","Chia đất nước thành 12 đạo thừa tuyên và phủ Trung Đô.","Bãi bỏ lộ, trấn cũ, thành lập hệ thống phủ, huyện/châu, xã"],a:1,d:'hard'},
+{q:"Một trong những ý nghĩa về cuộc cải cách của vua Lê Thánh Tông ở thế kỉ XV là",o:["Tạo tiền đề cho cuộc chiến tranh xâm lược phương Bắc.","Tạo thế và lực cho ta đánh bại quân xâm lược Minh.","Làm chuyển biến toàn bộ các hoạt động của quốc gia.","Mở ra khả năng độc lập, tự chủ đầu tiên cho dân tộc ta."],a:2,d:'hard'},
+{q:"Để tăng cường sức mạnh quân đội, trong cải cách của mình, vua Lê Thánh Tông đã",o:["Tăng cường tuyển quân quy mô lớn, ồ ạt ở các địa phương","Chú trọng cải tiến vũ khí, phòng thủ những nơi hiểm yếu","Quy định chặt chẽ kỉ luật quân đội và huấn luyện, tập trận","Thải hồi những binh sĩ già yếu, bổ sung người khỏe mạnh"],a:2,d:'hard'},
+{q:"Một trong những điểm mới của bộ Quốc triều hình luật là",o:["đề cao quyền lợi và địa vị của nam giới, quy định cụ thể về tố tụng","có sự gia tăng hình phạt đối với người phạm tội nếu đã đến tuổi trưởng thành","có sự phân biệt hình phạt đối với người phạm tội nếu tàn tật hoặc còn nhỏ","xóa bỏ hình phạt đối với người phạm tội nếu tàn tật hoặc còn nhỏ"],a:2,d:'hard'},
+{q:"Nội dung nào không phải là những giá trị cơ bản mà cuộc cải cách hành chính của vua Lê Thánh Tông mang lại?",o:["Xây dựng quy chế vận hành bộ máy nhà nước trên nguyên tắc quyền lực thuộc về nhân dân.","Thanh lọc, tỉnh giản một số chức quan, cơ quan và các cấp chính quyền trung gian.","Không để quyền lực tập trung quá nhiều vào một cơ quan, để ngăn chặn sự lộng quyền.","Các cơ quan Nhà nước giám sát lẫn nhau để hạn chế sự lạm quyền và nâng cao trách nhiệm."],a:0,d:'hard'}
+],
+bai11:[
+{q:"Cuộc cải cách hành chính lớn nhất của vương triều Nguyễn được tiến hành dưới thời vua",o:["Thiệu Trị.","Minh Mạng.","Tự Đức.","Gia Long."],a:1,d:'easy'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) được thực hiện trong bối cảnh lịch sử nào?",o:["Phương thức sản xuất tư bản chủ nghĩa phát triển mạnh","Chế độ quân chủ chuyên chế đang trong thời kì thịnh trị.","Đất nước đứng trước nguy cơ xâm lược từ nhà Thanh","Bộ máy chính quyền nhà nước chưa hoàn thiện, đồng bộ"],a:3,d:'easy'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) nhằm thực hiện mục đích nào?",o:["Khôi phục nền giáo dục Nho học","Thúc đẩy kinh tế tư bản chủ nghĩa","Ngăn ngừa nguy cơ giặc ngoại xâm","Tập trung quyền lực vào tay vua"],a:3,d:'easy'},
+{q:"Để hoàn thiện bộ máy chính quyền Trung ương, vua Minh Mạng đã cho thành lập",o:["Đô sát viện, Cơ mật viện","Thông chính ty, Quốc Tử Giám","Lục bộ, Lục khoa, Lục tự","Đô ty, Thừa ty, Hiến ty"],a:0,d:'easy'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) tập trung vào lĩnh vực chủ yếu nào?",o:["Hành chính","Quốc phòng","Kinh tế","Văn hóa"],a:0,d:'easy'},
+{q:"Trong cuộc cải cách nửa đầu thế kỉ XIX, vua Minh Mạng đã phân chia bộ máy chính quyền địa phương thành các cấp nào?",o:["Lộ, trấn, phủ, huyện/châu, xã","Đạo thừa tuyên, phủ, huyện/châu, xã.","Tỉnh/thành phố, huyện/châu, xã","Tỉnh, phủ, huyện/châu, tổng, xã."],a:3,d:'easy'},
+{q:"Nội dung nào không phải là hoạt động cải cách của vua Minh Mạng nửa đầu thế kỉ XIX?",o:["Phân chia lại đơn vị hành chính ở cấp địa phương","Ban hành chính sách hạn điền và hạn nô","Hoàn thiện cơ cấu, chức năng của Lục bộ","Tăng cường giám sát lẫn nhau giữa các cơ quan"],a:1,d:'easy'},
+{q:"Trong công cuộc cải cách của vua Minh Mạng, Nội các được thành lập có vai trò nào?",o:["Xướng danh những người đỗ trong kì thi Đình","Phụ trách nhân khẩu, thu thuế trong cả nước","Giúp vua khởi thảo các văn bản hành chính","Kiểm tra, giám sát hoạt động của Lục bộ"],a:2,d:'easy'},
+{q:"Năm 1832, vua Minh Mạng cho thành lập Đô sát viện để thực hiện nhiệm vụ nào?",o:["Phụ trách bang giao, đón tiếp sứ thần nước ngoài","Tiếp nhận và xử lý các loại công văn, giấy tờ","Phụ trách nhân khẩu, thu thuế trong cả nước","Can gián nhà vua và giám sát các cơ quan"],a:3,d:'easy'},
+{q:"Trong cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX), đứng đầu tỉnh là",o:["Lục khoa, Lục tự","Đô ty, Thừa ty, Hiến ty.","Tổng đốc, Tuần phủ.","Lục bộ, Lục khoa"],a:2,d:'easy'},
+{q:"Công cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) đã đem lại kết quả nào?",o:["Đưa đất nước phát triển lên chế độ tư bản chủ nghĩa.","Hoàn thành thống nhất đất nước về mặt lãnh thổ.","Góp phần mở cửa và hội nhập nền kinh tế khu vực.","Thúc đẩy bộ máy chính quyền các cấp hoạt động hiệu quả."],a:3,d:'medium'},
+{q:"Nội dung nào không phản ánh đúng kết quả cuộc cải cách của vua Minh Mạng?",o:["Xây dựng chế độ quân chủ trung ương phân quyền cao độ.","Tổ chức cơ cấu bộ máy nhà nước gọn nhẹ, chặt chẽ.","Thống nhất đơn vị hành chính địa phương trong cả nước.","Xây dựng được chế độ quân chủ trung ương tập quyền cao độ."],a:0,d:'medium'},
+{q:"Trong bộ máy chính quyền trung ương thời Minh Mạng, Cơ mật viện có vai trò tư vấn cho nhà vua về",o:["quân sự.","luật pháp.","giáo dục.","văn hóa."],a:0,d:'medium'},
+{q:"Ở địa phương, trong công cuộc cải cách nửa đầu thế kỉ XIX, vua Minh Mạng đã chia cả nước thành",o:["các lộ, trấn, phủ, huyện/châu","30 tỉnh và 1 phủ Thừa Thiên.","Bắc Thành, Gia Định thành","13 đạo thừa tuyên và các phủ"],a:1,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) được thực hiện trong bối cảnh",o:["bộ máy nhà nước phong kiến cơ bản đã hoàn chỉnh.","tình hình an ninh – xã hội ở nhiều địa phương bất ổn","tình trạng phân quyền, thiếu thống nhất đã khắc phục.","phương thức sản xuất tư bản chủ nghĩa thâm nhập mạnh"],a:1,d:'medium'},
+{q:"Cuộc cải cách hành chính của vua Minh Mạng không nhằm mục đích nào?",o:["Tập trung quyền lực và hoàn thiện bộ máy nhà nước.","Xóa bỏ tình trạng \"bế quan tỏa cảng\" của đất nước.","Tăng cường tính thống nhất và tiềm lực của đất nước.","Khắc phục tình trạng phân quyền, thiếu thống nhất."],a:1,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) có ý nghĩa quan trọng nào?",o:["ngăn chặn mọi nguy cơ xâm lược từ bên ngoài.","xóa bỏ tình trạng \"bế quan tỏa cảng\" của đất nước.","đặt cơ sở cho sự phân chia tỉnh, huyện hiện nay.","hoàn thành thống nhất đất nước về mặt lãnh thổ."],a:2,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng và vua Lê Thánh Tông có điểm giống nhau nào?",o:["Khuyến khích, tạo điều kiện cho ngoại thương phát triển.","Chú trọng phát triển kinh tế, xã hội theo hướng tư bản.","Ưu tiên cho sự nghiệp thống nhất đất nước về lãnh thổ.","Nâng cao vai trò quản lí của chính quyền ở trung ương."],a:3,d:'medium'},
+{q:"Một trong những di sản lớn nhất trong cuộc cải cách của vua Minh Mạng còn giá trị đến ngày nay là",o:["ưu tiên bổ nhiệm quan lại là người ở địa phương.","cách thức tổ chức bộ máy nhà nước ở trung ương.","tập trung cao độ quyền lực vào trong tay nhà vua.","cách thức phân chia đơn vị hành chính cấp tỉnh."],a:3,d:'medium'},
+{q:"Cuộc cải cách của vua Minh Mạng và vua Lê Thánh Tông có điểm khác biệt nào?",o:["Tăng cường quyền lực tuyệt đối của nhà vua.","Thành lập lục Bộ để giúp việc cho nhà vua.","Thành lập các cơ quan Nội các và Cơ mật viện.","Củng cố chế độ quân chủ chuyên chế tập quyền."],a:2,d:'hard'},
+{q:"Cuộc cải cách hành chính của vua Minh Mạng được thực hiện trên cơ sở học tập mô hình của vương triều nào ở Trung Quốc?",o:["Nhà Thanh","Nhà Tống","Nhà Nguyên","Nhà Đường"],a:0,d:'hard'},
+{q:"Một trong những hạn chế trong cải cách của vua Minh Mạng nửa đầu thế kỉ XIX là",o:["bộ máy nhà nước cồng kềnh, hoạt động kém hiệu quả hơn thời kì trước","sự giám sát, ràng buộc lẫn nhau giữa các cơ quan, chức quan mờ nhạt","cải cách làm tăng thêm tình trạng cát cứ, phân quyền ở các địa phương","cải cách nặng về củng cố vương triều, ít chú ý đến cải thiện dân sinh"],a:3,d:'hard'},
+{q:"Dưới thời Minh Mạng, triều đình tăng cường quyền kiểm soát đối với vùng dân tộc thiểu số thông qua việc",o:["bỏ lưu quan (quan lại người Kinh)","bãi bỏ quyền thế tập của tù trưởng.","gả công chúa cho các tù trưởng","thiết lập chế độ thổ quan"],a:1,d:'hard'},
+{q:"Cuộc cải cách của vua Minh Mạng nửa đầu thế kỉ XIX đã đưa đến",o:["sự xác lập của mô hình quản lý nhà nước hoàn toàn độc đáo so với thế giới lúc bấy giờ","sự xác lập của nền quân chủ chuyên chế trung ương tập quyền cao độ mang tính quan liêu.","sự xác lập của nền quân chủ chuyên chế trung ương tập quyền cao độ mang tính quý tộc.","sự phát triển thịnh trị đạt đến đỉnh cao trong lịch sử của chế độ quân chủ Việt Nam"],a:1,d:'hard'},
+{q:"Trong cải cách của vua Minh Mạng, cơ quan tư vấn tối cao cho nhà vua về những vấn đề quân sự quan trọng được gọi là",o:["Đô sát viện.","Hàn lâm viện.","Cơ mật viện.","Nội các."],a:2,d:'hard'},
+{q:"Một trong những tác dụng tích cực của cải cách hành chính thời vua Minh Mạng là",o:["phát triển nền văn hóa mang đậm bản sắc dân tộc.","khích lệ người dân tích cực thi cử và ra làm quan.","hạn chế sự tham nhũng và lộng hành của quan lại.","tạo điều kiện phát triển kinh tế theo hướng tư bản"],a:2,d:'hard'},
+{q:"Vua Minh Mạng cải cách hệ thống chính trị - hành chính không nhằm mục tiêu nào dưới đây?",o:["Hạn chế tối đa quyền tự trị của làng xã, địa phương.","Nâng cao năng lực hệ thống quan chức ở trung ương.","Thống nhất đất nước, xác lập chủ quyền lãnh thổ.","Thiết lập nên nhà nước quân chủ phong kiến tập quyền."],a:2,d:'hard'},
+{q:"Cuộc cải cách của vua Minh Mạng và vua Lê Thánh Tông có điểm khác biệt nào?",o:["Chia cả nước thành 30 tỉnh và phủ Thừa Thiên.","Củng cố chế độ quân chủ chuyên chế tập quyền.","Thành lập lục Bộ để giúp việc cho nhà vua.","Tăng cường quyền lực tuyệt đối của nhà vua."],a:0,d:'hard'},
+{q:"Nội dung nào phản ánh đúng điểm giống nhau trong cải cách của Hồ Quý Ly và vua Minh Mạng?",o:["Cải cách nặng về mô phỏng, dập khuôn bên ngoài mà ít có sự sáng tạo","Cải cách nhằm tăng cường quyền lực của vua và hiệu quả của bộ máy nhà nước","Được tiến hành khi đất nước đang lâm vào tình trạng khủng hoảng trầm trọng.","Cải cách nhằm hướng đến cải thiện dân sinh, phát triển kinh tế - xã hội đất nước"],a:1,d:'hard'},
+{q:"Một trong những cơ quan chủ chốt của triều đình phong kiến trung ương được thành lập từ thời vua Minh Mạng là",o:["Hồng lô tự.","Thông chính ty.","Đô sát viện.","Quốc tử giám."],a:2,d:'hard'},
+{q:"Một trong những đặc điểm cuộc cải cách của vua Minh Mạng (nửa đầu thế kỉ XIX) là",o:["không tạo điều kiện cho sự phát triển kinh tế đất nước","mang tính cưỡng bức, nặng về mô phỏng bên ngoài","chủ yếu diễn ra trên lĩnh vực chính trị, hành chính","ảnh hưởng trực tiếp đến khối đại đoàn kết dân tộc"],a:2,d:'hard'}
+],
+bai12:[
+{q:"Biển Đông là vùng biển thuộc",o:["Đại Tây Dương.","Ấn Độ Dương.","Địa Trung Hải.","Thái Bình Dương."],a:3,d:'easy'},
+{q:"Về vị trí địa lý, biển Đông được coi là cầu nối giữa Thái Bình Dương và",o:["Địa Trung Hải.","Ấn Độ Dương.","Đại Tây Dương.","Bắc Băng Dương."],a:1,d:'easy'},
+{q:"Biển Đông là vùng biển chung của 9 quốc gia ở châu Á, trong đó có",o:["Nhật Bản","Ấn Độ","Trung Quốc","Lào"],a:2,d:'easy'},
+{q:"Phía tây nam của biển Đông nối với biển An-đa-man của Ấn Độ Dương thông qua eo biển",o:["Đài Loan","La-li-man-tan","Lu-dông","Ma-lắc-ca"],a:3,d:'easy'},
+{q:"Tuyến đường vận tải quốc tế qua Biển Đông được coi là nhộn nhịp thứ 2 trên thế giới chỉ sau biển",o:["Gia-va.","Địa Trung Hải","Caribê.","Hoa Đông."],a:1,d:'easy'},
+{q:"Eo biển Ma-lắc-ca là điểm điều tiết giao thông quan trọng bậc nhất ở châu lục nào?",o:["Châu Mĩ.","Châu Âu.","Châu Phi.","Châu Á."],a:3,d:'easy'},
+{q:"Biển Đông là đường vận chuyển huyết mạch của khu vực",o:["châu Á - Thái Bình Dương.","châu Âu và mũi Hảo Vọng.","châu Phi và châu Nam Cực.","Bắc Mĩ và eo biển Đan Mạch."],a:0,d:'easy'},
+{q:"Biển Đông có ảnh hưởng trực tiếp tới cuộc sống của người dân ở khu vực nào?",o:["Châu Phi.","Châu Mĩ.","Châu Á","Châu Âu."],a:2,d:'easy'},
+{q:"Biển Đông là vùng biển chung của 9 quốc gia ở châu Á, trong đó có",o:["Ma-lai-xi-a","Mi-an-ma","Liên bang Nga","Mĩ"],a:0,d:'easy'},
+{q:"Các cảng biển lớn trên Biển Đông có vai trò nào?",o:["Điểm trung chuyển của tàu thuyền.","Nơi giải quyết các vấn đề xã hội.","Điểm tập trung phát triển du lịch.","Nơi khai thác và chế biến dầu khí."],a:0,d:'easy'},
+{q:"Eo biển Ma-lắc-ca kết nối nhiều nước châu Á, trong đó có 3 nước đông dân nhất là In-đô-nê-xi-a, Trung Quốc và",o:["Ấn Độ","Ai Cập","Liên bang Nga","Mông Cổ"],a:0,d:'medium'},
+{q:"Vùng biển nào là tuyến đường di chuyển ngắn nhất nối Thái Bình Dương và Ấn Độ Dương?",o:["Biển Đỏ.","Biển Địa Trung Hải.","Biển Đen.","Biển Đông."],a:3,d:'medium'},
+{q:"Trong lịch sử, Biển Đông được coi là tuyến đường thiết yếu trong giao thông, giao thương, di cư,… giữa",o:["Trung Quốc và Nhật Bản","Ấn Độ và Nam Á","Ấn Độ và Trung Quốc","Trung Quốc và Đông Á"],a:2,d:'medium'},
+{q:"Các quốc gia ở khu vực nào có nền kinh tế gắn trực tiếp với con đường thương mại, cảng biển và tài nguyên trên Biển Đông?",o:["Đông Nam Á và Nam Á","Đông Bắc Á và Tây Âu","Đông Bắc Á và Đông Nam Á","Nam Á và Tây Á"],a:2,d:'medium'},
+{q:"Ở Biển Đông, nguồn tài nguyên thiên nhiên nào có trữ lượng vào loại lớn nhất thế giới?",o:["Muối biển.","Quặng sắt.","Băng cháy.","Dầu khí."],a:3,d:'medium'},
+{q:"Nội dung nào phản ánh đúng sự phong phú về nguồn tài nguyên thiên nhiên của Biển Đông?",o:["Biển Đông là điểm điều tiết giao thông đường biển quan trọng nhất châu Á","Biển Đông có hàng trăm loài sinh vật, bao gồm cả động vật và thực vật","Biển Đông là địa bàn cạnh tranh ảnh hưởng truyền thống của các nước lớn","Biển Đông là nơi tập trung các mô hình chính trị, kinh tế xã hội đa dạng"],a:1,d:'medium'},
+{q:"Nội dung nào không phản ánh đúng vai trò quan trọng của Biển Đông về mặt kinh tế?",o:["Biển Đông là nơi diễn ra quá trình giao thoa của nhiều nền văn hóa lớn","Biển Đông là tuyến đường vận tải hàng hải nhộn nhịp thứ hai thế giới","Các nước ven biển Đông có hoạt động khai thác hải sản và dầu khí sôi động","Các nước Đông Nam Á ven biển hưởng lợi trực tiếp về kinh tế từ biển Đông"],a:0,d:'medium'},
+{q:"Ngành kinh tế nào được đẩy mạnh nhờ hệ sinh vật đa dạng dưới đáy biển và cảnh quan thiên nhiên tươi đẹp của Biển Đông?",o:["Nuôi trồng thủy, hải sản.","Đánh bắt cá.","Khai thác khoáng sản.","Du lịch biển."],a:3,d:'medium'},
+{q:"Nội dung nào thể hiện tầm quan trọng chiến lược của Biển Đông?",o:["Có nguồn tài nguyên thiên nhiên biển phong phú.","Là tuyến hàng hải nối Thái Bình Dương với Bắc Băng Dương","Là tuyến hàng hải quốc tế nhộn nhịp nhất trên thế giới.","Là tuyến giao thông hàng hải duy nhất trên biển."],a:0,d:'medium'},
+{q:"Nguồn tài nguyên khoáng sản đa dạng trên biển Đông là điều kiện thuận lợi để các nước",o:["phát triển hoạt động kinh tế có tầm chiến lược.","xây dựng cơ sở hậu cần, kỹ thuật, phục vụ quân sự.","kiểm soát, đảm bảo an ninh giao thông trên biển.","xây dựng các trạm thông tin, trạm dừng chân."],a:0,d:'hard'},
+{q:"Quần đảo Hoàng Sa và quần đảo Trường Sa thuộc chủ quyền của quốc gia nào?",o:["Trung Quốc.","Việt Nam.","Hàn Quốc.","Nhật Bản."],a:1,d:'hard'},
+{q:"Hiện nay, quần đảo Hoàng Sa trực thuộc quyền quản lý hành chính của",o:["thành phố Đà Nẵng.","tỉnh Cà Mau.","tỉnh Bà Rịa – Vũng Tàu.","tỉnh Khánh Hòa"],a:0,d:'hard'},
+{q:"Hiện nay, quần đảo Trường Sa trực thuộc quyền quản lí hành chính của",o:["tỉnh Nghệ An.","tỉnh Kiên Giang.","thành phố Đà Nẵng.","tỉnh Khánh Hòa."],a:3,d:'hard'},
+{q:"Nội dung nào phản ánh đúng tầm quan trọng của quần đảo Hoàng Sa và Trường Sa đối với Việt Nam về mặt quốc phòng – an ninh?",o:["Xây dựng các trạm thông tin, dừng chân, tiếp nhiên liệu cho các tàu.","Tạo thế mạnh cho dịch vụ hàng hải và đánh bắt hải sản trong khu vực","Giúp xây dựng các khu bảo tồn, trung tâm nghiên cứu sinh vật biển.","Hình thành tuyến phòng thủ nhiều tầng, từ xa đến gần bảo vệ đất liền."],a:3,d:'hard'},
+{q:"Nội dung nào không phản ánh đúng tầm quan trọng của quần đảo Hoàng Sa và Trường Sa đối với Việt Nam về mặt kinh tế?",o:["Tạo tuyến phòng thủ nhiều tầng từ xa đến gần để bảo vệ đất liền","Tạo thế mạnh về dịch vụ hàng hải cho nước ta trên Biển Đông","Tạo thuận lợi để phát triển ngành nuôi trồng, chế biến thủy sản","Tạo thế mạnh để phát triển kinh tế du lịch biển đảo cho nước ta"],a:0,d:'hard'},
+{q:"Tầm quan trọng chiến lược của quần đảo Hoàng Sa và Trường Sa được thể hiện ở nội dung nào?",o:["Đây là hai quần đảo duy nhất thuộc khu vực Biển Đông","Đây là hai quần đảo lớn nhất thuộc khu vực Biển Đông","Là nơi tiếp nhiên liệu duy nhất cho các tàu trên biển","Phục vụ tuyến hàng hải huyết mạch trên Biển Đông"],a:3,d:'hard'},
+{q:"Đối với Việt Nam, tầm quan trọng chiến lược của quần đảo Trường Sa và Hoàng Sa được thể hiện ở điểm nào?",o:["Là tuyến đường duy nhất để Việt Nam xuất khẩu hàng nông sản.","Là nền tảng duy nhất để Việt Nam phát triển công nghiệp nặng.","Có ý nghĩa về chiến lược quốc phòng, an ninh, kinh tế biển.","Đảm bảo nguồn an ninh lương thực cho nhân dân Việt Nam."],a:2,d:'hard'},
+{q:"Nội dung nào phản ánh đúng về tầm quan trọng chiến lược của Biển Đông đối với sự phát triển kinh tế Việt Nam?",o:["Vùng biển rộng lớn với nhiều đảo là không gian trọng yếu để phát triển văn hóa.","Hệ thống đảo, quần đảo trên Biển Đông chỉ thuận lợi để đầu tư và phát triển du lịch.","Việt Nam được đánh giá là quốc gia có lợi thế và tiềm năng to lớn về tài nguyên biển.","Biển đảo là nguồn cung cấp lương thực chủ yếu cho cuộc sống của nhân dân Việt Nam."],a:2,d:'hard'},
+{q:"Đặc điểm chung về vị trí địa lý của quần đảo Hoàng Sa và Trường Sa là",o:["gần với khu vực đất liền Việt Nam nhất","đều thuộc khu vực miền Bắc Việt Nam","nằm ở vị trí trung tâm của Biển Đông","đều thuộc khu vực miền Nam Việt Nam"],a:2,d:'hard'},
+{q:"Cả hai quần đảo Hoàng Sa và Trường Sa đều tạo thuận lợi để Việt Nam phát triển ngành kinh tế nào?",o:["công nghiệp chế tạo","lâm nghiệp","khai thác hải sản","nông nghiệp lúa nước"],a:2,d:'hard'}
+],
+cnbai15:[
+{q:"Ngành cơ khí động lực là ngành kỹ thuật tập trung vào việc gì?",o:["Chế tạo các loại máy công cụ phục vụ sản xuất.","Thiết kế, chế tạo, vận hành và bảo dưỡng các loại máy động lực và máy công tác.","Lắp đặt hệ thống điện dân dụng và công nghiệp.","Nghiên cứu các loại vật liệu mới trong xây dựng."],a:1,d:'easy'},
+{q:"Đâu là thiết bị thuộc nhóm máy động lực?",o:["Máy cày.","Ô tô.","Động cơ đốt trong.","Máy gặt đập liên hợp."],a:2,d:'easy'},
+{q:"Trong hệ thống cơ khí động lực, máy công tác nhận năng lượng từ đâu để thực hiện nhiệm vụ?",o:["Từ môi trường bên ngoài.","Từ hệ thống truyền lực kết nối với máy động lực.","Từ nguồn điện lưới trực tiếp.","Tự tạo ra năng lượng thông qua quá trình đốt cháy."],a:1,d:'easy'},
+{q:"Vai trò chính của cơ khí động lực đối với nền kinh tế quốc dân là gì?",o:["Chỉ phục vụ cho mục đích di chuyển của con người.","Đóng vai trò là trái tim của các hệ thống sản xuất và giao thông vận tải.","Giúp giảm thiểu tối đa lượng điện năng tiêu thụ.","Thay thế hoàn toàn con người trong mọi công đoạn sản xuất."],a:1,d:'easy'},
+{q:"Nhóm máy nào dưới đây được phân loại theo lĩnh vực giao thông vận tải?",o:["Máy kéo, máy xới đất.","Tàu thủy, máy bay, ô tô.","Máy ủi, máy xúc, cần trục.","Máy bơm nước, máy phát điện."],a:1,d:'medium'},
+{q:"Quy trình nào sau đây mô tả đúng chu kỳ hoạt động của cơ khí động lực?",o:["Thiết kế → Chế tạo → Sử dụng → Bảo dưỡng, sửa chữa.","Chế tạo → Thiết kế → Sử dụng → Loại bỏ.","Sử dụng → Bảo dưỡng → Chế tạo → Thiết kế.","Thiết kế → Chế tạo → Bán hàng → Kết thúc."],a:0,d:'medium'},
+{q:"Đối tượng lao động của ngành cơ khí động lực chủ yếu là:",o:["Các loại phần mềm máy tính.","Các loại máy động lực, hệ thống truyền lực và máy công tác.","Các bản vẽ kỹ thuật trên giấy.","Các loại cây trồng và vật nuôi."],a:1,d:'medium'},
+{q:"Nghề nghiệp nào sau đây trực tiếp thuộc lĩnh vực cơ khí động lực?",o:["Kỹ sư xây dựng dân dụng.","Kỹ sư thiết kế ô tô.","Chuyên viên tư vấn tài chính.","Bác sĩ thú y."],a:1,d:'hard'},
+{q:"Sự phát triển của ngành cơ khí động lực hiện nay đang hướng tới mục tiêu nào?",o:["Sử dụng hoàn toàn nhiên liệu hóa thạch.","Tăng kích thước máy móc càng lớn càng tốt.","Tiết kiệm năng lượng, giảm phát thải và thân thiện với môi trường.","Chỉ tập trung vào tốc độ mà không cần quan tâm đến độ an toàn."],a:2,d:'hard'},
+{q:"Tại sao nói cơ khí động lực thúc đẩy sự phát triển của các ngành khoa học khác?",o:["Vì nó cung cấp thiết bị và phương tiện thực nghiệm chính xác, hiện đại.","Vì nó là ngành duy nhất có sử dụng toán học.","Vì nó không cần sự hỗ trợ từ các ngành khác.","Vì nó ra đời sớm nhất trong lịch sử loài người."],a:0,d:'hard'}
+],
+cnbai16:[
+{q:"Ngành nghề nào dưới đây trực tiếp thực hiện quá trình thiết kế, chế tạo và bảo dưỡng các loại động cơ và máy động lực?",o:["Sư phạm kỹ thuật.","Cơ khí động lực.","Công nghệ thực phẩm.","Kỹ thuật xây dựng."],a:1,d:'easy'},
+{q:"Công việc nào thuộc về nhiệm vụ của một kỹ sư cơ khí động lực?",o:["Trực tiếp vận hành máy tiện để gia công chi tiết.","Thiết kế, tổ chức sản xuất và quản lý hệ thống cơ khí động lực.","Chỉ thực hiện bảo trì, thay dầu cho xe ô tô định kỳ.","Bán phụ tùng xe máy và ô tô tại cửa hàng."],a:1,d:'easy'},
+{q:"Đâu là đặc điểm về môi trường làm việc đặc trưng của nghề thợ sửa chữa xe có động cơ?",o:["Làm việc hoàn toàn trong văn phòng máy lạnh.","Thường xuyên tiếp xúc với dầu mỡ, tiếng ồn và khí thải.","Chỉ làm việc vào ban đêm để tránh nắng nóng.","Không yêu cầu sử dụng các thiết bị bảo hộ lao động."],a:1,d:'easy'},
+{q:"Kỹ thuật viên cơ khí động lực thường làm việc ở vị trí nào trong doanh nghiệp?",o:["Lãnh đạo cao cấp điều hành chiến lược kinh doanh.","Trung gian giữa kỹ sư và công nhân, giám sát lắp ráp và sửa chữa.","Nhân viên kế toán quản lý vật tư thiết bị.","Chuyên gia tư vấn pháp luật về an toàn giao thông."],a:1,d:'easy'},
+{q:"Yêu cầu về phẩm chất đối với người lao động trong ngành cơ khí động lực là gì?",o:["Có tính kiên trì, cẩn thận và trách nhiệm cao.","Chỉ cần có sức khỏe tốt, không cần tư duy sáng tạo.","Có khả năng thuyết trình trước đám đông xuất sắc.","Không cần quan tâm đến vấn đề bảo vệ môi trường."],a:0,d:'medium'},
+{q:"Một trong những kỹ năng quan trọng nhất của thợ cơ khí động lực là:",o:["Sử dụng thành thạo các loại nhạc cụ.","Sử dụng thành thạo các dụng cụ cầm tay và thiết bị đo kiểm.","Viết phần mềm quản lý tài chính doanh nghiệp.","Thiết kế thời trang bảo hộ lao động."],a:1,d:'medium'},
+{q:"Đối tượng lao động của ngành cơ khí động lực bao gồm:",o:["Các loại cây trồng và vật nuôi.","Các loại động cơ đốt trong, động cơ điện, các hệ thống truyền động.","Các công trình kiến trúc dân dụng.","Các phần mềm đồ họa máy tính chuyên dụng."],a:1,d:'medium'},
+{q:"Sự phát triển của ngành cơ khí động lực hiện nay đang hướng tới mục tiêu nào?",o:["Chỉ tập trung vào động cơ sử dụng nhiên liệu hóa thạch.","Phát triển động cơ thân thiện với môi trường (xe điện, xe hybrid).","Loại bỏ hoàn toàn các loại máy móc tự động hóa.","Giảm tối đa độ bền của sản phẩm để tăng doanh số bán hàng."],a:1,d:'hard'},
+{q:"Người làm nghề thiết kế trong ngành cơ khí động lực cần sử dụng thành thạo công cụ nào?",o:["Các phần mềm hỗ trợ thiết kế trên máy tính (CAD).","Các thiết bị đo huyết áp và nhịp tim.","Máy may công nghiệp.","Các dụng cụ làm vườn."],a:0,d:'hard'},
+{q:"Tại sao người lao động trong ngành cơ khí động lực cần có ý thức bảo vệ môi trường?",o:["Vì công việc này không gây ra bất kỳ tác động nào đến môi trường.","Để hạn chế tác động tiêu cực từ khí thải và chất thải độc hại (dầu, mỡ).","Chỉ để đối phó với các cơ quan kiểm tra chức năng.","Vì đây là yêu cầu không bắt buộc trong ngành kỹ thuật."],a:1,d:'hard'}
+],
+cnbai17:[
+{q:"Động cơ đốt trong là loại động cơ nhiệt mà quá trình biến đổi nhiệt năng thành công cơ học diễn ra ở đâu?",o:["Bên ngoài xi lanh của động cơ.","Bên trong buồng cháy (xi lanh) của động cơ.","Trong bình chứa nhiên liệu.","Trong hệ thống truyền động."],a:1,d:'easy'},
+{q:"Dựa vào nhiên liệu sử dụng, động cơ đốt trong phổ biến nhất hiện nay bao gồm:",o:["Động cơ chạy bằng sức gió và sức nước.","Động cơ xăng và động cơ diesel.","Động cơ chạy bằng điện và năng lượng mặt trời.","Động cơ hơi nước và động cơ phản lực."],a:1,d:'easy'},
+{q:"Theo số hành trình của piston trong một chu trình làm việc, động cơ đốt trong được phân loại thành:",o:["Động cơ 1 kỳ và 2 kỳ.","Động cơ 2 kỳ và 4 kỳ.","Động cơ 3 kỳ và 4 kỳ.","Động cơ nằm ngang và thẳng đứng."],a:1,d:'easy'},
+{q:"Cấu tạo chung của động cơ đốt trong (loại 4 kỳ) thường gồm có bao nhiêu cơ cấu và hệ thống chính?",o:["2 cơ cấu, 4 hệ thống.","3 cơ cấu, 5 hệ thống.","2 cơ cấu, 5 hệ thống.","3 cơ cấu, 4 hệ thống."],a:2,d:'easy'},
+{q:"Hai cơ cấu chính của động cơ đốt trong là:",o:["Cơ cấu trục khuỷu thanh truyền và Cơ cấu phân phối khí.","Cơ cấu khởi động và Cơ cấu làm mát.","Cơ cấu bôi trơn và Cơ cấu cung cấp nhiên liệu.","Cơ cấu piston và Cơ cấu bánh đà."],a:0,d:'medium'},
+{q:"Hệ thống nào có nhiệm vụ duy trì nhiệt độ làm việc của các chi tiết trong động cơ ở mức ổn định?",o:["Hệ thống bôi trơn.","Hệ thống cung cấp nhiên liệu và không khí.","Hệ thống làm mát.","Hệ thống khởi động."],a:2,d:'medium'},
+{q:"Điểm khác biệt cơ bản về cấu tạo giữa động cơ xăng và động cơ diesel là gì?",o:["Động cơ diesel không có hệ thống bôi trơn.","Động cơ xăng có hệ thống đánh lửa (bugi), động cơ diesel thì không.","Động cơ xăng không có cơ cấu trục khuỷu thanh truyền.","Động cơ diesel sử dụng nến điện để mồi cháy nhiên liệu."],a:1,d:'medium'},
+{q:"Trong động cơ đốt trong, chi tiết nào trực tiếp nhận áp lực của khí cháy để truyền lực cho trục khuỷu?",o:["Xupap.","Thanh truyền.","Piston.","Thân máy."],a:2,d:'hard'},
+{q:"Hệ thống nào dưới đây chỉ có ở động cơ xăng mà thường không có ở động cơ diesel?",o:["Hệ thống khởi động.","Hệ thống làm mát.","Hệ thống đánh lửa.","Hệ thống bôi trơn."],a:2,d:'hard'},
+{q:"Vai trò của hệ thống bôi trơn trong động cơ đốt trong là:",o:["Cung cấp năng lượng cho động cơ hoạt động.","Giảm ma sát, làm mát, tẩy rửa và bảo vệ các bề mặt chi tiết máy.","Đốt cháy hỗn hợp nhiên liệu trong xi lanh.","Đưa khí thải từ trong xi lanh ra môi trường bên ngoài."],a:1,d:'hard'}
+],
+cnbai18:[
+{q:"Trong động cơ đốt trong, một chu trình làm việc bao gồm các quá trình nào sau đây?",o:["Quay trục khuỷu, đẩy piston, đánh lửa.","Hút, nén, đẩy, xả.","Nạp, nén, nổ, thải.","Nạp, nén, đốt cháy, làm mát."],a:2,d:'easy'},
+{q:"Điểm chết dưới (ĐCD) của piston được định nghĩa là gì?",o:["Vị trí piston ở gần tâm trục khuỷu nhất.","Vị trí piston ở xa tâm trục khuỷu nhất.","Vị trí mà piston bắt đầu quá trình nén.","Vị trí mà xupap nạp bắt đầu đóng lại."],a:1,d:'easy'},
+{q:"Trong động cơ 4 kỳ, trục khuỷu quay bao nhiêu vòng để hoàn thành một chu trình làm việc?",o:["0,5 vòng.","1 vòng.","2 vòng.","4 vòng."],a:2,d:'easy'},
+{q:"Trong kỳ nén của động cơ diesel 4 kỳ, bộ phận nào được nén trong xi lanh?",o:["Hỗn hợp xăng và không khí.","Hỗn hợp dầu diesel và không khí.","Chỉ có nhiên liệu diesel.","Chỉ có không khí."],a:3,d:'easy'},
+{q:"Hiện tượng phun sớm trong động cơ đốt trong xảy ra ở thời điểm nào?",o:["Cuối kỳ nạp.","Đầu kỳ nén.","Cuối kỳ nén, trước khi piston lên đến ĐCT.","Đầu kỳ thải."],a:2,d:'medium'},
+{q:"Tại sao gọi là động cơ 2 kỳ?",o:["Vì nó chỉ có 2 xupap nạp và thải.","Vì động cơ chỉ có 2 xi lanh.","Vì nó sử dụng 2 loại nhiên liệu cùng lúc.","Vì một chu trình làm việc được thực hiện trong 2 hành trình của piston."],a:3,d:'medium'},
+{q:"Trong kỳ nổ (sinh công), trạng thái của các xupap nạp và xupap thải như thế nào?",o:["Cả hai xupap đều mở.","Cả hai xupap đều đóng.","Xupap nạp mở, xupap thải đóng.","Xupap nạp đóng, xupap thải mở."],a:1,d:'medium'},
+{q:"Thể tích toàn phần của xi lanh (Va) được tính bằng công thức nào?",o:["Va = Vh / Vbc","Va = Vh","Va = Vbc + Vh","Va = Vbc - Vh"],a:2,d:'hard'},
+{q:"Đặc điểm nào sau đây là của động cơ 2 kỳ so với động cơ 4 kỳ?",o:["Có cấu tạo phức tạp hơn.","Tiết kiệm nhiên liệu hơn.","Thực hiện nạp và thải khí thông qua các cửa khí ở thành xi lanh.","Trục khuỷu quay 2 vòng mới sinh công 1 lần."],a:2,d:'hard'},
+{q:"Trong chu trình làm việc của động cơ xăng 4 kỳ, hệ thống đánh lửa phát ra tia lửa điện vào thời điểm nào?",o:["Cuối kỳ nạp.","Đầu kỳ nén.","Cuối kỳ nén.","Giữa kỳ nổ."],a:2,d:'hard'}
+],
+cnbai19:[
+{q:"Thân máy và nắp máy của động cơ đốt trong có vai trò chính là gì?",o:["Biến nhiệt năng thành cơ năng.","Là nơi lắp đặt và làm giá đỡ cho các cơ cấu, hệ thống của động cơ.","Điều khiển quá trình nạp và thải khí.","Truyền lực từ piston đến trục khuỷu."],a:1,d:'easy'},
+{q:"Chi tiết nào dưới đây cùng với đỉnh piston và nắp máy tạo thành buồng cháy của động cơ?",o:["Trục khuỷu.","Thanh truyền.","Thân xi lanh.","Bánh đà."],a:2,d:'easy'},
+{q:"Cơ cấu trục khuỷu thanh truyền có nhiệm vụ gì trong quá trình động cơ làm việc?",o:["Biến chuyển động quay của trục khuỷu thành chuyển động tịnh tiến của piston.","Biến chuyển động tịnh tiến của piston thành chuyển động quay của trục khuỷu để đưa ra máy công tác.","Chỉ có nhiệm vụ truyền lực từ piston xuống.","Cả A và B đều đúng."],a:3,d:'easy'},
+{q:"Thanh truyền là chi tiết dùng để nối bộ phận nào với nhau?",o:["Piston và trục cam.","Piston và trục khuỷu.","Trục khuỷu và bánh đà.","Thân máy và nắp máy."],a:1,d:'easy'},
+{q:"Cấu tạo của piston gồm có các phần chính nào?",o:["Đỉnh, thân, đuôi.","Đầu, thân, chốt piston.","Đỉnh, đầu, thân.","Đầu, chân, thân."],a:2,d:'medium'},
+{q:"Trên đầu piston có xéc măng (vòng găng) với mục đích chủ yếu là:",o:["Làm tăng trọng lượng piston để chạy khỏe hơn.","Làm kín buồng cháy và ngăn dầu bôi trơn lọt vào buồng cháy.","Giúp piston chuyển động êm hơn.","Giảm ma sát trực tiếp giữa thân máy và nắp máy."],a:1,d:'medium'},
+{q:"Cơ cấu phân phối khí có nhiệm vụ gì?",o:["Đóng, mở các cửa nạp và cửa thải đúng lúc.","Phun nhiên liệu vào buồng cháy.","Đánh lửa để đốt cháy hòa khí.","Làm mát các chi tiết trong thân máy."],a:0,d:'medium'},
+{q:"Trong cơ cấu phân phối khí dùng xupap, bộ phận nào trực tiếp dẫn động xupap mở ra?",o:["Piston.","Trục khuỷu.","Cam (trên trục cam).","Thanh truyền."],a:2,d:'hard'},
+{q:"Điểm khác biệt chính về cấu tạo thân máy của động cơ làm mát bằng nước so với làm mát bằng không khí là:",o:["Có cánh tản nhiệt.","Có các đường nước (áo nước) bên trong.","Thân máy dày hơn.","Không có sự khác biệt."],a:1,d:'hard'},
+{q:"Bộ phận nào gắn trên trục khuỷu giúp động cơ vượt qua các điểm chết và làm việc ổn định hơn?",o:["Xéc măng.","Bánh đà.","Chốt piston.","Trục cam."],a:1,d:'hard'}
+],
+cnbai20:[
+{q:"Mục đích chính của hệ thống bôi trơn trong động cơ đốt trong là gì?",o:["Cung cấp nhiên liệu cho buồng cháy.","Đưa dầu đến các bề mặt ma sát để giảm mài mòn và làm mát, tẩy rửa chi tiết.","Tăng áp suất trong xi lanh để động cơ khỏe hơn.","Giúp động cơ khởi động nhanh hơn vào mùa đông."],a:1,d:'easy'},
+{q:"Trong hệ thống bôi trơn cưỡng bức, bộ phận nào có nhiệm vụ hút dầu từ các-te và đẩy đến các bề mặt ma sát?",o:["Lọc dầu.","Két làm mát dầu.","Bơm dầu.","Van khống chế lưu lượng."],a:2,d:'easy'},
+{q:"Tại sao dầu bôi trơn sau một thời gian sử dụng cần phải thay mới?",o:["Vì dầu bị biến chất, nhiễm bẩn và giảm khả năng bôi trơn.","Vì dầu bị bay hơi hết.","Vì dầu chuyển sang màu đen thì động cơ sẽ không nổ được.","Vì áp suất dầu sẽ tăng quá cao gây hỏng bơm."],a:0,d:'easy'},
+{q:"Khi nhiệt độ của dầu bôi trơn vượt quá giới hạn cho phép, dầu sẽ đi qua bộ phận nào để hạ nhiệt?",o:["Bộ lọc dầu.","Két làm mát dầu.","Các-te.","Đường dầu chính."],a:1,d:'easy'},
+{q:"Hệ thống làm mát bằng nước tuần hoàn cưỡng bức bao gồm các bộ phận chính nào?",o:["Cánh tản nhiệt, quạt gió.","Bơm nước, két nước, quạt gió, van hằng nhiệt.","Áo nước, cửa nạp, cửa thải.","Bơm dầu, lọc dầu, két làm mát."],a:1,d:'medium'},
+{q:"Van hằng nhiệt trong hệ thống làm mát bằng nước có vai trò gì?",o:["Giữ cho nhiệt độ của nước luôn ở mức 0°C.","Tự động đóng/mở để điều tiết lộ trình của nước tùy theo nhiệt độ của động cơ.","Tăng áp suất nước để nước chảy nhanh hơn.","Lọc sạch cặn bẩn trong nước làm mát."],a:1,d:'medium'},
+{q:"Khi động cơ mới khởi động (nhiệt độ nước còn thấp), van hằng nhiệt sẽ cho nước làm mát đi đâu?",o:["Đi vào két nước để làm mát ngay.","Đi thẳng về bơm nước rồi quay lại áo nước (không qua két nước).","Chảy ra ngoài động cơ.","Ngừng lưu thông để động cơ nhanh nóng lên."],a:1,d:'medium'},
+{q:"Đặc điểm nhận dạng dễ thấy nhất của động cơ làm mát bằng không khí là:",o:["Có các đường ống dẫn nước chằng chịt.","Có các cánh tản nhiệt đúc trực tiếp trên thân máy và nắp máy.","Có bình chứa nước phụ.","Động cơ luôn có kích thước rất lớn."],a:1,d:'hard'},
+{q:"Trong hệ thống làm mát bằng nước, quạt gió có tác dụng gì?",o:["Thổi gió trực tiếp vào xi lanh.","Tăng tốc độ lưu thông của không khí qua két nước để nâng cao hiệu quả làm mát.","Hút hơi nóng từ buồng cháy ra ngoài.","Quay trục khuỷu khi khởi động."],a:1,d:'hard'},
+{q:"Nếu hệ thống làm mát bị hỏng (động cơ quá nóng) mà vẫn tiếp tục vận hành thì điều gì sẽ xảy ra?",o:["Động cơ chạy càng khỏe vì nhiệt độ cao.","Tiết kiệm nhiên liệu hơn.","Các chi tiết bị giãn nở quá mức gây kẹt (bó máy), hỏng piston và xi lanh.","Không ảnh hưởng gì đến tuổi thọ động cơ."],a:2,d:'hard'}
+],
+cnbai21:[
+{q:"Nhiệm vụ chính của hệ thống nhiên liệu trong động cơ đốt trong là gì?",o:["Đốt cháy nhiên liệu để sinh công.","Cung cấp nhiên liệu và không khí sạch vào buồng cháy đúng thời điểm, đúng lượng.","Làm mát các chi tiết trong buồng cháy.","Thải khí sạch ra ngoài môi trường."],a:1,d:'easy'},
+{q:"Trong hệ thống nhiên liệu dùng bộ chế hòa khí (xe máy đời cũ), việc hòa trộn xăng và không khí diễn ra ở đâu?",o:["Bên trong xi lanh.","Trong bộ chế hòa khí.","Trong vòi phun.","Trong bình xăng."],a:1,d:'easy'},
+{q:"Ưu điểm nổi bật của hệ thống phun xăng điện tử (EFI) so với hệ thống dùng bộ chế hòa khí là:",o:["Cấu tạo đơn giản, dễ sửa chữa.","Tiết kiệm nhiên liệu và giảm ô nhiễm môi trường nhờ kiểm soát chính xác lượng xăng.","Không cần sử dụng điện.","Chỉ dùng được cho động cơ 2 kỳ."],a:1,d:'easy'},
+{q:"Bộ phận nào trong hệ thống phun xăng điện tử có nhiệm vụ quyết định lượng nhiên liệu phun dựa trên các tín hiệu cảm biến?",o:["Bơm xăng.","Vòi phun.","Bộ điều khiển điện tử (ECU).","Bầu lọc gió."],a:2,d:'easy'},
+{q:"Ở động cơ Diesel, nhiên liệu được đưa vào buồng cháy dưới dạng nào?",o:["Dạng lỏng chảy thành dòng.","Dạng hơi (đã bay hóa).","Dạng sương mù với áp suất cao.","Dạng hỗn hợp hòa khí đã trộn sẵn ngoài xi lanh."],a:2,d:'medium'},
+{q:"Thiết bị nào là linh hồn của hệ thống nhiên liệu Diesel truyền thống, có nhiệm vụ tạo áp suất cao và điều tiết lượng nhiên liệu?",o:["Bơm cao áp.","Vòi phun.","Bơm chuyển nhiên liệu.","Bầu lọc tinh."],a:0,d:'medium'},
+{q:"Tại sao trong hệ thống nhiên liệu Diesel lại cần có cả bầu lọc thô và bầu lọc tinh?",o:["Vì nhiên liệu Diesel rất rẻ tiền.","Để đảm bảo nhiên liệu cực kỳ sạch, tránh làm tắc nghẽn và mài mòn các chi tiết siêu chính xác như kim phun.","Để tăng áp suất nhiên liệu.","Để tách nước ra khỏi không khí."],a:1,d:'medium'},
+{q:"Hệ thống nhiên liệu Common Rail (đường dẫn chung) hiện đại ở động cơ Diesel có đặc điểm gì khác biệt?",o:["Không dùng vòi phun.","Nhiên liệu luôn được duy trì ở áp suất rất cao trong đường ống chung trước khi vào vòi phun.","Nhiên liệu được trộn với nước để làm mát.","Sử dụng bộ chế hòa khí giống động cơ xăng."],a:1,d:'hard'},
+{q:"Thứ tự di chuyển của nhiên liệu trong hệ thống Diesel là:",o:["Thùng xăng → Bộ chế hòa khí → Xi lanh.","Thùng dầu → Bầu lọc → Bơm cao áp → Vòi phun → Xi lanh.","Vòi phun → Bơm cao áp → Thùng dầu → Xi lanh.","Thùng dầu → Vòi phun → Bơm cao áp → Xi lanh."],a:1,d:'hard'},
+{q:"Khi động cơ xăng dùng hệ thống phun xăng trực tiếp (GDI), vòi phun sẽ đặt ở đâu?",o:["Trên đường ống nạp.","Trước bầu lọc gió.","Trực tiếp bên trong buồng cháy (xi lanh).","Gắn trên nắp bình xăng."],a:2,d:'hard'}
+],
+cnbai22:[
+{q:"Nhiệm vụ chính của hệ thống đánh lửa trên động cơ xăng là gì?",o:["Cung cấp hỗn hợp xăng và không khí vào xi lanh.","Tạo ra tia lửa điện cao áp để đốt cháy hòa khí đúng thời điểm.","Biến nhiệt năng thành cơ năng để làm quay trục khuỷu.","Làm mát các chi tiết của động cơ khi hoạt động."],a:1,d:'easy'},
+{q:"Trong hệ thống đánh lửa điện tử không tiếp điểm, bộ phận nào dùng để tích lũy năng lượng điện trước khi phóng qua bugi?",o:["Cuộn sơ cấp của biến áp đánh lửa.","Tụ điện hoặc cuộn dây (tùy loại hệ thống).","Ma-nhê-tô.","Điốt chặn."],a:1,d:'easy'},
+{q:"Bugi có vai trò gì trong hệ thống đánh lửa?",o:["Tăng điện áp từ thấp lên cao.","Ngắt mạch điện sơ cấp.","Phát sinh tia lửa điện để đốt cháy hòa khí trong xi lanh.","Lưu trữ điện năng từ bình ắc quy."],a:2,d:'easy'},
+{q:"Thời điểm đánh lửa sớm được hiểu là:",o:["Đánh lửa sau khi piston xuống điểm chết dưới.","Đánh lửa đúng lúc piston ở điểm chết trên.","Đánh lửa trước khi piston đến điểm chết trên ở cuối kỳ nén.","Đánh lửa khi piston bắt đầu quá trình nạp."],a:2,d:'easy'},
+{q:"Hệ thống khởi động có nhiệm vụ gì?",o:["Giúp động cơ đạt được tốc độ quay tối đa ngay lập tức.","Làm quay trục khuỷu động cơ đến tốc độ nhất định để động cơ tự nổ được.","Cung cấp điện năng cho các đèn tín hiệu trên xe.","Thay thế động cơ đốt trong khi xe bị hỏng."],a:1,d:'medium'},
+{q:"Bộ phận nào của hệ thống khởi động bằng động cơ điện có vai trò truyền momen quay từ mô tơ điện đến vành răng bánh đà?",o:["Khớp truyền động (khớp một chiều).","Tiếp điểm rơ le.","Cuộn dây cảm ứng.","Chổi than."],a:0,d:'medium'},
+{q:"Tại sao trong hệ thống khởi động bằng điện, người ta phải sử dụng khớp truyền động một chiều?",o:["Để tăng tốc độ quay cho động cơ điện.","Để bảo vệ mô tơ điện không bị động cơ kéo quay ngược lại khi động cơ đã nổ.","Để giúp bánh răng ăn khớp dễ dàng hơn.","Để tiết kiệm điện năng từ ắc quy."],a:1,d:'medium'},
+{q:"Động cơ Diesel thường khởi động bằng phương pháp nào phổ biến nhất trên các dòng xe tải lớn?",o:["Khởi động bằng tay (tay quay).","Khởi động bằng động cơ điện hoặc bằng khí nén.","Khởi động bằng động cơ xăng phụ.","Khởi động bằng bàn đạp (cần khởi động)."],a:1,d:'hard'},
+{q:"Trong sơ đồ khối hệ thống đánh lửa điện tử, bộ phận biến áp đánh lửa có chức năng:",o:["Chuyển dòng điện xoay chiều thành dòng điện một chiều.","Tăng điện áp thấp của nguồn điện thành điện áp cao (hàng chục nghìn vôn).","Điều khiển thời điểm đánh lửa theo tốc độ động cơ.","Ngắt dòng điện khi động cơ quá nóng."],a:1,d:'hard'},
+{q:"Khi người lái vặn chìa khóa sang nấc Start, bộ phận nào trong hệ thống khởi động sẽ đẩy bánh răng vào ăn khớp với vành răng bánh đà?",o:["Lò xo hồi vị.","Rơ le khởi động (Nam châm điện).","Trục khuỷu.","Bộ giảm tốc."],a:1,d:'hard'}
+],
+cnbai23:[
+{q:"Về mặt cấu tạo, một chiếc ô tô cơ bản thường được chia thành mấy phần chính?",o:["2 phần: Động cơ và Thân xe.","3 phần: Động cơ, Khung gầm và Điện ô tô.","4 phần: Động cơ, Gầm, Thân xe và Hệ thống điện.","5 phần: Động cơ, Hệ thống truyền lực, Bánh xe, Thân xe và Hệ thống lái."],a:2,d:'easy'},
+{q:"Bộ phận nào được coi là nguồn động lực của ô tô?",o:["Hệ thống truyền lực.","Động cơ đốt trong (hoặc động cơ điện).","Bánh xe chủ động.","Hệ thống khởi động."],a:1,d:'easy'},
+{q:"Phần gầm của ô tô bao gồm các hệ thống nào sau đây?",o:["Hệ thống truyền lực, hệ thống chuyển động, hệ thống lái và hệ thống phanh.","Động cơ, hệ thống đánh lửa và hệ thống khởi động.","Vỏ xe, ghế ngồi và các tiện nghi nội thất.","Hệ thống chiếu sáng và hệ thống điều hòa không khí."],a:0,d:'easy'},
+{q:"Dựa theo mục đích sử dụng, ô tô được phân loại thành:",o:["Ô tô dùng động cơ xăng và ô tô dùng động cơ diesel.","Ô tô con, ô tô khách, ô tô tải và ô tô chuyên dùng.","Ô tô 1 cầu và ô tô 2 cầu.","Ô tô số sàn và ô tô số tự động."],a:1,d:'easy'},
+{q:"Khoảng sáng gầm xe được định nghĩa là:",o:["Khoảng cách từ điểm cao nhất của xe đến mặt đất.","Khoảng cách từ trục bánh xe trước đến trục bánh xe sau.","Khoảng cách từ điểm thấp nhất của gầm xe đến mặt đường.","Chiều rộng lớn nhất của thân xe."],a:2,d:'medium'},
+{q:"Hệ thống nào có nhiệm vụ thay đổi hướng chuyển động hoặc giữ cho ô tô chuyển động ổn định theo hướng nhất định?",o:["Hệ thống truyền lực.","Hệ thống treo.","Hệ thống lái.","Hệ thống phanh."],a:2,d:'medium'},
+{q:"Thông số chiều dài cơ sở của ô tô là khoảng cách giữa:",o:["Hai mép ngoài cùng của bánh xe.","Tâm các bánh xe trên cùng một trục.","Tâm trục bánh xe trước đến tâm trục bánh xe sau.","Đầu xe và đuôi xe."],a:2,d:'medium'},
+{q:"Hệ thống phanh trên ô tô có chức năng chính là gì?",o:["Giúp xe tăng tốc nhanh hơn.","Giảm tốc độ, dừng hẳn ô tô hoặc giữ cho ô tô đứng yên trên dốc.","Truyền momen quay từ động cơ đến các bánh xe.","Giảm rung động từ mặt đường lên thân xe."],a:1,d:'hard'},
+{q:"Thân xe (vỏ xe) của ô tô con có vai trò gì?",o:["Là nơi lắp đặt các hệ thống của động cơ.","Tạo không gian chở người, hàng hóa và bảo vệ người dùng khỏi tác động môi trường.","Chứa toàn bộ hệ thống truyền lực và hệ thống phanh.","Chỉ dùng để tăng tính thẩm mỹ cho xe."],a:1,d:'hard'},
+{q:"Ô tô chuyên dùng là loại xe nào dưới đây?",o:["Xe buýt chở học sinh.","Xe sedan 5 chỗ.","Xe cứu hỏa, xe cần cẩu, xe chở rác.","Xe tải chở nông sản."],a:2,d:'hard'}
+],
+cnbai24:[
+{q:"Hệ thống truyền lực trên ô tô có nhiệm vụ chính là gì?",o:["Tạo ra năng lượng để xe hoạt động.","Truyền và biến đổi momen quay, tốc độ từ động cơ đến bánh xe chủ động.","Điều khiển hướng chuyển động của xe.","Giảm rung động từ mặt đường truyền lên thân xe."],a:1,d:'easy'},
+{q:"Các bộ phận chính của hệ thống truyền lực trên ô tô (loại cơ khí) sắp xếp theo đúng thứ tự là:",o:["Động cơ → Hộp số → Ly hợp → Cầu chủ động.","Động cơ → Ly hợp → Hộp số → Truyền lực các đăng → Cầu chủ động.","Động cơ → Cầu chủ động → Hộp số → Ly hợp.","Động cơ → Truyền lực các đăng → Ly hợp → Hộp số."],a:1,d:'easy'},
+{q:"Bộ phận nào dùng để ngắt hoặc nối truyền động từ động cơ đến hộp số một cách êm dịu?",o:["Hộp số.","Truyền lực các đăng.","Ly hợp.","Vi sai."],a:2,d:'easy'},
+{q:"Hộp số trên ô tô có những nhiệm vụ nào?",o:["Thay đổi momen quay và tốc độ của xe.","Giúp xe có khả năng chuyển động lùi.","Cho phép động cơ chạy không tải (ngắt truyền lực trong thời gian dài).","Cả 3 phương án trên đều đúng."],a:3,d:'easy'},
+{q:"Truyền lực các đăng được sử dụng để truyền momen giữa các trục có đặc điểm:",o:["Luôn luôn song song với nhau.","Luôn luôn thẳng hàng với nhau.","Có tâm thay đổi hoặc không cùng nằm trên một đường thẳng.","Cố định khoảng cách tuyệt đối."],a:2,d:'medium'},
+{q:"Bộ phận nào cho phép hai bánh xe chủ động quay với tốc độ khác nhau khi xe đi vào đường vòng (cua)?",o:["Ly hợp.","Hộp số.","Bộ vi sai.","Trục các đăng."],a:2,d:'medium'},
+{q:"Trong hệ thống truyền lực, cầu chủ động bao gồm các bộ phận cơ bản nào?",o:["Ly hợp và hộp số.","Truyền lực chính và bộ vi sai.","Trục các đăng và bánh xe.","Động cơ và hộp số."],a:1,d:'medium'},
+{q:"Kí hiệu 4WD hoặc 4x4 trên ô tô có nghĩa là gì?",o:["Xe có 4 bánh nhưng chỉ có 1 bánh chủ động.","Xe dẫn động 4 bánh (tất cả các bánh đều là bánh chủ động).","Xe có hộp số 4 cấp.","Xe chỉ chạy được tối đa 40 km/h."],a:1,d:'hard'},
+{q:"Ưu điểm của xe dẫn động cầu trước (FF) so với dẫn động cầu sau là:",o:["Cấu tạo phức tạp hơn.","Giúp không gian nội thất rộng rãi hơn do không có trục các đăng chạy dọc thân xe.","Khả năng leo dốc tốt hơn khi chở nặng.","Xe dễ bị mất lái khi vào cua."],a:1,d:'hard'},
+{q:"Khi tài xế đạp bàn đạp ly hợp (côn), trạng thái của hệ thống truyền lực lúc đó là:",o:["Đang nối truyền động.","Đang ngắt truyền động từ động cơ sang hộp số.","Đang chuyển sang số lùi.","Đang hãm cứng bánh xe lại."],a:1,d:'hard'}
+],
+cnbai25:[
+{q:"Hệ thống lái trên ô tô có nhiệm vụ chính là gì?",o:["Giảm tốc độ của xe khi gặp chướng ngại vật.","Thay đổi hướng chuyển động hoặc giữ cho ô tô chuyển động ổn định theo hướng nhất định.","Truyền momen từ hộp số đến các bánh xe.","Đảm bảo độ êm dịu cho người ngồi trên xe."],a:1,d:'easy'},
+{q:"Trong hệ thống lái, bộ phận nào truyền lực quay từ vô lăng xuống cơ cấu lái?",o:["Trục lái.","Thanh kéo.","Đòn quay đứng.","Hình thang lái."],a:0,d:'easy'},
+{q:"Hệ thống phanh có chức năng nào sau đây?",o:["Giảm tốc độ của xe.","Dừng hẳn ô tô.","Giữ cho ô tô đứng yên trên dốc (phanh đỗ).","Tất cả các phương án trên."],a:3,d:'easy'},
+{q:"Phanh đĩa khác với phanh tang trống ở điểm cơ bản nào?",o:["Phanh đĩa không dùng dầu phanh.","Phanh đĩa sử dụng má phanh ép vào hai mặt của đĩa phanh thay vì ép vào mặt trong tang trống.","Phanh đĩa chỉ dùng cho xe tải nặng.","Phanh đĩa không có khả năng tự thoát nhiệt."],a:1,d:'easy'},
+{q:"Hệ thống treo có nhiệm vụ gì trong cấu tạo ô tô?",o:["Nối cứng bánh xe với khung xe để xe chạy nhanh hơn.","Nối đàn hồi khung (hoặc thân xe) với các cầu (hoặc bánh xe) để giảm rung động và va đập.","Truyền lực phanh đến các bánh xe.","Điều khiển các bánh xe dẫn hướng."],a:1,d:'medium'},
+{q:"Bộ phận nào trong hệ thống treo có tác dụng dập tắt nhanh các dao động của khung và vỏ xe?",o:["Bộ phận đàn hồi (như lò xo, lá nhíp).","Bộ phận dẫn hướng.","Bộ phận giảm chấn (ống nhún).","Thanh ổn định."],a:2,d:'medium'},
+{q:"Hệ thống chống bó cứng phanh (ABS) có vai trò gì?",o:["Làm xe dừng lại tức thì ngay khi đạp phanh.","Ngăn không cho bánh xe bị trượt lết (bị khóa cứng) khi phanh gấp, giúp duy trì khả năng lái.","Tăng lực phanh lên gấp đôi bình thường.","Giúp xe tăng tốc nhanh hơn sau khi phanh."],a:1,d:'medium'},
+{q:"Cơ cấu lái thường được sử dụng phổ biến trên ô tô con hiện nay là:",o:["Cơ cấu lái trục vít - cung răng.","Cơ cấu lái bánh răng - thanh răng.","Cơ cấu lái trục vít - chốt quay.","Cơ cấu lái kiểu cam - đòn."],a:1,d:'hard'},
+{q:"Thành phần nào dưới đây thuộc bộ phận đàn hồi của hệ thống treo?",o:["Kích thủy lực.","Nhíp lá hoặc lò xo.","Thước lái.","Bầu phanh."],a:1,d:'hard'},
+{q:"Hình thang lái có vai trò gì trong hệ thống lái?",o:["Đảm bảo các bánh xe dẫn hướng quay với các góc quay khác nhau để xe không bị trượt khi vào cua.","Giúp vô lăng quay nhẹ nhàng hơn.","Hạn chế độ rơ của trục lái.","Kết nối trực tiếp động cơ với bánh xe."],a:0,d:'hard'}
+]};
+
+// STATE
+let qs=[],idx=0,score=0,answers=[],done=false,qty=10,mode='lesson',lesson=null;
+
+// NAV
+function showScr(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  requestAnimationFrame(()=>document.getElementById('scr-'+id).classList.add('on'));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goHome(){showScr('home')}
+function showSetup(){showScr('setup')}
+function showSetupCN(){showScr('setup-cn')}
+function showSetupVatLi(){showScr('setup-vat-li')}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.subj-tab').forEach(t => t.classList.remove('on'));
+  document.getElementById('tab-' + id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// THEME
+function toggleTheme(){
+  const h=document.documentElement,dark=h.dataset.theme==='dark';
+  h.dataset.theme=dark?'light':'dark';
+  document.getElementById('tbtn').textContent=dark?'🌙':'☀️';
+  localStorage.setItem('theme',h.dataset.theme);
+}
+
+// SETUP
+function pickQty(btn,q){
+  document.querySelectorAll('#scr-setup .qbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');qty=q;
+}
+let qtyCN=10;
+let qtyVatLi=10;
+function pickQtyCN(btn,q){
+  document.querySelectorAll('#cn-qty-row .qbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');qtyCN=q;
+}
+function pickQtyVatLi(btn,q){
+  document.querySelectorAll('#vatli-qty-row .qbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');qtyVatLi=q;
+}
+
+// START
+function normalizeQ(q){
+  if(!q)return {q:'',o:[],a:0};
+  const fix=s=>(typeof s==='string'?s.replace(/\\\\/g,'\\'):s);
+  if('q' in q)return { ...q, q: fix(q.q), o: (q.o||[]).map(fix) };
+  const aMap={A:0,B:1,C:2,D:3};
+  return {q:fix(q.text||''), o:(q.options||[]).map(fix), a:typeof q.correct==='string'?aMap[q.correct]??0:(q.correct??0), d:q.d, img:q.img||''};
+}
+function startLesson(l){lesson=l;mode='lesson';qs=[...QDB[l]].map(normalizeQ);begin()}
+function startRandom(){
+  const cks=[...document.querySelectorAll('.lchk:checked')];
+  if(!cks.length){showToast('⚠️ Chọn ít nhất một bài!');return}
+  mode='random';
+  let pool=[];cks.forEach(c=>{
+    if(c.value==='vatliall') pool.push(...(window.questionsVatLi||[]).map(normalizeQ));
+    else pool.push(...QDB[c.value].map(normalizeQ));
+  });
+  const e=shuffle(pool.filter(q=>q.d==='easy'));
+  const m=shuffle(pool.filter(q=>q.d==='medium'));
+  const h=shuffle(pool.filter(q=>q.d==='hard'));
+  let ord=[...e,...m,...h];
+  if(qty!=='all')ord=ord.slice(0,qty);
+  qs=ord;begin();
+}
+function startRandomCN(){
+  const cks=[...document.querySelectorAll('.cnchk:checked')];
+  if(!cks.length){showToast('⚠️ Chọn ít nhất một bài!');return}
+  mode='random';
+  let pool=[];cks.forEach(c=>pool.push(...QDB[c.value].map(normalizeQ)));
+  pool=shuffle(pool);
+  if(qtyCN!=='all')pool=pool.slice(0,qtyCN);
+  qs=pool;begin();
+}
+function startRandomVatLi(){
+  mode='random';
+  let pool=shuffle([...(window.questionsVatLi||[]).map(normalizeQ)]);
+  qs=qtyVatLi==='all'?pool:pool.slice(0,qtyVatLi);
+  begin();
+}
+function showSetupVatLi(){showScr('setup-vat-li')}
+function getVatLiLessonQuestions(group){
+  const qs=window.questionsVatLi||[];
+  const ranges={dongdien:[1,35],dientro:[36,60],nguon:[61,83],nangluong:[84,100]};
+  const r=ranges[group];
+  if(!r)return qs;
+  return qs.filter(q=>q.id>=r[0]&&q.id<=r[1]);
+}
+function startLessonVatLi(group){lesson=group;mode='lesson';qs=[...getVatLiLessonQuestions(group)].map(normalizeQ);begin()}
+function renderMath(el){
+  if(!el||!window.renderMathInElement||!window.__katexReady)return;
+  renderMathInElement(el,{delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'\\[',right:'\\]',display:true},
+    {left:'\\(',right:'\\)',display:false}
+  ]});
+}
+function renderMathSoon(el){setTimeout(()=>renderMath(el),250)}
+window.addEventListener('load',()=>{document.querySelectorAll('.qtxt,.otxt,.fb-area,.ls-passage').forEach(renderMath)})
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function begin(){idx=0;score=0;answers=[];done=false;showScr('quiz');render()}
+
+// RENDER
+function render(){
+  const q=qs[idx],tot=qs.length;
+  document.getElementById('pfill').style.width=((idx/tot)*100)+'%';
+  document.getElementById('qctr').textContent=`Câu ${idx+1} / ${tot}`;
+  document.getElementById('qscore').textContent=`✓ ${score} đúng`;
+  document.getElementById('qbadge').textContent=`Câu ${idx+1}`;
+  document.getElementById('qtxt').innerHTML=q.q;
+  const imgBox=document.getElementById('qimg');
+  if(imgBox){
+    imgBox.innerHTML=q.img?`<img src="${q.img}" alt="Câu hỏi minh hoạ" style="display:block;max-width:min(100%,420px);max-height:260px;width:auto;height:auto;object-fit:contain;border-radius:12px;margin:12px auto 8px;box-shadow:var(--sh1)">`:'';
+  }
+  const ol=document.getElementById('opts');
+  ol.innerHTML='';
+  q.o.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='opt';d.onclick=()=>pick(i);
+    d.innerHTML=`<span class="oltr">${L[i]}</span><span class="otxt">${o}</span>`;
+    ol.appendChild(d);
+  });
+  renderMathSoon(document.getElementById('qtxt'));
+  renderMathSoon(ol);
+  document.getElementById('fbarea').innerHTML='';
+  const nb=document.getElementById('nxtbtn');
+  nb.disabled=true;
+  nb.textContent=idx===tot-1?'Xem kết quả 🎯':'Câu tiếp theo →';
+  done=false;
+}
+
+// ANSWER
+function pick(i){
+  if(done)return;done=true;
+  const q=qs[idx],c=q.a,ok=i===c;
+  if(ok)score++;
+  answers[idx]={sel:i,correct:c,ok};
+  document.querySelectorAll('.opt').forEach((o,j)=>{
+    o.classList.add('done');
+    if(j===c)o.classList.add('right');
+    if(j===i&&!ok)o.classList.add('wrong');
+  });
+  const fb=document.getElementById('fbarea');
+  fb.innerHTML=ok
+    ?`<div class="fb fb-ok"><div class="fb-ico">✓</div><span>Chính xác! Bạn đã chọn đúng.</span></div>`
+    :`<div class="fb fb-err"><div class="fb-title"><div class="fb-ico">✕</div>Sai rồi!</div><div class="fb-ans">Đáp án đúng: <strong>${L[c]}. ${q.o[c]}</strong></div></div>`;
+  renderMathSoon(fb);
+  document.getElementById('nxtbtn').disabled=false;
+  document.getElementById('qscore').textContent=`✓ ${score} đúng`;
+}
+
+function nextQ(){
+  if(!done)return;
+  if(++idx>=qs.length)showResults();else render();
+}
+
+// RESULTS
+function showResults(){
+  const tot=qs.length,pct=Math.round((score/tot)*100);
+  const C=408,offset=C-(pct/100)*C;
+  const ring=document.getElementById('rring');
+  ring.style.strokeDasharray=C;
+  ring.style.strokeDashoffset=C;
+  document.getElementById('rnum').textContent=`${score}/${tot}`;
+  document.getElementById('rcok').textContent=score;
+  document.getElementById('rcerr').textContent=tot-score;
+  document.getElementById('rcpct').textContent=pct+'%';
+  let emoji,title,sub;
+  if(pct>=90){emoji='🏆';title='Xuất sắc!';sub='Bạn đã nắm vững bài học này rồi!';}
+  else if(pct>=75){emoji='🎉';title='Rất tốt!';sub='Kết quả tuyệt vời, tiếp tục cố gắng!';}
+  else if(pct>=60){emoji='👍';title='NHU CC!';sub='Bạn đã hiểu phần lớn nội dung.';}
+  else if(pct>=40){emoji='💪';title='NGU - LAM BAI nhu cc!';sub='Hãy ôn lại bài và thử lại nhé!';}
+  else{emoji='📖';title='B lam bai nhu cc!';sub='Đọc kỹ bài học rồi làm lại bài thi.';}
+  document.getElementById('remoji').textContent=emoji;
+  document.getElementById('rtitle').textContent=title;
+  document.getElementById('rsub').textContent=sub;
+  // Build review
+  const rl=document.getElementById('revlist');
+  rl.innerHTML='';
+  qs.forEach((q,i)=>{
+    const ua=answers[i]||{sel:-1,correct:q.a,ok:false};
+    const d=document.createElement('div');
+    d.className='rev-item '+(ua.ok?'ok':'err');
+    d.innerHTML=`<div class="rev-bar"></div><div class="rev-body">
+      <div class="rev-q">${i+1}. ${q.q}</div>
+      <div class="rev-a">${ua.ok
+        ?`<span class="rv-ok">✓ ${L[ua.correct]}. ${q.o[ua.correct]}</span>`
+        :`<span class="rv-err">✗ Bạn chọn: ${ua.sel>=0?L[ua.sel]+'. '+q.o[ua.sel]:'Chưa trả lời'}</span><br><span class="rv-ok">✓ Đáp án: ${L[ua.correct]}. ${q.o[ua.correct]}</span>`
+      }</div></div>`;
+    rl.appendChild(d);
+  });
+  rl.style.display='none';
+  document.getElementById('ricon').textContent='▼';
+  showScr('results');
+  setTimeout(()=>{ring.style.strokeDashoffset=offset},350);
+  animN(document.getElementById('rcok'),score,1000);
+  animN(document.getElementById('rcerr'),tot-score,1000);
+}
+
+function animN(el,target,dur){
+  let s=null;
+  const step=ts=>{
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/dur,1);
+    el.textContent=Math.round(p*target);
+    if(p<1)requestAnimationFrame(step);else el.textContent=target;
+  };
+  requestAnimationFrame(step);
+}
+
+function toggleRev(){
+  const rl=document.getElementById('revlist');
+  const h=rl.style.display==='none';
+  rl.style.display=h?'flex':'none';
+  document.getElementById('ricon').textContent=h?'▲':'▼';
+}
+function retryQuiz(){if(mode==='lesson')startLesson(lesson);else{qs=shuffle(qs);begin()}}
+function confirmQuit(){if(idx>0||done){if(confirm('Thoát bài thi? Tiến độ sẽ không được lưu.'))goHome()}else goHome()}
+
+// TOAST
+function showToast(msg,ms=3000){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),ms);
+}
+
+// KEYBOARD
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('scr-quiz').classList.contains('on'))return;
+  if(['1','2','3','4'].includes(e.key)&&!done)pick(+e.key-1);
+  if((e.key==='Enter'||e.key==='ArrowRight')&&done)nextQ();
+});
+
+// LISTENING
+const LISTEN_DATA={
+  ban1:{
+    title:'Listening Bài 1 – Bản 1',
+    answers:['effective','mutual','weaknesses','failure','maturity'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an '},{t:'b',n:1},
+      {t:'p',v:' school. 80 per cent of the students felt that '},{t:'b',n:2},
+      {t:'p',v:' respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their '},{t:'b',n:3},
+      {t:'p',v:'. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from '},{t:'b',n:4},
+      {t:'p',v:', and time management, suited to the '},{t:'b',n:5},
+      {t:'p',v:' of the students concerned.'}
+    ]
+  },
+  ban2:{
+    title:'Listening Bài 1 – Bản 2',
+    answers:['survey','implied','attitudes','performance','concerned'],
+    segs:[
+      {t:'p',v:'In an informal '},{t:'b',n:1},
+      {t:'p',v:' carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This '},{t:'b',n:2},
+      {t:'p',v:' that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive '},{t:'b',n:3},
+      {t:'p',v:' towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their '},{t:'b',n:4},
+      {t:'p',v:' of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students '},{t:'b',n:5},
+      {t:'p',v:'.'}
+    ]
+  },
+  ban3:{
+    title:'Listening Bài 1 – Bản 3',
+    answers:['Perth','individuals','goals','motivated','time'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in '},{t:'b',n:1},
+      {t:'p',v:', western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as '},{t:'b',n:2},
+      {t:'p',v:' with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic '},{t:'b',n:3},
+      {t:'p',v:' for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be '},{t:'b',n:4},
+      {t:'p',v:' and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and '},{t:'b',n:5},
+      {t:'p',v:' management, suited to the maturity of the students concerned.'}
+    ]
+  },
+  ban4:{
+    title:'Listening Bài 1 – Bản 4',
+    answers:['views','realistic','life','academic','direct'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their '},{t:'b',n:1},
+      {t:'p',v:' on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set '},{t:'b',n:2},
+      {t:'p',v:' goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important '},{t:'b',n:3},
+      {t:'p',v:' skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the social side of school was as important as '},{t:'b',n:4},
+      {t:'p',v:' activities. The older students felt that they should be allowed to give some input school decision making a '},{t:'b',n:5},
+      {t:'p',v:' effect on students.'}
+    ]
+  },
+  ban5:{
+    title:'Listening Bài 1 – Bản 5',
+    answers:['informal survey','mutual respect','encouraged','reflect in','maturity'],
+    segs:[
+      {t:'p',v:'In an '},{t:'b',n:1,w:160},
+      {t:'p',v:' carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that '},{t:'b',n:2,w:155},
+      {t:'p',v:' in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be '},{t:'b',n:3},
+      {t:'p',v:' to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then '},{t:'b',n:4,w:120},
+      {t:'p',v:' their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the '},{t:'b',n:5},
+      {t:'p',v:' of the students concerned.'}
+    ]
+  },
+  ban6:{
+    title:'Listening Bài 1 – Bản 6',
+    answers:['views','essential','individuals','attitudes','time management'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their '},{t:'b',n:1},
+      {t:'p',v:' on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was '},{t:'b',n:2},
+      {t:'p',v:' learning to take place. This implied that students should be treated as '},{t:'b',n:3},
+      {t:'p',v:' with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have '},{t:'b',n:4},
+      {t:'p',v:' towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and '},{t:'b',n:5,w:165},
+      {t:'p',v:', suited to the maturity of the students concerned.'}
+    ]
+  },
+  ban7:{
+    title:'Listening Bài 1 – Bản 7',
+    answers:['effective school','implied','realistic goals','motivated','centered on'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an '},{t:'b',n:1,w:165},
+      {t:'p',v:'. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This '},{t:'b',n:2},
+      {t:'p',v:' that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set '},{t:'b',n:3,w:155},
+      {t:'p',v:' for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be '},{t:'b',n:4},
+      {t:'p',v:' and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be '},{t:'b',n:5,w:130},
+      {t:'p',v:' important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'}
+    ]
+  },
+  ban8:{
+    title:'Listening Bài 1 – Bản 8',
+    answers:['strengths and weaknesses','positive attitudes','performance','communication','social side'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their '},{t:'b',n:1,w:230},
+      {t:'p',v:'. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have '},{t:'b',n:2,w:170},
+      {t:'p',v:' towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their '},{t:'b',n:3},
+      {t:'p',v:' of the students. Nearly all the students believed that learning should be centered on important life skills such as '},{t:'b',n:4},
+      {t:'p',v:', building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the '},{t:'b',n:5,w:120},
+      {t:'p',v:' of school was as important as academic activities.'}
+    ]
+  },
+  ban9:{
+    title:'Listening Bài 1 – Bản 9',
+    answers:['life skills','self-respect','learn from failure','academic activities','input'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important '},{t:'b',n:1,w:120},
+      {t:'p',v:' such as communication, building '},{t:'b',n:2,w:130},
+      {t:'p',v:', self-confidence, the ability to '},{t:'b',n:3,w:165},
+      {t:'p',v:', and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the social side of school was as important as '},{t:'b',n:4,w:185},
+      {t:'p',v:'. The older students felt that they should be allowed to give some '},{t:'b',n:5},
+      {t:'p',v:' school decision making a direct effect on students.'}
+    ]
+  },
+  ban10:{
+    title:'Listening Bài 1 – Bản 10',
+    answers:['decision making','direct effect','communication','motivated','individuals'],
+    segs:[
+      {t:'p',v:'In an informal survey carried out in Perth, western of Australia, students were asked to give their views on what makes an effective school. 80 per cent of the students felt that mutual respect in the classroom was essential learning to take place. This implied that students should be treated as individuals with both their strengths and their weaknesses. 60 per cent of the students felt they should be encouraged to set realistic goals for their learning, and to have positive attitudes towards themselves and others.'},
+      {t:'br'},
+      {t:'p',v:'About 55 per cent of the students expected their teachers to be motivated and interested in what they were doing: this would then reflect in their performance of the students. Nearly all the students believed that learning should be centered on important life skills such as communication, building self-respect and self-confidence, the ability to learn from failure, and time management, suited to the maturity of the students concerned.'},
+      {t:'br'},
+      {t:'p',v:'One hundred per cent of the students felt that the social side of school was as important as academic activities. The older students felt that they should be allowed to give some input school '},{t:'b',n:1,w:165},
+      {t:'p',v:' a '},{t:'b',n:2,w:145},
+      {t:'p',v:' on students.'},
+      {t:'note',v:'(3), (4), (5) – Chọn từ phù hợp trong bài để điền:'},
+      {t:'b',n:3,w:155},{t:'p',v:'\u00A0\u00A0\u00A0'},{t:'b',n:4,w:120},{t:'p',v:'\u00A0\u00A0\u00A0'},{t:'b',n:5,w:120}
+    ]
+  }
+  ,p_ban1:{
+    title:'Listening Bài 2 – Bản 1',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['Boston Marathon','USA','New York','2 hours 50 minutes and 10 seconds','6164'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of '},{t:'b',n:1,w:185},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every year, in the '},{t:'b',n:2,w:80},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In 1897. And the same year, John McDermott won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from '},{t:'b',n:3,w:120},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked '},{t:'b',n:4,w:300},{t:'p',v:'.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to participate in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until 1967, women were formally accepted to take part in the Boston races ... A few years later, Kuscsik became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In 1972. There were 8 women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world join it. In 1984, '},{t:'b',n:5,w:80},{t:'p',v:' runners from 34 countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about 42km. Runners have to go through 13 towns during the race. It ends in the centre of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."}
+    ]
+  },
+  p_ban2:{
+    title:'Listening Bài 2 – Bản 2',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['year','1897','participate','1972','join'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of Boston Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every '},{t:'b',n:1,w:80},{t:'p',v:', in the USA.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In '},{t:'b',n:2,w:80},{t:'p',v:'. And the same year, John McDermott won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from New York.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked 2 hours 50 minutes and 10 seconds.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to '},{t:'b',n:3,w:120},{t:'p',v:' in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until 1967, women were formally accepted to take part in the Boston races ... A few years later, Kuscsik became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In '},{t:'b',n:4,w:80},{t:'p',v:'. There were 8 women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world '},{t:'b',n:5,w:80},{t:'p',v:' it. In 1984, 6164 runners from 34 countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about 42km. Runners have to go through 13 towns during the race. It ends in the centre of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."}
+    ]
+  },
+  p_ban3:{
+    title:'Listening Bài 2 – Bản 3',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['John McDermott','1967','Kuscsik','8','34'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of Boston Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every year, in the USA.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In 1897. And the same year, '},{t:'b',n:1,w:165},{t:'p',v:' won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from New York.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked 2 hours 50 minutes and 10 seconds.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to participate in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until '},{t:'b',n:2,w:80},{t:'p',v:', women were formally accepted to take part in the Boston races ... A few years later, '},{t:'b',n:3,w:110},{t:'p',v:' became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In 1972. There were '},{t:'b',n:4,w:60},{t:'p',v:' women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world join it. In 1984, 6164 runners from '},{t:'b',n:5,w:60},{t:'p',v:' countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about 42km. Runners have to go through 13 towns during the race. It ends in the centre of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."}
+    ]
+  },
+  p_ban4:{
+    title:'Listening Bài 2 – Bản 4',
+    audio:'tienganh 2 - paul.mp3',
+    answers:['42km','13','centre','Boston Marathon','participate'],
+    segs:[
+      {t:'p',v:'Trang: What are you reading, Paul?'},{t:'br'},
+      {t:'p',v:'Paul: The history of Boston Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: It sounds interesting! How often is it held?'},{t:'br'},
+      {t:'p',v:'Paul: Every year, in the USA.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did it begin?'},{t:'br'},
+      {t:'p',v:'Paul: In 1897. And the same year, John McDermott won the first Boston Athletic Association Marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Who was John McDermott? Where did he come from?'},{t:'br'},
+      {t:'p',v:'Paul: He was the first man who won the first Boston Marathon in the USA. He came from New York.'},
+      {t:'br'},
+      {t:'p',v:'Trang: How long did it take him to reach the finish?'},{t:'br'},
+      {t:'p',v:'Paul: He clocked 2 hours 50 minutes and 10 seconds.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Did women have right to participate in long distance running?'},{t:'br'},
+      {t:'p',v:'Paul: Yes ... But not until 1967, women were formally accepted to take part in the Boston races ... A few years later, Kuscsik became the first official female champion.'},
+      {t:'br'},
+      {t:'p',v:'Trang: When did she win the race?'},{t:'br'},
+      {t:'p',v:'Paul: In 1972. There were 8 women starting the race and all 8 finished.'},
+      {t:'br'},
+      {t:'p',v:'Trang: Is the race held for only American people?'},{t:'br'},
+      {t:'p',v:'Paul: No. Each year, more runners from every part of the world join it. In 1984, 6164 runners from 34 countries ran in the marathon.'},
+      {t:'br'},
+      {t:'p',v:'Trang: What are the rules of the Boston Marathon?'},{t:'br'},
+      {t:'p',v:'Paul: The Boston race is about '},{t:'b',n:1,w:80},{t:'p',v:'. Runners have to go through '},{t:'b',n:2,w:60},{t:'p',v:' towns during the race. It ends in the '},{t:'b',n:3,w:90},{t:'p',v:' of Boston.'},
+      {t:'br'},
+      {t:'p',v:"Trang: Oh, that's great. Thanks a lot, Paul."},
+      {t:'note',v:'Điền thêm từ/cụm từ nghe được trong bài:'},
+      {t:'b',n:4,w:185},{t:'p',v:'\u00A0\u00A0\u00A0\u00A0'},{t:'b',n:5,w:120}
+    ]
+  }
+};
+
+let curListen=null;
+
+function startListening(ban){
+  curListen=ban;
+  const d=LISTEN_DATA[ban];
+  document.getElementById('ls-title').textContent=d.title;
+  const audio=document.getElementById('ls-audio');
+  audio.pause();
+  const newSrc=d.audio||'tienganh 1.mp3';
+  if(audio.dataset.curSrc!==newSrc){audio.src=newSrc;audio.dataset.curSrc=newSrc;audio.load();}
+  audio.currentTime=0;
+  let html='<div class="ls-para">';
+  d.segs.forEach(s=>{
+    if(s.t==='br'){html+='</div><div class="ls-para">';}
+    else if(s.t==='p'){html+=s.v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+    else if(s.t==='b'){const w=s.w||110;html+=`<span class="blank-wrap"><span class="blank-num">(${s.n})</span><input class="ls-blank" id="lb${s.n}" type="text" placeholder="..." autocomplete="off" spellcheck="false" style="width:${w}px"></span>`;}
+    else if(s.t==='note'){html+=`</div><div class="ls-note">${s.v}</div><div class="ls-para">`;}
+  });
+  html+='</div>';
+  document.getElementById('ls-passage').innerHTML=html;
+  document.getElementById('ls-score').style.display='none';
+  document.getElementById('ls-check-btn').style.display='flex';
+  document.getElementById('ls-retry-btn').style.display='none';
+  showScr('listening');
+  setTimeout(()=>{const f=document.getElementById('lb1');if(f)f.focus()},350);
+}
+
+function normalizeAns(s){
+  return s.toLowerCase().replace(/[()]/g,'').replace(/\s*\/\s*/g,' and ').trim().replace(/\s+/g,' ');
+}
+
+function checkListening(){
+  const d=LISTEN_DATA[curListen];
+  let ok=0,list='';
+  d.answers.forEach((ans,i)=>{
+    const n=i+1,inp=document.getElementById('lb'+n);
+    const val=(inp.value||'').trim();
+    const right=normalizeAns(val)===normalizeAns(ans);
+    if(right)ok++;
+    inp.disabled=true;
+    inp.classList.add(right?'ls-correct':'ls-incorrect');
+    const icon=right
+      ?`<span style="color:var(--ok);font-weight:700">✓</span>`
+      :`<span style="color:var(--err);font-weight:700">✗</span>`;
+    const userPart=(!right&&val)?` <span style="color:var(--txt3);font-size:12px">← bạn điền: "${val}"</span>`:'';
+    list+=`<div class="ls-ans-row">${icon} <strong>(${n})</strong> <span style="color:var(--ok)">${ans}</span>${userPart}</div>`;
+  });
+  document.getElementById('ls-score-num').textContent=`${ok}/${d.answers.length}`;
+  document.getElementById('ls-ans-list').innerHTML=list;
+  document.getElementById('ls-score').style.display='block';
+  document.getElementById('ls-check-btn').style.display='none';
+  document.getElementById('ls-retry-btn').style.display='flex';
+}
+
+function retryListening(){startListening(curListen);}
+
+// WORD FORM
+const WF_DATA={
+  wf1:{
+    title:'Word Form – Bộ 1',
+    items:[
+      {q:'Some children have more ___ personalities than others.',hint:'socialize',ans:'sociable'},
+      {q:'They are the most ___ advanced nations in the world.',hint:'technology',ans:'technologically'},
+      {q:'The book bears several striking ___ to last year\'s bestseller.',hint:'similar',ans:'similarities'},
+      {q:'There was an ___ smell coming from the drains.',hint:'please',ans:'unpleasant'},
+      {q:'Environmental ___ has increased dramatically over the past decade.',hint:'aware',ans:'awareness'},
+      {q:'The company ___ bought and sold high-interest home loans.',hint:'responsible',ans:'irresponsibly'},
+      {q:'Ellen\'s ___ with pop music is astonishing.',hint:'familiar',ans:'familiarity'},
+      {q:'I hope Adam\'s actually doing some work at college - he seems to spend all his time ___!',hint:'socially',ans:'socializing'}
+    ]
+  },
+  wf2:{
+    title:'Word Form – Bộ 2',
+    items:[
+      {q:'I need to eat a large meal to ___ my hunger after a long day at work.',hint:'satisfaction',ans:'satisfy'},
+      {q:'The students were ___ that the test had been rescheduled to the following week, so they arrived at school unprepared.',hint:'aware',ans:'unaware'},
+      {q:'He was an ___ young man who dreamed of becoming a doctor.',hint:'ambition',ans:'ambitious'},
+      {q:'She greeted everyone with a smile and a sense of ___ .',hint:'cheerful',ans:'cheerfulness'},
+      {q:'The ___ made a deliberate choice to use bold and vibrant colors in her painting.',hint:'art',ans:'artist'},
+      {q:'The idea for the new product ___ from a deliberate market research analysis conducted by the company.',hint:'origin',ans:'originated'},
+      {q:'The style of the painting was so ___ that it stood out from all the other artworks in the exhibit.',hint:'distinct',ans:'distinctive'},
+      {q:'He is not only a talented singer but also a ___ gifted composer who can play multiple instruments.',hint:'music',ans:'musically'}
+    ]
+  },
+  wf3:{
+    title:'Word Form – Bộ 3',
+    items:[
+      {q:'The teacher made a ___ effort to give each student individual attention.',hint:'deliberation',ans:'deliberate'},
+      {q:'Despite his friend\'s optimism, he remained a ___ and believed that everything would end in failure.',hint:'pessimistic',ans:'pessimist'},
+      {q:'The magician was able to ___ a spectacular trick that left the audience in awe.',hint:'performance',ans:'perform'},
+      {q:'Though she was often criticized for her ___ approach to work, she surprised everyone with her talent.',hint:'organize',ans:'disorganized'},
+      {q:'The ___ festival was a melting pot of diverse traditions and art forms.',hint:'culture',ans:'cultural'},
+      {q:'___ speaking, the sunrise is a canvas painted by the divine.',hint:'Poet',ans:'Poetically'},
+      {q:'She was a ___ writer who always came up with original ideas.',hint:'create',ans:'creative'},
+      {q:'She valued ___ in her work and life, as it allowed her to adapt to different situations.',hint:'flexible',ans:'flexibility'}
+    ]
+  },
+  wf4:{
+    title:'Word Form – Bộ 4',
+    items:[
+      {q:'She was an ___ of classical music and opera, and attended many concerts.',hint:'enthusiastic',ans:'enthusiast'},
+      {q:'She was ___ about her chances of winning the competition.',hint:'optimism',ans:'optimistic'},
+      {q:'He suffered from ___ and often doubted himself and others.',hint:'pessimistic',ans:'pessimism'},
+      {q:'He was ___ and always arrived on time for his appointments.',hint:'punctuality',ans:'punctual'},
+      {q:'She was a ___ person who enjoyed having conversations and making connections.',hint:'society',ans:'sociable'},
+      {q:'She was ___ to his situation and offered her support and advice.',hint:'sympathy',ans:'sympathetic'},
+      {q:'Why had James behaved so ___? I don\'t understand him.',hint:'ordinary',ans:'oddly'},
+      {q:'An investigation revealed that the mine was ___ both the air and the groundwater.',hint:'pollutant',ans:'polluting'}
+    ]
+  },
+  wf5:{
+    title:'Word Form – Bộ 5',
+    items:[
+      {q:'Other industrialized and densely ___ countries have similar problems.',hint:'populous',ans:'populated'},
+      {q:'Too little exercise is a ___ factor in heart disease.',hint:'contribute',ans:'contributing'},
+      {q:'She\'s too young and ___ to go abroad on her own.',hint:'experience',ans:'inexperienced'},
+      {q:'They ___ each other for their ability to collaborate effectively as a team when they worked in a team.',hint:'compliment',ans:'complimented'},
+      {q:'She ran ___ down the hall to greet her cousins.',hint:'excitement',ans:'excitedly'},
+      {q:'The company has successfully ___ new products and services.',hint:'innovation',ans:'innovated'},
+      {q:'Hong Kong is one of the most ___ areas in the world.',hint:'population',ans:'populous'},
+      {q:'Power plants burn fossil fuels to operate; due to this they produce a variety of different ___ .',hint:'pollute',ans:'pollutants'}
+    ]
+  }
+};
+
+let curWF=null;
+function startWordForm(set){
+  curWF=set;
+  const d=WF_DATA[set];
+  document.getElementById('wf-title').textContent=d.title;
+  let html='';
+  d.items.forEach((item,i)=>{
+    const n=i+1;
+    const parts=item.q.split('___');
+    const w=Math.max(130,item.ans.length*11);
+    html+=`<div class="ls-para" style="margin-bottom:18px">
+      <span style="font-size:12px;font-weight:700;color:var(--pri);margin-right:6px">${n}.</span>${parts[0].replace(/&/g,'&amp;')}<span class="blank-wrap"><input class="ls-blank" id="wfb${n}" type="text" placeholder="..." autocomplete="off" spellcheck="false" style="width:${w}px"></span>${(parts[1]||'').replace(/&/g,'&amp;')} <span style="font-size:13px;color:var(--txt3);font-style:italic">(${item.hint})</span>
+    </div>`;
+  });
+  document.getElementById('wf-passage').innerHTML=html;
+  document.getElementById('wf-score').style.display='none';
+  document.getElementById('wf-check-btn').style.display='flex';
+  document.getElementById('wf-retry-btn').style.display='none';
+  showScr('wordform');
+  setTimeout(()=>{const f=document.getElementById('wfb1');if(f)f.focus()},350);
+}
+function checkWordForm(){
+  const d=WF_DATA[curWF];
+  let ok=0,list='';
+  d.items.forEach((item,i)=>{
+    const n=i+1,inp=document.getElementById('wfb'+n);
+    const val=(inp.value||'').trim();
+    const right=val.toLowerCase()===item.ans.toLowerCase();
+    if(right)ok++;
+    inp.disabled=true;
+    inp.classList.add(right?'ls-correct':'ls-incorrect');
+    const icon=right?`<span style="color:var(--ok);font-weight:700">✓</span>`:`<span style="color:var(--err);font-weight:700">✗</span>`;
+    const userPart=(!right&&val)?` <span style="color:var(--txt3);font-size:12px">← bạn điền: "${val}"</span>`:'';
+    list+=`<div class="ls-ans-row">${icon} <strong>(${n})</strong> <span style="color:var(--ok)">${item.ans}</span>${userPart}</div>`;
+  });
+  document.getElementById('wf-score-num').textContent=`${ok}/${d.items.length}`;
+  document.getElementById('wf-ans-list').innerHTML=list;
+  document.getElementById('wf-score').style.display='block';
+  document.getElementById('wf-check-btn').style.display='none';
+  document.getElementById('wf-retry-btn').style.display='flex';
+  renderMathSoon(document.getElementById('wf-passage'));
+}
+function retryWordForm(){startWordForm(curWF);}
+
+// INIT
+(()=>{
+  const t=localStorage.getItem('theme');
+  if(t){document.documentElement.dataset.theme=t;document.getElementById('tbtn').textContent=t==='dark'?'☀️':'🌙'}
+})();
+</script>
+<script src="questions-vatli.js"></script>
+</body>
+</html>
